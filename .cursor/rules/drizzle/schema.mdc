@@ -1,0 +1,1012 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+Drizzle schema
+Drizzle lets you define a schema in TypeScript with various models and properties supported by the underlying database. When you define your schema, it serves as the source of truth for future modifications in queries (using Drizzle-ORM) and migrations (using Drizzle-Kit).
+
+If you are using Drizzle-Kit for the migration process, make sure to export all the models defined in your schema files so that Drizzle-Kit can import them and use them in the migration diff process.
+
+Organize your schema files
+You can declare your SQL schema directly in TypeScript either in a single schema.ts file, or you can spread them around — whichever you prefer, all the freedom!
+
+Schema in 1 file
+The most common way to declare your schema with Drizzle is to put all your tables into one schema.ts file.
+
+Note: You can name your schema file whatever you like. For example, it could be models.ts, or something else.
+
+This approach works well if you don’t have too many table models defined, or if you’re okay with keeping them all in one file
+
+Example:
+
+📦 <project root>
+└ 📂 src
+└ 📂 db
+   └ 📜 schema.ts
+
+In the drizzle.config.ts file, you need to specify the path to your schema file. With this configuration, Drizzle will read from the schema.ts file and use this information during the migration generation process. For more information about the drizzle.config.ts file and migrations with Drizzle, please check: link
+
+import { defineConfig } from "drizzle-kit";
+export default defineConfig({
+  dialect: 'postgresql', // 'mysql' | 'sqlite' | 'turso'
+  schema: './src/db/schema.ts'
+})
+
+Schema in multiple files
+You can place your Drizzle models — such as tables, enums, sequences, etc. — not only in one file but in any file you prefer. The only thing you must ensure is that you export all the models from those files so that the Drizzle kit can import them and use them in migrations.
+
+One use case would be to separate each table into its own file.
+
+📦 <project root>
+ └ 📂 src
+    └ 📂 db
+       └ 📂 schema
+          ├ 📜 users.ts
+          ├ 📜 countries.ts
+          ├ 📜 cities.ts
+          ├ 📜 products.ts
+          ├ 📜 clients.ts
+          └ 📜 etc.ts
+
+In the drizzle.config.ts file, you need to specify the path to your schema folder. With this configuration, Drizzle will read from the schema folder and find all the files recursively and get all the drizzle tables from there. For more information about the drizzle.config.ts file and migrations with Drizzle, please check: link
+
+import { defineConfig } from "drizzle-kit";
+export default defineConfig({
+  dialect: 'postgresql', // 'mysql' | 'sqlite' | 'turso'
+  schema: './src/db/schema'
+})
+
+You can also group them in any way you like, such as creating groups for user-related tables, messaging-related tables, product-related tables, etc.
+
+📦 <project root>
+ └ 📂 src
+    └ 📂 db
+       └ 📂 schema
+          ├ 📜 users.ts
+          ├ 📜 messaging.ts
+          └ 📜 products.ts
+
+In the drizzle.config.ts file, you need to specify the path to your schema file. With this configuration, Drizzle will read from the schema.ts file and use this information during the migration generation process. For more information about the drizzle.config.ts file and migrations with Drizzle, please check: link
+
+import { defineConfig } from "drizzle-kit";
+export default defineConfig({
+  dialect: 'postgresql', // 'mysql' | 'sqlite' | 'turso'
+  schema: './src/db/schema'
+})
+
+Shape your data schema
+Drizzle schema consists of several model types from database you are using. With drizzle you can specify:
+
+Tables with columns, constraints, etc.
+Schemas(PostgreSQL only)
+Enums
+Sequences(PostgreSQL only)
+Views
+Materialized Views
+etc.
+Let’s go one by one and check how the schema should be defined with drizzle
+
+Tables and columns declaration
+A table in Drizzle should be defined with at least 1 column, the same as it should be done in database. There is one important thing to know, there is no such thing as a common table object in drizzle. You need to choose a dialect you are using, PostgreSQL, MySQL or SQLite
+
+
+
+import { pgTable, integer } from "drizzle-orm/pg-core"
+export const users = pgTable('users', {
+  id: integer()
+});
+
+By default, Drizzle will use the TypeScript key names for columns in database queries. Therefore, the schema and query from the example will generate the SQL query shown below
+
+This example uses a db object, whose initialization is not covered in this part of the documentation. To learn how to connect to the database, please refer to the Connections Docs
+
+
+TypeScript key = database key
+
+// schema.ts
+import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
+export const users = pgTable('users', {
+  id: integer(),
+  first_name: varchar()
+})
+
+// query.ts
+await db.select().from(users);
+
+SELECT "id", "first_name" from users;
+
+If you want to use different names in your TypeScript code and in the database, you can use column aliases
+
+// schema.ts
+import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
+export const users = pgTable('users', {
+  id: integer(),
+  firstName: varchar('first_name')
+})
+
+// query.ts
+await db.select().from(users);
+
+SELECT "id", "first_name" from users;
+
+Camel and Snake casing
+Database model names often use snake_case conventions, while in TypeScript, it is common to use camelCase for naming models. This can lead to a lot of alias definitions in the schema. To address this, Drizzle provides a way to automatically map camelCase from TypeScript to snake_case in the database by including one optional parameter during Drizzle database initialization
+
+For such mapping, you can use the casing option in the Drizzle DB declaration. This parameter will help you specify the database model naming convention and will attempt to map all JavaScript keys accordingly
+
+// schema.ts
+import { drizzle } from "drizzle-orm/node-postgres";
+import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
+export const users = pgTable('users', {
+  id: integer(),
+  firstName: varchar()
+})
+
+// db.ts
+const db = drizzle({ connection: process.env.DATABASE_URL, casing: 'snake_case' })
+
+// query.ts
+await db.select().from(users);
+
+SELECT "id", "first_name" from users;
+
+Advanced
+There are a few tricks you can use with Drizzle ORM. As long as Drizzle is entirely in TypeScript files, you can essentially do anything you would in a simple TypeScript project with your code.
+
+One common feature is to separate columns into different places and then reuse them. For example, consider the updated_at, created_at, and deleted_at columns. Many tables/models may need these three fields to track and analyze the creation, deletion, and updates of entities in a system
+
+We can define those columns in a separate file and then import and spread them across all the table objects you have
+
+// columns.helpers.ts
+const timestamps = {
+  updated_at: timestamp(),
+  created_at: timestamp().defaultNow().notNull(),
+  deleted_at: timestamp(),
+}
+
+// users.sql.ts
+export const users = pgTable('users', {
+  id: integer(),
+  ...timestamps
+})
+
+// posts.sql.ts
+export const posts = pgTable('posts', {
+  id: integer(),
+  ...timestamps
+})
+
+Schemas
+
+In PostgreSQL, there is an entity called a schema (which we believe should be called folders). This creates a structure in PostgreSQL:
+
+
+
+You can manage your PostgreSQL schemas with pgSchema and place any other models inside it.
+
+Define the schema you want to manage using Drizzle
+
+import { pgSchema } from "drizzle-orm/pg-core"
+export const customSchema = pgSchema('custom');
+
+Then place the table inside the schema object
+
+import { integer, pgSchema } from "drizzle-orm/pg-core";
+export const customSchema = pgSchema('custom');
+export const users = customSchema.table('users', {
+  id: integer()
+})
+
+Example
+Once you know the basics, let’s define a schema example for a real project to get a better view and understanding
+
+All examples will use generateUniqueString. The implementation for it will be provided after all the schema examples
+
+import { AnyPgColumn } from "drizzle-orm/pg-core";
+import { pgEnum, pgTable as table } from "drizzle-orm/pg-core";
+import * as t from "drizzle-orm/pg-core";
+export const rolesEnum = pgEnum("roles", ["guest", "user", "admin"]);
+export const users = table(
+  "users",
+  {
+    id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
+    firstName: t.varchar("first_name", { length: 256 }),
+    lastName: t.varchar("last_name", { length: 256 }),
+    email: t.varchar().notNull(),
+    invitee: t.integer().references((): AnyPgColumn => users.id),
+    role: rolesEnum().default("guest"),
+  },
+  (table) => [
+    t.uniqueIndex("email_idx").on(table.email)
+  ]
+);
+export const posts = table(
+  "posts",
+  {
+    id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
+    slug: t.varchar().$default(() => generateUniqueString(16)),
+    title: t.varchar({ length: 256 }),
+    ownerId: t.integer("owner_id").references(() => users.id),
+  },
+  (table) => [
+    t.uniqueIndex("slug_idx").on(table.slug),
+    t.index("title_idx").on(table.title),
+  ]
+);
+export const comments = table("comments", {
+  id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
+  text: t.varchar({ length: 256 }),
+  postId: t.integer("post_id").references(() => posts.id),
+  ownerId: t.integer("owner_id").references(() => users.id),
+});
+
+generateUniqueString implementation:
+
+function generateUniqueString(length: number = 12): string {
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let uniqueString = "";
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    uniqueString += characters[randomIndex];
+  }
+  return uniqueString;
+}
+
+
+
+SQLite column types
+Based on the official SQLite docs, each value stored in an SQLite database (or manipulated by the database engine) has one of the following storage classes NULL, INTEGER, REAL, TEXT and BLOB.
+
+We have native support for all of them, yet if that’s not enough for you, feel free to create custom types.
+
+important
+All examples in this part of the documentation do not use database column name aliases, and column names are generated from TypeScript keys.
+
+You can use database aliases in column names if you want, and you can also use the casing parameter to define a mapping strategy for Drizzle.
+
+You can read more about it here
+
+Integer
+A signed integer, stored in 0, 1, 2, 3, 4, 6, or 8 bytes depending on the magnitude of the value.
+
+import { integer, sqliteTable } from "drizzle-orm/sqlite-core";
+const table = sqliteTable('table', {
+	id: integer()
+});
+// you can customize integer mode to be number, boolean, timestamp, timestamp_ms
+integer({ mode: 'number' })
+integer({ mode: 'boolean' })
+integer({ mode: 'timestamp_ms' })
+integer({ mode: 'timestamp' }) // Date
+
+CREATE TABLE `table` (
+	`id` integer
+);
+
+// to make integer primary key auto increment
+integer({ mode: 'number' }).primaryKey({ autoIncrement: true })
+
+CREATE TABLE `table` (
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL
+);
+
+Real
+A floating point value, stored as an 8-byte IEEE floating point number.
+
+import { real, sqliteTable } from "drizzle-orm/sqlite-core";
+const table = sqliteTable('table', {
+	real: real()
+});
+
+CREATE TABLE `table` (
+	`real` real
+);
+
+Text
+A text string, stored using the database encoding (UTF-8, UTF-16BE or UTF-16LE).
+
+You can define { enum: ["value1", "value2"] } config to infer insert and select types, it won’t check runtime values.
+
+import { text, sqliteTable } from "drizzle-orm/sqlite-core";
+const table = sqliteTable('table', {
+	text: text()
+});
+// will be inferred as text: "value1" | "value2" | null
+text({ enum: ["value1", "value2"] })
+text({ mode: 'json' })
+text({ mode: 'json' }).$type<{ foo: string }>()
+
+CREATE TABLE `table` (
+	`text` text
+);
+
+Blob
+A blob of data, stored exactly as it was input.
+
+It’s recommended to use text('', { mode: 'json' }) instead of blob('', { mode: 'json' }), because it supports JSON functions:
+
+All JSON functions currently throw an error if any of their arguments are BLOBs because BLOBs are reserved for a future enhancement in which BLOBs will store the binary encoding for JSON.
+
+See https://www.sqlite.org/json1.html.
+
+import { blob, sqliteTable } from "drizzle-orm/sqlite-core";
+const table = sqliteTable('table', {
+	blob: blob()
+});
+blob()
+blob({ mode: 'buffer' })
+blob({ mode: 'bigint' })
+blob({ mode: 'json' })
+blob({ mode: 'json' }).$type<{ foo: string }>()
+
+CREATE TABLE `table` (
+	`blob` blob
+);
+
+You can specify .$type<..>() for blob inference, it won’t check runtime values. It provides compile time protection for default values, insert and select schemas.
+
+// will be inferred as { foo: string }
+json: blob({ mode: 'json' }).$type<{ foo: string }>();
+// will be inferred as string[]
+json: blob({ mode: 'json' }).$type<string[]>();
+// won't compile
+json: blob({ mode: 'json' }).$type<string[]>().default({});
+
+Boolean
+SQLite does not have native boolean data type, yet you can specify integer column to be in a boolean mode. This allows you to operate boolean values in your code and Drizzle stores them as 0 and 1 integer values in the database.
+
+import { integer, sqliteTable } from "drizzle-orm/sqlite-core";
+const table = sqliteTable('table', {
+	id: integer({ mode: 'boolean' })
+});
+
+CREATE TABLE `table` (
+	`id` integer
+);
+
+Bigint
+Since there is no bigint data type in SQLite, Drizzle offers a special bigint mode for blob columns. This mode allows you to work with BigInt instances in your code, and Drizzle stores them as blob values in the database.
+
+import { blob, sqliteTable } from "drizzle-orm/sqlite-core";
+const table = sqliteTable('table', {
+	id: blob({ mode: 'bigint' })
+});
+
+CREATE TABLE `table` (
+	`id` blob
+);
+
+Numeric
+import { blob, sqliteTable } from "drizzle-orm/sqlite-core";
+const table = sqliteTable('table', {
+	numeric: numeric(),
+	numericNum: numeric({ mode: 'number' }),
+	numericBig: numeric({ mode: 'bigint' }),
+});
+
+CREATE TABLE `table` (
+	`numeric` numeric,
+	`numericNum` numeric,
+	`numericBig` numeric,
+);
+
+Customizing data type
+Every column builder has a .$type() method, which allows you to customize the data type of the column. This is useful, for example, with unknown or branded types.
+
+type UserId = number & { __brand: 'user_id' };
+type Data = {
+	foo: string;
+	bar: number;
+};
+const users = sqliteTable('users', {
+  id: integer().$type<UserId>().primaryKey(),
+  jsonField: blob().$type<Data>(),
+});
+
+Not null
+NOT NULL constraint dictates that the associated column may not contain a NULL value.
+
+const table = sqliteTable('table', { 
+	numInt: integer().notNull() 
+});
+
+CREATE TABLE table (
+	`numInt` integer NOT NULL
+);
+
+Default value
+The DEFAULT clause specifies a default value to use for the column if no value is explicitly provided by the user when doing an INSERT. If there is no explicit DEFAULT clause attached to a column definition, then the default value of the column is NULL.
+
+An explicit DEFAULT clause may specify that the default value is NULL, a string constant, a blob constant, a signed-number, or any constant expression enclosed in parentheses.
+
+import { sql } from "drizzle-orm";
+import { integer, sqliteTable } from "drizzle-orm/sqlite-core";
+const table = sqliteTable('table', {
+	int1: integer().default(42),
+	int2: integer().default(sql`(abs(42))`)
+});
+
+CREATE TABLE `table` (
+	`int1` integer DEFAULT 42
+	`int2` integer DEFAULT (abs(42))
+);
+
+A default value may also be one of the special case-independent keywords CURRENT_TIME, CURRENT_DATE or CURRENT_TIMESTAMP.
+
+import { sql } from "drizzle-orm";
+import { text, sqliteTable } from "drizzle-orm/sqlite-core";
+const table = sqliteTable("table", {
+  time: text().default(sql`(CURRENT_TIME)`),
+  date: text().default(sql`(CURRENT_DATE)`),
+  timestamp: text().default(sql`(CURRENT_TIMESTAMP)`),
+});
+
+CREATE TABLE `table` (
+	`time` text DEFAULT (CURRENT_TIME)
+	`date` text DEFAULT (CURRENT_DATE)
+	`timestamp` text DEFAULT (CURRENT_TIMESTAMP)
+);
+
+When using $default() or $defaultFn(), which are simply different aliases for the same function, you can generate defaults at runtime and use these values in all insert queries. These functions can assist you in utilizing various implementations such as uuid, cuid, cuid2, and many more.
+
+Note: This value does not affect the drizzle-kit behavior, it is only used at runtime in drizzle-orm
+
+import { text, sqliteTable } from "drizzle-orm/sqlite-core";
+import { createId } from '@paralleldrive/cuid2';
+const table = sqliteTable('table', {
+	id: text().$defaultFn(() => createId()),
+});
+
+When using $onUpdate() or $onUpdateFn(), which are simply different aliases for the same function, you can generate defaults at runtime and use these values in all update queries.
+
+Adds a dynamic update value to the column. The function will be called when the row is updated, and the returned value will be used as the column value if none is provided. If no default (or $defaultFn) value is provided, the function will be called when the row is inserted as well, and the returned value will be used as the column value.
+
+Note: This value does not affect the drizzle-kit behavior, it is only used at runtime in drizzle-orm
+
+import { text, sqliteTable } from "drizzle-orm/sqlite-core";
+const table = sqliteTable('table', {
+    alwaysNull: text().$type<string | null>().$onUpdate(() => null),
+});Indexes & Constraints
+Constraints
+SQL constraints are the rules enforced on table columns. They are used to prevent invalid data from being entered into the database.
+
+This ensures the accuracy and reliability of your data in the database.
+
+Default
+The DEFAULT clause specifies a default value to use for the column if no value provided by the user when doing an INSERT. If there is no explicit DEFAULT clause attached to a column definition, then the default value of the column is NULL.
+
+An explicit DEFAULT clause may specify that the default value is NULL, a string constant, a blob constant, a signed-number, or any constant expression enclosed in parentheses.
+
+import { sql } from "drizzle-orm";
+import { integer, sqliteTable } from "drizzle-orm/sqlite-core";
+const table = sqliteTable('table', {
+  int1: integer('int1').default(42),
+  int2: integer('int2').default(sql`(abs(42))`)
+});
+
+CREATE TABLE `table` (
+  `int1` integer DEFAULT 42
+  `int2` integer DEFAULT (abs(42))
+);
+
+Not null
+By default, a column can hold NULL values. The NOT NULL constraint enforces a column to NOT accept NULL values.
+
+This enforces a field to always contain a value, which means that you cannot insert a new record, or update a record without adding a value to this field.
+
+const table = sqliteTable('table', { 
+  numInt: integer('numInt').notNull() 
+});
+
+CREATE TABLE table (
+  `numInt` integer NOT NULL
+);
+
+Unique
+The UNIQUE constraint ensures that all values in a column are different.
+
+Both the UNIQUE and PRIMARY KEY constraints provide a guarantee for uniqueness for a column or set of columns.
+
+A PRIMARY KEY constraint automatically has a UNIQUE constraint.
+
+You can have many UNIQUE constraints per table, but only one PRIMARY KEY constraint per table.
+
+import { int, text, unique, sqliteTable } from "drizzle-orm/sqlite-core";
+export const user = sqliteTable('user', {
+  id: int('id').unique(),
+});
+export const table = sqliteTable('table', {
+  id: int('id').unique('custom_name'),
+});
+export const composite = sqliteTable('composite_example', {
+  id: int('id'),
+  name: text('name'),
+}, (t) => [
+  unique().on(t.id, t.name),
+  unique('custom_name').on(t.id, t.name)
+]);
+
+CREATE TABLE `user` (
+    `id` integer
+);
+CREATE TABLE `table` (
+	`id` integer
+);
+CREATE TABLE `composite_example` (
+	`id` integer,
+	`name` text
+);
+CREATE UNIQUE INDEX `composite_example_id_name_unique` ON `composite_example` (`id`,`name`);
+CREATE UNIQUE INDEX `custom_name` ON `composite_example` (`id`,`name`);
+CREATE UNIQUE INDEX `custom_name` ON `table` (`id`);
+CREATE UNIQUE INDEX `user_id_unique` ON `user` (`id`);
+
+Check
+The CHECK constraint is used to limit the value range that can be placed in a column.
+
+If you define a CHECK constraint on a column it will allow only certain values for this column.
+
+If you define a CHECK constraint on a table it can limit the values in certain columns based on values in other columns in the row.
+
+import { sql } from "drizzle-orm";
+import { check, int, sqliteTable, text } from "drizzle-orm/sqlite-core";
+export const users = sqliteTable(
+  "users",
+  {
+    id: int().primaryKey(),
+    username: text().notNull(),
+    age: int(),
+  },
+  (table) => [
+    check("age_check1", sql`${table.age} > 21`)
+  ]
+);
+
+CREATE TABLE `users` (
+    `id` integer PRIMARY KEY NOT NULL,
+    `username` text NOT NULL,
+    `age` integer,
+    CONSTRAINT "age_check1" CHECK("users"."age" > 21)
+);
+
+Primary Key
+The PRIMARY KEY constraint uniquely identifies each record in a table.
+Primary keys must contain UNIQUE values, and cannot contain NULL values.
+
+A table can have only ONE primary key; and in the table, this primary key can consist of single or multiple columns (fields).
+
+import { integer, sqliteTable } from "drizzle-orm/sqlite-core";
+export const user = sqliteTable("user", {
+  id: integer("id").primaryKey(),
+})
+export const pet = sqliteTable("pet", {
+  id: integer("id").primaryKey(),
+})
+
+CREATE TABLE `user` (
+    `id` integer PRIMARY KEY AUTOINCREMENT NOT NULL
+);
+CREATE TABLE `pet` (
+    `id` integer PRIMARY KEY AUTOINCREMENT
+)
+
+Composite Primary Key
+Just like PRIMARY KEY, composite primary key uniquely identifies each record in a table using multiple fields.
+
+Drizzle ORM provides a standalone primaryKey operator for that:
+
+import { integer, text, primaryKey, sqliteTable} from "drizzle-orm/sqlite-core";
+export const user = sqliteTable("user", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name"),
+});
+export const book = sqliteTable("book", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name"),
+});
+export const bookToAuthor = sqliteTable("book_to_author", {
+  authorId: integer("author_id"),
+  bookId: integer("book_id"),
+}, (table) => [
+  primaryKey({ columns: [table.bookId, table.authorId] }),
+  // Or PK with custom name
+  primaryKey({ name: 'custom_name', columns: [table.bookId, table.authorId] })
+]);
+
+...
+CREATE TABLE `book_to_author` (
+  `author_id` integer,
+  `book_id` integer,
+  PRIMARY KEY(`book_id`, `author_id`)
+);
+
+Foreign key
+The FOREIGN KEY constraint is used to prevent actions that would destroy links between tables. A FOREIGN KEY is a field (or collection of fields) in one table, that refers to the PRIMARY KEY in another table. The table with the foreign key is called the child table, and the table with the primary key is called the referenced or parent table.
+
+Drizzle ORM provides several ways to declare foreign keys. You can declare them in a column declaration statement:
+
+import { integer, text, sqliteTable } from "drizzle-orm/sqlite-core";
+export const user = sqliteTable("user", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name"),
+});
+export const book = sqliteTable("book", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name"),
+  authorId: integer("author_id").references(() => user.id)
+});
+
+If you want to do a self reference, due to a TypeScript limitations you will have to either explicitly set return type for reference callback or use a standalone foreignKey operator.
+
+import { integer, text, foreignKey, sqliteTable, AnySQLiteColumn } from "drizzle-orm/sqlite-core";
+export const user = sqliteTable("user", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name"),
+  parentId: integer("parent_id").references((): AnySQLiteColumn => user.id)
+});
+//or
+export const user = sqliteTable("user", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name"),
+  parentId: integer("parent_id"),
+}, (table) => [
+  foreignKey({
+    columns: [table.parentId],
+    foreignColumns: [table.id],
+    name: "custom_fk"
+  })
+]);
+
+To declare multicolumn foreign keys you can use a dedicated foreignKey operator:
+
+import { integer, text, primaryKey, foreignKey, sqliteTable, AnySQLiteColumn } from "drizzle-orm/sqlite-core";
+export const user = sqliteTable("user", {
+  firstName: text("firstName"),
+  lastName: text("lastName"),
+}, (table) => [
+  primaryKey({ columns: [table.firstName, table.lastName]})
+]);
+export const profile = sqliteTable("profile", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  userFirstName: text("user_first_name"),
+  userLastName: text("user_last_name"),
+}, (table) => [
+  foreignKey({
+    columns: [table.userFirstName, table.userLastName],
+    foreignColumns: [user.firstName, user.lastName],
+    name: "custom_name"
+  })
+]);
+
+Indexes
+Drizzle ORM provides API for both index and unique index declaration:
+
+import { serial, text, index, uniqueIndex, pgTable } from "drizzle-orm/pg-core";
+export const user = pgTable("user", {
+  id: serial("id").primaryKey(),
+  name: text("name"),
+  email: text("email"),
+}, (table) => [
+  index("name_idx").on(table.name),
+  uniqueIndex("email_idx").on(table.email)
+]);
+
+CREATE TABLE "user" (
+  ...
+);
+CREATE INDEX "name_idx" ON "user" ("name");
+CREATE UNIQUE INDEX "email_idx" ON "user" ("email");
+
+IMPORTANT
+For versions before drizzle-kit@0.22.0 and drizzle-orm@0.31.0 drizzle-kit only supports index name and on() param.
+
+After versions drizzle-kit@0.22.0 and drizzle-orm@0.31.0 all fields are supported in drizzle-kit!
+
+Starting from 0.31.0 a new index api for Drizzle ORM provides set of all params for index creation:
+
+// First example, with `.on()`
+index('name')
+  .on(table.column1.asc(), table.column2.nullsFirst(), ...) or .onOnly(table.column1.desc().nullsLast(), table.column2, ...)
+  .concurrently()
+  .where(sql``)
+  .with({ fillfactor: '70' })
+// Second Example, with `.using()`
+index('name')
+  .using('btree', table.column1.asc(), sql`lower(${table.column2})`, table.column1.op('text_ops'))
+  .where(sql``) // sql expression
+  .with({ fillfactor: '70' })Drizzle soft relations
+The sole purpose of Drizzle relations is to let you query your relational data in the most simple and consise way:
+
+import * as schema from './schema';
+import { drizzle } from 'drizzle-orm/…';
+const db = drizzle(client, { schema });
+const result = db.query.users.findMany({
+  with: {
+    posts: true,
+  },
+});
+
+[{
+  id: 10,
+  name: "Dan",
+  posts: [
+    {
+      id: 1,
+      content: "SQL is awesome",
+      authorId: 10,
+    },
+    {
+      id: 2,
+      content: "But check relational queries",
+      authorId: 10,
+    }
+  ]
+}]
+
+One-to-one
+Drizzle ORM provides you an API to define one-to-one relations between tables with the relations operator.
+
+An example of a one-to-one relation between users and users, where a user can invite another (this example uses a self reference):
+
+import { pgTable, serial, text, integer, boolean } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
+export const users = pgTable('users', {
+	id: serial('id').primaryKey(),
+	name: text('name'),
+	invitedBy: integer('invited_by'),
+});
+export const usersRelations = relations(users, ({ one }) => ({
+	invitee: one(users, {
+		fields: [users.invitedBy],
+		references: [users.id],
+	}),
+}));
+
+Another example would be a user having a profile information stored in separate table. In this case, because the foreign key is stored in the “profile_info” table, the user relation have neither fields or references. This tells Typescript that user.profileInfo is nullable:
+
+import { pgTable, serial, text, integer, jsonb } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
+export const users = pgTable('users', {
+	id: serial('id').primaryKey(),
+	name: text('name'),
+});
+export const usersRelations = relations(users, ({ one }) => ({
+	profileInfo: one(profileInfo),
+}));
+export const profileInfo = pgTable('profile_info', {
+	id: serial('id').primaryKey(),
+	userId: integer('user_id').references(() => users.id),
+	metadata: jsonb('metadata'),
+});
+export const profileInfoRelations = relations(profileInfo, ({ one }) => ({
+	user: one(users, { fields: [profileInfo.userId], references: [users.id] }),
+}));
+const user = await queryUserWithProfileInfo();
+//____^? type { id: number, profileInfo: { ... } | null  }
+
+One-to-many
+Drizzle ORM provides you an API to define one-to-many relations between tables with relations operator.
+
+Example of one-to-many relation between users and posts they’ve written:
+
+import { pgTable, serial, text, integer } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
+export const users = pgTable('users', {
+	id: serial('id').primaryKey(),
+	name: text('name'),
+});
+export const usersRelations = relations(users, ({ many }) => ({
+	posts: many(posts),
+}));
+export const posts = pgTable('posts', {
+	id: serial('id').primaryKey(),
+	content: text('content'),
+	authorId: integer('author_id'),
+});
+export const postsRelations = relations(posts, ({ one }) => ({
+	author: one(users, {
+		fields: [posts.authorId],
+		references: [users.id],
+	}),
+}));
+
+Now lets add comments to the posts:
+
+...
+export const posts = pgTable('posts', {
+	id: serial('id').primaryKey(),
+	content: text('content'),
+	authorId: integer('author_id'),
+});
+export const postsRelations = relations(posts, ({ one, many }) => ({
+	author: one(users, {
+		fields: [posts.authorId],
+		references: [users.id],
+	}),
+	comments: many(comments)
+}));
+export const comments = pgTable('comments', {
+	id: serial('id').primaryKey(),
+	text: text('text'),
+	authorId: integer('author_id'),
+	postId: integer('post_id'),
+});
+export const commentsRelations = relations(comments, ({ one }) => ({
+	post: one(posts, {
+		fields: [comments.postId],
+		references: [posts.id],
+	}),
+}));
+
+Many-to-many
+Drizzle ORM provides you an API to define many-to-many relations between tables through so called junction or join tables, they have to be explicitly defined and store associations between related tables.
+
+Example of many-to-many relation between users and groups:
+
+import { relations } from 'drizzle-orm';
+import { integer, pgTable, primaryKey, serial, text } from 'drizzle-orm/pg-core';
+export const users = pgTable('users', {
+  id: serial('id').primaryKey(),
+  name: text('name'),
+});
+export const usersRelations = relations(users, ({ many }) => ({
+  usersToGroups: many(usersToGroups),
+}));
+export const groups = pgTable('groups', {
+  id: serial('id').primaryKey(),
+  name: text('name'),
+});
+export const groupsRelations = relations(groups, ({ many }) => ({
+  usersToGroups: many(usersToGroups),
+}));
+export const usersToGroups = pgTable(
+  'users_to_groups',
+  {
+    userId: integer('user_id')
+      .notNull()
+      .references(() => users.id),
+    groupId: integer('group_id')
+      .notNull()
+      .references(() => groups.id),
+  },
+  (t) => [
+		primaryKey({ columns: [t.userId, t.groupId] })
+	],
+);
+export const usersToGroupsRelations = relations(usersToGroups, ({ one }) => ({
+  group: one(groups, {
+    fields: [usersToGroups.groupId],
+    references: [groups.id],
+  }),
+  user: one(users, {
+    fields: [usersToGroups.userId],
+    references: [users.id],
+  }),
+}));
+
+Foreign keys
+You might’ve noticed that relations look similar to foreign keys — they even have a references property. So what’s the difference?
+
+While foreign keys serve a similar purpose, defining relations between tables, they work on a different level compared to relations.
+
+Foreign keys are a database level constraint, they are checked on every insert/update/delete operation and throw an error if a constraint is violated. On the other hand, relations are a higher level abstraction, they are used to define relations between tables on the application level only. They do not affect the database schema in any way and do not create foreign keys implicitly.
+
+What this means is relations and foreign keys can be used together, but they are not dependent on each other. You can define relations without using foreign keys (and vice versa), which allows them to be used with databases that do not support foreign keys.
+
+The following two examples will work exactly the same in terms of querying the data using Drizzle relational queries.
+
+export const users = pgTable('users', {
+	id: serial('id').primaryKey(),
+	name: text('name'),
+});
+export const usersRelations = relations(users, ({ one, many }) => ({
+	profileInfo: one(users, {
+		fields: [profileInfo.userId],
+		references: [users.id],
+	}),
+}));
+export const profileInfo = pgTable('profile_info', {
+	id: serial('id').primaryKey(),
+	userId: integer("user_id"),
+	metadata: jsonb("metadata"),
+});
+
+Foreign key actions
+for more information check postgres foreign keys docs
+
+You can specify actions that should occur when the referenced data in the parent table is modified. These actions are known as “foreign key actions.” PostgreSQL provides several options for these actions.
+
+On Delete/ Update Actions
+
+CASCADE: When a row in the parent table is deleted, all corresponding rows in the child table will also be deleted. This ensures that no orphaned rows exist in the child table.
+
+NO ACTION: This is the default action. It prevents the deletion of a row in the parent table if there are related rows in the child table. The DELETE operation in the parent table will fail.
+
+RESTRICT: Similar to NO ACTION, it prevents the deletion of a parent row if there are dependent rows in the child table. It is essentially the same as NO ACTION and included for compatibility reasons.
+
+SET DEFAULT: If a row in the parent table is deleted, the foreign key column in the child table will be set to its default value if it has one. If it doesn’t have a default value, the DELETE operation will fail.
+
+SET NULL: When a row in the parent table is deleted, the foreign key column in the child table will be set to NULL. This action assumes that the foreign key column in the child table allows NULL values.
+
+Analogous to ON DELETE there is also ON UPDATE which is invoked when a referenced column is changed (updated). The possible actions are the same, except that column lists cannot be specified for SET NULL and SET DEFAULT. In this case, CASCADE means that the updated values of the referenced column(s) should be copied into the referencing row(s). in drizzle you can add foreign key action using references() second argument.
+
+type of the actions
+
+export type UpdateDeleteAction = 'cascade' | 'restrict' | 'no action' | 'set null' | 'set default';
+// second argument of references interface
+actions?: {
+		onUpdate?: UpdateDeleteAction;
+		onDelete?: UpdateDeleteAction;
+	} | undefined
+
+In the following example, adding onDelete: 'cascade' to the author field on the posts schema means that deleting the user will also delete all related Post records.
+
+import { pgTable, serial, text, integer } from 'drizzle-orm/pg-core';
+export const users = pgTable('users', {
+	id: serial('id').primaryKey(),
+	name: text('name'),
+});
+export const posts = pgTable('posts', {
+	id: serial('id').primaryKey(),
+	name: text('name'),
+	author: integer('author').references(() => users.id, {onDelete: 'cascade'}).notNull(),
+});
+
+For constraints specified with the foreignKey operator, foreign key actions are defined with the syntax:
+
+import { foreignKey, pgTable, serial, text, integer } from 'drizzle-orm/pg-core';
+export const users = pgTable('users', {
+	id: serial('id').primaryKey(),
+	name: text('name'),
+});
+export const posts = pgTable('posts', {
+	id: serial('id').primaryKey(),
+	name: text('name'),
+	author: integer('author').notNull(),
+}, (table) => [
+	foreignKey({
+		name: "author_fk",
+		columns: [table.author],
+		foreignColumns: [users.id],
+	})
+		.onDelete('cascade')
+		.onUpdate('cascade')
+]);
+
+Disambiguating relations
+Drizzle also provides the relationName option as a way to disambiguate relations when you define multiple of them between the same two tables. For example, if you define a posts table that has the author and reviewer relations.
+
+import { pgTable, serial, text, integer } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
+ 
+export const users = pgTable('users', {
+	id: serial('id').primaryKey(),
+	name: text('name'),
+});
+ 
+export const usersRelations = relations(users, ({ many }) => ({
+	author: many(posts, { relationName: 'author' }),
+	reviewer: many(posts, { relationName: 'reviewer' }),
+}));
+ 
+export const posts = pgTable('posts', {
+	id: serial('id').primaryKey(),
+	content: text('content'),
+	authorId: integer('author_id'),
+	reviewerId: integer('reviewer_id'),
+});
+ 
+export const postsRelations = relations(posts, ({ one }) => ({
+	author: one(users, {
+		fields: [posts.authorId],
+		references: [users.id],
+		relationName: 'author',
+	}),
+	reviewer: one(users, {
+		fields: [posts.reviewerId],
+		references: [users.id],
+		relationName: 'reviewer',
+	}),
+}));

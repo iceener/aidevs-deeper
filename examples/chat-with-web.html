@@ -1,0 +1,840 @@
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>
+	@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.actions-btn {
+  @apply text-zinc-400 hover:text-white;
+  width: 26px;  /* 14px + 8px (4px padding on each side) */
+  height: 26px; /* 14px + 8px (4px padding on each side) */
+  @apply p-1;   /* 4px padding */
+  @apply border;
+  @apply flex items-center justify-center;
+  @apply transition-all duration-200;
+}
+
+.actions-btn svg {
+  width: 14px;
+  height: 14px;
+}
+ 
+@layer base {
+  :root {
+    font-family: 'SF Pro Text', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* --background: 0 0% 100%; */
+    /* --foreground: 222.2 84% 4.9%; */
+ 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+ 
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+ 
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+ 
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+ 
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+ 
+    --destructive: 0 72.2% 50.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --ring: 267 84% 47%;
+ 
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+ 
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+ 
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --ring: 267 84% 47%;
+  }
+ 
+  /* Add specific selection styles for the message content */
+  .message-content ::selection {
+    @apply bg-violet-500/100;
+  }
+
+  /* Keep the prompt's existing selection style for other elements */
+  ::selection {
+    @apply bg-primary-600/90 text-white;
+  }
+
+  /* Caret styling */
+  @supports (-webkit-caret-color: auto) or (caret-color: auto) {
+    input, textarea, [contenteditable="true"] {
+      caret-color: theme('colors.primary.600');
+    }
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ... existing styles ... */
+
+/* Remove default select styling */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+/* Remove default focus outline in Firefox */
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #fff;
+}
+
+/* Remove default select arrow in IE */
+select::-ms-expand {
+  display: none;
+}
+
+/* Add focus styles for form elements */
+[type='text']:focus,
+[type='email']:focus,
+[type='url']:focus,
+[type='password']:focus,
+[type='number']:focus,
+[type='date']:focus,
+[type='datetime-local']:focus,
+[type='month']:focus,
+[type='search']:focus,
+[type='tel']:focus,
+[type='time']:focus,
+[type='week']:focus,
+[multiple]:focus,
+textarea:focus,
+select:focus,
+button:focus {
+  /*outline: 1px solid #6D28D9 !important;  violet-700 */
+  outline-offset: 1px;
+  --tw-ring-shadow: none;
+  --tw-ring-offset-shadow: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+dialog {
+  color: initial;
+}
+
+.renderer {
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: -0.011em;
+  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  min-height: 34px;
+  color: #27272a;  /* Default light theme color */
+  max-width: calc(83vw);
+}
+
+[data-theme="dark"] .renderer {
+  color: #fafafa;  /* Dark theme color */
+}
+
+.renderer {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.renderer h1, .renderer h2, .renderer h3, 
+.renderer h4, .renderer h5, .renderer h6 {
+  margin: 1.2em 0 0.6em;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--heading-color, inherit);
+}
+
+.renderer h1 {
+  font-size: 1.5em;
+  font-weight: 700;
+}
+.renderer h2 { font-size: 1.25em; font-weight: 700; }
+.renderer h3 { font-size: 1.125em; font-weight: 600; }
+.renderer h4 { font-size: 1em; font-weight: 600; }
+.renderer h5 { font-size: 0.875em; font-weight: 600; }
+.renderer h6 { font-size: 0.75em; font-weight: 600; }
+
+.renderer p {
+  margin: 0.75em 0;
+  line-height: 1.6;
+  max-width: 70ch;
+}
+
+.renderer strong {
+  font-weight: bold;
+}
+
+.renderer em {
+  font-style: italic;
+}
+
+.renderer a {
+  color: var(--link-color, theme('colors.primary.500', #3B82F6));
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.15em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.renderer a:hover {
+  text-decoration-thickness: 0.125em;
+}
+
+.renderer a:focus {
+  outline: 2px solid var(--link-color, #0070f3);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.renderer code {
+  font-family: 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.92em;
+  /* padding: 0.2em 0.4em; */
+  border-radius: 3px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+[data-theme="light"] .renderer code {
+  background-color: transparent;
+  color: #24292e;
+}
+
+[data-theme="dark"] .renderer code {
+  background-color: transparent;
+  color: #e1e4e8;
+}
+
+.renderer pre {
+  padding: 0 1.5rem 0 0;
+  margin: 1em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* font-size: 0.875rem; */
+  /* line-height: 1.7142857; */
+  border-radius: 0.375rem;
+  max-width: 100%;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+[data-theme="light"] .renderer pre {
+  /* @apply bg-zinc-100/80 border border-zinc-200; */
+}
+
+[data-theme="dark"] .renderer pre {
+  /* @apply bg-zinc-950/90 border border-zinc-800; */
+}
+
+.renderer blockquote {
+  @apply pl-4 border-l-4 border-primary-600 
+         bg-zinc-900/50 
+         py-3 px-4 my-4 
+         text-zinc-200
+         rounded-r
+         backdrop-blur-sm
+         shadow-sm
+         transition-colors
+         duration-200;
+}
+
+.renderer blockquote > ul {
+  @apply my-0;
+}
+
+.renderer blockquote > p {
+  @apply my-0 first:mt-0 last:mb-0;
+}
+
+.renderer blockquote > p + p {
+  @apply mt-4;
+}
+
+.renderer blockquote strong {
+  @apply text-primary-600;
+}
+
+.renderer blockquote a {
+  @apply text-primary-600 hover:text-primary-500 
+         transition-colors duration-200;
+}
+
+.renderer ul,
+.renderer ol {
+  padding-left: 1.5em;
+  margin: 1em 0;
+}
+
+.renderer li {
+  margin: 0.5em 0;
+}
+
+.renderer hr {
+  border: none;
+  border-top: 1px solid #242424;
+  margin: 2em 0;
+}
+
+.renderer table {
+  font-size: 1rem;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+.renderer th,
+.renderer td {
+  border: 1px solid #27272a;
+  padding: 0.5em;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.renderer th {
+  font-weight: 600;
+  background: #27272a;
+}
+
+.renderer img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  @apply bg-primary-600/5;
+  object-fit: contain;
+}
+
+p + p {
+ margin-top: 1rem;
+}
+
+div > code {
+ color: #9333ea;
+}
+
+/* Add this new override for tab buttons */
+[role="tab"]:focus {
+  outline-offset: -1px !important;
+}
+
+.custom-scrollbar {
+  /* Force scrollbar visibility */
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* Target both the container and any nested scrollable elements */
+.custom-scrollbar,
+.custom-scrollbar * {
+  &::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-zinc-600/50 hover:bg-zinc-400/70 dark:bg-zinc-800/50 dark:hover:bg-zinc-800/70 !important;
+    border-radius: 5px !important;
+    min-height: 50px !important;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent !important;
+    border-radius: 5px !important;
+  }
+
+  &::-webkit-scrollbar-corner {
+    @apply bg-transparent !important;
+  }
+}
+
+/* Ensure Firefox fallback */
+@supports (scrollbar-color: auto) {
+  .custom-scrollbar {
+    scrollbar-width: thin !important;
+    @apply scrollbar-color-light dark:scrollbar-color-dark !important;
+  }
+}
+
+@layer utilities {
+  .scrollbar-color-light {
+    scrollbar-color: theme('colors.zinc.400/50') transparent !important;
+  }
+  .scrollbar-color-dark {
+    scrollbar-color: theme('colors.zinc.600/50') transparent !important;
+  }
+}
+
+/* Renderer styles */
+.renderer .line-number {
+  pointer-events: none;
+  user-select: none;
+  margin-right: 25px;
+  opacity: 0.5;
+  font-size: 16px;
+}
+
+.renderer strong {
+  /* @apply text-primary-600; */
+}
+
+.onboarding-message .renderer strong {
+  @apply text-primary-600 selection:text-white selection:bg-primary-600/50;
+}
+
+.renderer > div > :first-child > .block-container, 
+.renderer > div > :first-child > p, 
+.renderer > div > :first-child > ul, 
+.renderer > div > :first-child > ul li:first-of-type,
+.renderer > div > :first-child > ol, 
+.renderer > div > :first-child > img,
+.renderer > div > :first-child > ol li:first-of-type,
+.renderer > div > .message-container > :first-child,
+.renderer > div > :first-child {
+  margin-top: -1px !important
+}
+
+.renderer > :first-child p {
+  /* margin-bottom: 0; */
+}
+
+.renderer > p:first-child {
+  /* margin-bottom: 0; */
+}
+
+.renderer .line {
+  padding: 0 10px;
+  @apply transition-colors duration-200;
+}
+
+[data-theme="light"] .renderer .line:hover {
+  @apply bg-zinc-200/70;
+}
+
+[data-theme="dark"] .renderer .line:hover {
+  @apply bg-zinc-700/70;
+}
+
+.renderer pre {
+  border-radius: 6px;
+}
+
+.renderer ul {
+   list-style-type: disc;
+   margin-top: 1.5em;
+   margin-bottom: 1.5em;
+   padding-left: 1.5em;
+}
+.renderer ol {
+   list-style-type: decimal;
+   margin-top: 1.5em;
+   margin-bottom: 1.5em;
+   padding-left: 1.5em;
+}
+.renderer li {
+    margin-bottom: 0.5em;
+}
+
+pre:empty {
+  display: none;
+  opacity: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.avatar {
+  height: 38px;
+}
+
+.math-inline {
+  display: block !important;
+  margin: 15px 0;
+}
+
+:global(.renderer .line:hover) {
+  background: rgba(24, 24, 27, 0.95);
+}
+</style>
+<div class="renderer" data-theme="light">
+<h1 id="openai-api-url-q-a">OpenAI API URL Q&amp;A</h1>
+<p>This task involves explaining how to use the OpenAI API to answer questions based on the content of a specific URL. It includes steps such as retrieving the webpage content, preprocessing the text, and using the API to generate responses. The focus is on integrating web content with OpenAI&#39;s language models for question answering.</p>
+<hr>
+<h2 id="objective-question-answering-from-urls">Objective: Question Answering from URLs</h2>
+<p>The goal of this guide is to enable developers to use the OpenAI API to answer questions based on the content of a specific URL. Since the OpenAI API does not natively support URL inputs, a multi-step process is required to extract, preprocess, and query the content effectively.</p>
+<p><strong>Key Objective:</strong></p>
+<ul>
+<li>Enable question answering over the content of a specific URL using OpenAI&#39;s Chat Completions API.</li>
+</ul>
+<p>This involves:</p>
+<ol>
+<li>Retrieving the webpage content</li>
+<li>Preprocessing the content</li>
+<li>Constructing a prompt</li>
+<li>Sending the request to OpenAI</li>
+<li>Processing the response</li>
+</ol>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This approach is essential for building intelligent agents or assistants that can reason over arbitrary web content. It is particularly useful in applications like customer support bots, research assistants, or content summarizers. By decoupling content retrieval from the LLM, developers gain flexibility and control over what data is passed to the model.</p>
+</blockquote>
+<hr>
+<h2 id="approach-overview-fetch-preprocess-prompt-query-answer">Approach Overview: Fetch → Preprocess → Prompt → Query → Answer</h2>
+<p>The overall workflow to enable question answering over a URL using OpenAI API consists of the following steps:</p>
+<ol>
+<li><strong>Fetch</strong>: Retrieve the raw HTML content of the webpage.</li>
+<li><strong>Preprocess</strong>: Clean and extract the main textual content.</li>
+<li><strong>Prompt</strong>: Format the content and the question into a structured prompt.</li>
+<li><strong>Query</strong>: Send the prompt to the OpenAI API.</li>
+<li><strong>Answer</strong>: Parse and display the model&#39;s response.</li>
+</ol>
+<p>Each of these steps is critical to ensure the model receives clean, relevant, and concise input.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This pipeline mirrors the architecture of Retrieval-Augmented Generation (RAG) systems, where external data is retrieved and injected into the prompt. It allows LLMs to operate on up-to-date or domain-specific content without retraining. Tools like LangChain and LlamaIndex formalize this pattern for production use.</p>
+</blockquote>
+<hr>
+<h2 id="openai-api-limitations-with-urls">OpenAI API Limitations with URLs</h2>
+<p>The OpenAI API does <strong>not</strong> accept URLs as input. This means you cannot simply pass a URL and expect the model to fetch and analyze the content.</p>
+<p><strong>Implications:</strong></p>
+<ul>
+<li>You must manually or programmatically retrieve the content.</li>
+<li>The content must be included in the <code>messages</code> array of the API request.</li>
+</ul>
+<p>This limitation ensures that the model only processes data explicitly provided by the user.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This design choice aligns with OpenAI&#39;s security and privacy principles. It prevents the model from accessing arbitrary web content, which could include sensitive or malicious data. It also gives developers full control over what data is passed to the model, which is crucial for compliance and reproducibility.</p>
+</blockquote>
+<hr>
+<h2 id="manual-or-tool-based-content-extraction">Manual or Tool-Based Content Extraction</h2>
+<p>Since the API doesn&#39;t fetch URLs, you need to extract and format the webpage content yourself. This can be done:</p>
+<ul>
+<li><strong>Manually</strong>: Copy-paste the content.</li>
+<li><strong>Programmatically</strong>: Use tools or libraries to automate extraction.</li>
+</ul>
+<p><strong>Recommended Tools:</strong></p>
+<ul>
+<li><a href="https://firecrawl.dev/">Firecrawl</a>: Converts URLs into markdown or structured data.</li>
+<li><a href="https://cheerio.js.org/">cheerio</a>: jQuery-like HTML parser for Node.js.</li>
+<li><a href="https://github.com/jsdom/jsdom">jsdom</a>: Simulates a browser environment in Node.js.</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Automated extraction is essential for scalability. Firecrawl, in particular, is optimized for LLM use cases, offering markdown output and schema-based extraction. For more control, libraries like <code>cheerio</code> and <code>jsdom</code> allow custom parsing logic. These tools are often used in web scraping and data mining pipelines.</p>
+</blockquote>
+<hr>
+<h2 id="retrieve-webpage-content">Retrieve Webpage Content</h2>
+<p>To retrieve the HTML content of a webpage, use an HTTP client in your preferred language:</p>
+<p><strong>JavaScript/Node.js:</strong></p>
+<pre><code class="lang-js">import axios <span class="hljs-keyword">from</span> <span class="hljs-string">'axios'</span>;
+<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> axios.<span class="hljs-keyword">get</span>(<span class="hljs-string">'https://example.com'</span>);
+<span class="hljs-keyword">const</span> html = response.data;
+</code></pre>
+<p><strong>Python:</strong></p>
+<pre><code class="lang-python"><span class="hljs-keyword">import</span> requests
+html = requests.<span class="hljs-built_in">get</span>(<span class="hljs-string">'https://example.com'</span>).<span class="hljs-built_in">text</span>
+</code></pre>
+<p><strong>Alternative:</strong> Use <a href="https://firecrawl.dev/">Firecrawl</a> to get structured content directly:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> scrapeResult = <span class="hljs-function">await app.<span class="hljs-title">scrapeUrl</span><span class="hljs-params">(<span class="hljs-string">'https://example.com'</span>, {
+  formats: [<span class="hljs-string">'markdown'</span>]
+})</span></span>;
+</code></pre>
+<p>Firecrawl simplifies extraction by returning clean markdown or JSON.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Fetching HTML is the first step in any web scraping or content ingestion pipeline. While tools like <code>axios</code> and <code>requests</code> are flexible, they require additional parsing. Firecrawl abstracts this by providing LLM-ready formats, reducing boilerplate and improving reliability.</p>
+</blockquote>
+<hr>
+<h2 id="preprocess-the-content">Preprocess the Content</h2>
+<p>Once you have the HTML, clean and extract the main content:</p>
+<ol>
+<li><strong>Strip HTML Tags</strong>: Remove <code>&lt;script&gt;</code>, <code>&lt;style&gt;</code>, and other non-content elements.</li>
+<li><strong>Extract Main Text</strong>:<ul>
+<li>Use <code>cheerio</code> or <code>jsdom</code> to select relevant DOM nodes.</li>
+<li>Firecrawl can return markdown directly.</li>
+</ul>
+</li>
+<li><strong>Truncate or Chunk</strong>:<ul>
+<li>GPT-4o has a token limit (~128k tokens).</li>
+<li>Split long content into chunks using sliding windows or summarization.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Example with Cheerio:</strong></p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> cheerio from <span class="hljs-string">'cheerio'</span>;
+<span class="hljs-keyword">const</span> $ = cheerio.load(html);
+<span class="hljs-keyword">const</span> <span class="hljs-built_in">text</span> = $(<span class="hljs-string">'body'</span>).<span class="hljs-built_in">text</span>();
+</code></pre>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Preprocessing is critical to ensure the model receives clean, relevant input. Token limits necessitate chunking strategies. Tools like <a href="https://www.npmjs.com/package/html-to-text">html-to-text</a> or <a href="https://github.com/mozilla/readability">readability</a> can help extract meaningful content. Firecrawl&#39;s markdown output is ideal for LLMs due to its structure and readability.</p>
+</blockquote>
+<hr>
+<h2 id="construct-the-prompt">Construct the Prompt</h2>
+<p>Format the cleaned content and your question into a prompt using the <code>messages</code> array:</p>
+<p><strong>Example:</strong></p>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"model"</span>: <span class="hljs-string">"gpt-4o"</span>,
+  <span class="hljs-attr">"messages"</span>: [
+    {<span class="hljs-attr">"role"</span>: <span class="hljs-string">"system"</span>, <span class="hljs-attr">"content"</span>: <span class="hljs-string">"You are a helpful assistant."</span>},
+    {<span class="hljs-attr">"role"</span>: <span class="hljs-string">"user"</span>, <span class="hljs-attr">"content"</span>: <span class="hljs-string">"Here is the content of a webpage: [insert text]. Based on this, answer: [insert question]"</span>}
+  ]
+}
+</code></pre>
+<p><strong>Tips:</strong></p>
+<ul>
+<li>Keep content concise.</li>
+<li>Use delimiters (e.g., triple quotes) to separate content from the question.</li>
+<li>Consider summarizing long content before prompting.</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Prompt engineering is a key skill when working with LLMs. Clear structure and context improve response quality. For long documents, consider using <a href="https://docs.langchain.com/">LangChain&#39;s</a> summarization chains or <a href="https://www.llamaindex.ai/">LlamaIndex</a> for chunked retrieval. Always test prompts iteratively.</p>
+</blockquote>
+<hr>
+<h2 id="send-the-request">Send the Request</h2>
+<p>Use the Chat Completions endpoint to send your prompt:</p>
+<p><strong>Endpoint:</strong></p>
+<pre><code>POST https:<span class="hljs-regexp">//</span>api.openai.com<span class="hljs-regexp">/v1/</span>chat<span class="hljs-regexp">/completions</span>
+</code></pre><p><strong>Headers:</strong></p>
+<pre><code class="lang-http"><span class="hljs-string">Authorization:</span> Bearer YOUR_API_KEY
+Content-<span class="hljs-string">Type:</span> application/json
+</code></pre>
+<p><strong>Body:</strong></p>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"model"</span>: <span class="hljs-string">"gpt-4o"</span>,
+  <span class="hljs-attr">"messages"</span>: [...],
+  <span class="hljs-attr">"stream"</span>: <span class="hljs-literal">false</span>
+}
+</code></pre>
+<p><strong>Streaming (optional):</strong>
+Set <code>&quot;stream&quot;: true</code> to receive partial responses via SSE.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>The Chat Completions API is the standard interface for conversational LLMs. Streaming is useful for real-time applications like chatbots. Libraries like <a href="https://www.npmjs.com/package/openai">openai</a> (Node.js) or <a href="https://github.com/openai/openai-python">openai-python</a> simplify integration. Always handle rate limits and retries gracefully.</p>
+</blockquote>
+<hr>
+<h2 id="process-the-response">Process the Response</h2>
+<p>After receiving the response:</p>
+<ol>
+<li><strong>Extract the Answer</strong>:<ul>
+<li>Access <code>response.choices[0].message.content</code>.</li>
+</ul>
+</li>
+<li><strong>Handle Errors</strong>:<ul>
+<li>Check for HTTP errors (e.g., 429, 500).</li>
+<li>Implement retries with exponential backoff.</li>
+</ul>
+</li>
+<li><strong>Display or Use the Answer</strong>:<ul>
+<li>Render in UI</li>
+<li>Store in database</li>
+<li>Use in downstream logic</li>
+</ul>
+</li>
+</ol>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Robust error handling is essential for production systems. Use libraries like <a href="https://www.npmjs.com/package/axios-retry">axios-retry</a> or <a href="https://www.npmjs.com/package/retry">retry</a> to manage retries. For streaming, use event listeners to process chunks incrementally. Always log and monitor API usage.</p>
+</blockquote>
+<hr>
+<h2 id="using-firecrawl-for-preprocessing">Using Firecrawl for Preprocessing</h2>
+<p>Firecrawl simplifies content extraction:</p>
+<ol>
+<li><p><strong>Endpoints:</strong></p>
+<ul>
+<li><code>scrapeUrl</code>: For single pages</li>
+<li><code>extract</code>: For structured data</li>
+</ul>
+</li>
+<li><p><strong>Output Formats:</strong></p>
+<ul>
+<li><code>markdown</code>, <code>html</code>, <code>json</code>, <code>screenshot</code></li>
+</ul>
+</li>
+<li><p><strong>Integration:</strong></p>
+<pre><code class="lang-ts"><span class="hljs-attribute">const scrapeResult</span> = await app.scrapeUrl(<span class="hljs-string">'https://example.com'</span>, {
+formats: [<span class="hljs-string">'markdown'</span>]
+});
+<span class="hljs-attribute">const markdown</span> = scrapeResult.data.markdown;
+</code></pre>
+</li>
+</ol>
+<p>Use the markdown in your OpenAI prompt.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Firecrawl is optimized for LLM pipelines. It supports schema-based extraction using <a href="https://zod.dev/">Zod</a> and natural language prompts. It also integrates with frameworks like <a href="https://js.langchain.com/docs/integrations/document_loaders/web_loaders/firecrawl">LangChain</a> and <a href="https://docs.llamaindex.ai/en/latest/examples/data_connectors/WebPageDemo/#using-firecrawl-reader">LlamaIndex</a>.</p>
+</blockquote>
+<hr>
+<h2 id="chunking-and-context-management">Chunking and Context Management</h2>
+<p>For long content:</p>
+<ol>
+<li><p><strong>Chunking Strategies:</strong></p>
+<ul>
+<li>Fixed-size chunks (e.g., 1000 tokens)</li>
+<li>Sliding window (overlapping chunks)</li>
+</ul>
+</li>
+<li><p><strong>Summarization:</strong></p>
+<ul>
+<li>Summarize each chunk</li>
+<li>Combine summaries for final prompt</li>
+</ul>
+</li>
+<li><p><strong>RAG (Retrieval-Augmented Generation):</strong></p>
+<ul>
+<li>Store chunks in a vector DB (e.g., Pinecone, Weaviate)</li>
+<li>Retrieve relevant chunks based on the question</li>
+<li>Inject into prompt</li>
+</ul>
+</li>
+</ol>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Context management is crucial due to token limits. RAG architectures are widely used in production (e.g., ChatGPT Retrieval Plugin). Tools like <a href="https://docs.langchain.com/docs/components/indexes/vectorstores/">LangChain</a> and <a href="https://www.llamaindex.ai/">LlamaIndex</a> provide abstractions for chunking, embedding, and retrieval. Use <a href="https://github.com/openai/tiktoken">tiktoken</a> to estimate token counts.</p>
+</blockquote>
+<hr>
+<h2 id="structured-output-with-json-schema">Structured Output with JSON Schema</h2>
+<p>To get structured responses:</p>
+<ol>
+<li><p><strong>Use <code>response_format</code>:</strong></p>
+<pre><code class="lang-json">{
+<span class="hljs-string">"response_format"</span>: {
+ <span class="hljs-string">"type"</span>: <span class="hljs-string">"json_schema"</span>,
+ <span class="hljs-string">"json_schema"</span>: { ... }
+}
+}
+</code></pre>
+</li>
+<li><p><strong>Alternative:</strong></p>
+<pre><code class="lang-json">{
+<span class="hljs-attr">"response_format"</span>: { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"json_object"</span> }
+}
+</code></pre>
+</li>
+<li><p><strong>Benefits:</strong></p>
+<ul>
+<li>Easier parsing</li>
+<li>Enforces structure</li>
+<li>Ideal for downstream processing</li>
+</ul>
+</li>
+</ol>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Structured outputs are essential for automation. OpenAI&#39;s <code>json_schema</code> mode ensures the model adheres to a defined schema. This is useful for form filling, data extraction, and API integration. See <a href="https://platform.openai.com/docs/guides/structured-outputs">Structured Outputs Guide</a> for details.</p>
+</blockquote>
+<hr>
+<h2 id="practical-example-node-js-firecrawl">Practical Example: Node.js + Firecrawl</h2>
+<p><strong>1. Install Dependencies:</strong></p>
+<pre><code class="lang-bash"><span class="hljs-selector-tag">npm</span> <span class="hljs-selector-tag">install</span> @<span class="hljs-keyword">mendable</span>/<span class="hljs-keyword">firecrawl</span>-<span class="hljs-keyword">js</span> openai
+</code></pre>
+<p><strong>2. Scrape Content:</strong></p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> FirecrawlApp <span class="hljs-keyword">from</span> <span class="hljs-string">'@mendable/firecrawl-js'</span>;
+<span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> FirecrawlApp({ <span class="hljs-attr">apiKey</span>: <span class="hljs-string">'fc-...'</span> });
+<span class="hljs-keyword">const</span> scrape = <span class="hljs-keyword">await</span> app.scrapeUrl(<span class="hljs-string">'https://example.com'</span>, { <span class="hljs-attr">formats</span>: [<span class="hljs-string">'markdown'</span>] });
+</code></pre>
+<p><strong>3. Construct Prompt:</strong></p>
+<pre><code class="lang-ts">const messages = [
+  { <span class="hljs-string">role:</span> <span class="hljs-string">'system'</span>, <span class="hljs-string">content:</span> <span class="hljs-string">'You are a helpful assistant.'</span> },
+  { <span class="hljs-string">role:</span> <span class="hljs-string">'user'</span>, <span class="hljs-string">content:</span> `Here is the <span class="hljs-string">content:</span> ${scrape.data.markdown}. Based on <span class="hljs-keyword">this</span>, <span class="hljs-string">answer:</span> What is the main topic?` }
+];
+</code></pre>
+<p><strong>4. Call OpenAI API:</strong></p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> OpenAI <span class="hljs-keyword">from</span> <span class="hljs-string">'openai'</span>;
+<span class="hljs-keyword">const</span> openai = <span class="hljs-keyword">new</span> OpenAI({ <span class="hljs-attr">apiKey</span>: <span class="hljs-string">'sk-...'</span> });
+<span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> openai.chat.completions.create({
+  <span class="hljs-attr">model</span>: <span class="hljs-string">'gpt-4o'</span>,
+  messages
+});
+<span class="hljs-built_in">console</span>.log(response.choices[<span class="hljs-number">0</span>].message.content);
+</code></pre>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This example demonstrates a full pipeline from scraping to answering. It can be extended with chunking, RAG, or structured output. For production, consider adding logging, retries, and caching. Use environment variables for API keys and modularize the code for reuse.</p>
+</blockquote>
+<hr>
+<h2 id="conclusion-and-best-practices">Conclusion and Best Practices</h2>
+<p><strong>Summary:</strong></p>
+<ul>
+<li>OpenAI API doesn&#39;t accept URLs directly.</li>
+<li>Use tools like Firecrawl to extract content.</li>
+<li>Preprocess and format content into prompts.</li>
+<li>Send requests via Chat Completions API.</li>
+<li>Handle responses and errors gracefully.</li>
+</ul>
+<p><strong>Best Practices:</strong></p>
+<ul>
+<li>Keep prompts concise and structured.</li>
+<li>Use markdown for readability.</li>
+<li>Monitor token usage.</li>
+<li>Use structured output when needed.</li>
+</ul>
+<p><strong>Limitations:</strong></p>
+<ul>
+<li>Token limits (~128k for GPT-4o)</li>
+<li>No real-time web access</li>
+<li>Requires manual or tool-based extraction</li>
+</ul>
+<p><strong>Resources:</strong></p>
+<ul>
+<li><a href="https://platform.openai.com/docs/api-reference/chat">OpenAI API Docs</a></li>
+<li><a href="https://firecrawl.dev/docs/scrape">Firecrawl Docs</a></li>
+<li><a href="https://js.langchain.com/">LangChain</a></li>
+<li><a href="https://www.llamaindex.ai/">LlamaIndex</a></li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This workflow empowers developers to build intelligent systems that reason over arbitrary web content. As LLMs evolve, tools like Firecrawl and vector databases will play a key role in bridging the gap between static models and dynamic data. Always stay updated with API changes and community best practices.</p>
+</blockquote>
+<hr>

@@ -1,0 +1,1477 @@
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>
+	@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.actions-btn {
+  @apply text-zinc-400 hover:text-white;
+  width: 26px;  /* 14px + 8px (4px padding on each side) */
+  height: 26px; /* 14px + 8px (4px padding on each side) */
+  @apply p-1;   /* 4px padding */
+  @apply border;
+  @apply flex items-center justify-center;
+  @apply transition-all duration-200;
+}
+
+.actions-btn svg {
+  width: 14px;
+  height: 14px;
+}
+ 
+@layer base {
+  :root {
+    font-family: 'SF Pro Text', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* --background: 0 0% 100%; */
+    /* --foreground: 222.2 84% 4.9%; */
+ 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+ 
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+ 
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+ 
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+ 
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+ 
+    --destructive: 0 72.2% 50.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --ring: 267 84% 47%;
+ 
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+ 
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+ 
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --ring: 267 84% 47%;
+  }
+ 
+  /* Add specific selection styles for the message content */
+  .message-content ::selection {
+    @apply bg-violet-500/100;
+  }
+
+  /* Keep the prompt's existing selection style for other elements */
+  ::selection {
+    @apply bg-primary-600/90 text-white;
+  }
+
+  /* Caret styling */
+  @supports (-webkit-caret-color: auto) or (caret-color: auto) {
+    input, textarea, [contenteditable="true"] {
+      caret-color: theme('colors.primary.600');
+    }
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ... existing styles ... */
+
+/* Remove default select styling */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+/* Remove default focus outline in Firefox */
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #fff;
+}
+
+/* Remove default select arrow in IE */
+select::-ms-expand {
+  display: none;
+}
+
+/* Add focus styles for form elements */
+[type='text']:focus,
+[type='email']:focus,
+[type='url']:focus,
+[type='password']:focus,
+[type='number']:focus,
+[type='date']:focus,
+[type='datetime-local']:focus,
+[type='month']:focus,
+[type='search']:focus,
+[type='tel']:focus,
+[type='time']:focus,
+[type='week']:focus,
+[multiple]:focus,
+textarea:focus,
+select:focus,
+button:focus {
+  /*outline: 1px solid #6D28D9 !important;  violet-700 */
+  outline-offset: 1px;
+  --tw-ring-shadow: none;
+  --tw-ring-offset-shadow: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+dialog {
+  color: initial;
+}
+
+.renderer {
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: -0.011em;
+  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  min-height: 34px;
+  color: #27272a;  /* Default light theme color */
+  max-width: calc(83vw);
+}
+
+[data-theme="dark"] .renderer {
+  color: #fafafa;  /* Dark theme color */
+}
+
+.renderer {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.renderer h1, .renderer h2, .renderer h3, 
+.renderer h4, .renderer h5, .renderer h6 {
+  margin: 1.2em 0 0.6em;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--heading-color, inherit);
+}
+
+.renderer h1 {
+  font-size: 1.5em;
+  font-weight: 700;
+}
+.renderer h2 { font-size: 1.25em; font-weight: 700; }
+.renderer h3 { font-size: 1.125em; font-weight: 600; }
+.renderer h4 { font-size: 1em; font-weight: 600; }
+.renderer h5 { font-size: 0.875em; font-weight: 600; }
+.renderer h6 { font-size: 0.75em; font-weight: 600; }
+
+.renderer p {
+  margin: 0.75em 0;
+  line-height: 1.6;
+  max-width: 70ch;
+}
+
+.renderer strong {
+  font-weight: bold;
+}
+
+.renderer em {
+  font-style: italic;
+}
+
+.renderer a {
+  color: var(--link-color, theme('colors.primary.500', #3B82F6));
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.15em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.renderer a:hover {
+  text-decoration-thickness: 0.125em;
+}
+
+.renderer a:focus {
+  outline: 2px solid var(--link-color, #0070f3);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.renderer code {
+  font-family: 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.92em;
+  /* padding: 0.2em 0.4em; */
+  border-radius: 3px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+[data-theme="light"] .renderer code {
+  background-color: transparent;
+  color: #24292e;
+}
+
+[data-theme="dark"] .renderer code {
+  background-color: transparent;
+  color: #e1e4e8;
+}
+
+.renderer pre {
+  padding: 0 1.5rem 0 0;
+  margin: 1em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* font-size: 0.875rem; */
+  /* line-height: 1.7142857; */
+  border-radius: 0.375rem;
+  max-width: 100%;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+[data-theme="light"] .renderer pre {
+  /* @apply bg-zinc-100/80 border border-zinc-200; */
+}
+
+[data-theme="dark"] .renderer pre {
+  /* @apply bg-zinc-950/90 border border-zinc-800; */
+}
+
+.renderer blockquote {
+  @apply pl-4 border-l-4 border-primary-600 
+         bg-zinc-900/50 
+         py-3 px-4 my-4 
+         text-zinc-200
+         rounded-r
+         backdrop-blur-sm
+         shadow-sm
+         transition-colors
+         duration-200;
+}
+
+.renderer blockquote > ul {
+  @apply my-0;
+}
+
+.renderer blockquote > p {
+  @apply my-0 first:mt-0 last:mb-0;
+}
+
+.renderer blockquote > p + p {
+  @apply mt-4;
+}
+
+.renderer blockquote strong {
+  @apply text-primary-600;
+}
+
+.renderer blockquote a {
+  @apply text-primary-600 hover:text-primary-500 
+         transition-colors duration-200;
+}
+
+.renderer ul,
+.renderer ol {
+  padding-left: 1.5em;
+  margin: 1em 0;
+}
+
+.renderer li {
+  margin: 0.5em 0;
+}
+
+.renderer hr {
+  border: none;
+  border-top: 1px solid #242424;
+  margin: 2em 0;
+}
+
+.renderer table {
+  font-size: 1rem;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+.renderer th,
+.renderer td {
+  border: 1px solid #27272a;
+  padding: 0.5em;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.renderer th {
+  font-weight: 600;
+  background: #27272a;
+}
+
+.renderer img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  @apply bg-primary-600/5;
+  object-fit: contain;
+}
+
+p + p {
+ margin-top: 1rem;
+}
+
+div > code {
+ color: #9333ea;
+}
+
+/* Add this new override for tab buttons */
+[role="tab"]:focus {
+  outline-offset: -1px !important;
+}
+
+.custom-scrollbar {
+  /* Force scrollbar visibility */
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* Target both the container and any nested scrollable elements */
+.custom-scrollbar,
+.custom-scrollbar * {
+  &::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-zinc-600/50 hover:bg-zinc-400/70 dark:bg-zinc-800/50 dark:hover:bg-zinc-800/70 !important;
+    border-radius: 5px !important;
+    min-height: 50px !important;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent !important;
+    border-radius: 5px !important;
+  }
+
+  &::-webkit-scrollbar-corner {
+    @apply bg-transparent !important;
+  }
+}
+
+/* Ensure Firefox fallback */
+@supports (scrollbar-color: auto) {
+  .custom-scrollbar {
+    scrollbar-width: thin !important;
+    @apply scrollbar-color-light dark:scrollbar-color-dark !important;
+  }
+}
+
+@layer utilities {
+  .scrollbar-color-light {
+    scrollbar-color: theme('colors.zinc.400/50') transparent !important;
+  }
+  .scrollbar-color-dark {
+    scrollbar-color: theme('colors.zinc.600/50') transparent !important;
+  }
+}
+
+/* Renderer styles */
+.renderer .line-number {
+  pointer-events: none;
+  user-select: none;
+  margin-right: 25px;
+  opacity: 0.5;
+  font-size: 16px;
+}
+
+.renderer strong {
+  /* @apply text-primary-600; */
+}
+
+.onboarding-message .renderer strong {
+  @apply text-primary-600 selection:text-white selection:bg-primary-600/50;
+}
+
+.renderer > div > :first-child > .block-container, 
+.renderer > div > :first-child > p, 
+.renderer > div > :first-child > ul, 
+.renderer > div > :first-child > ul li:first-of-type,
+.renderer > div > :first-child > ol, 
+.renderer > div > :first-child > img,
+.renderer > div > :first-child > ol li:first-of-type,
+.renderer > div > .message-container > :first-child,
+.renderer > div > :first-child {
+  margin-top: -1px !important
+}
+
+.renderer > :first-child p {
+  /* margin-bottom: 0; */
+}
+
+.renderer > p:first-child {
+  /* margin-bottom: 0; */
+}
+
+.renderer .line {
+  padding: 0 10px;
+  @apply transition-colors duration-200;
+}
+
+[data-theme="light"] .renderer .line:hover {
+  @apply bg-zinc-200/70;
+}
+
+[data-theme="dark"] .renderer .line:hover {
+  @apply bg-zinc-700/70;
+}
+
+.renderer pre {
+  border-radius: 6px;
+}
+
+.renderer ul {
+   list-style-type: disc;
+   margin-top: 1.5em;
+   margin-bottom: 1.5em;
+   padding-left: 1.5em;
+}
+.renderer ol {
+   list-style-type: decimal;
+   margin-top: 1.5em;
+   margin-bottom: 1.5em;
+   padding-left: 1.5em;
+}
+.renderer li {
+    margin-bottom: 0.5em;
+}
+
+pre:empty {
+  display: none;
+  opacity: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.avatar {
+  height: 38px;
+}
+
+.math-inline {
+  display: block !important;
+  margin: 15px 0;
+}
+
+:global(.renderer .line:hover) {
+  background: rgba(24, 24, 27, 0.95);
+}
+</style>
+<div class="renderer" data-theme="light">
+<h1 id="compare-openai-apis">Compare OpenAI APIs</h1>
+<p>This task involves creating a detailed comparison between OpenAI&#39;s Chat Completion API and the latest Response API, highlighting their differences, use cases, and best practices. It includes providing JavaScript code examples for interacting with both APIs and managing chat history effectively. The goal is to help users decide which API to use based on their specific application needs.</p>
+<hr>
+<h2 id="document-purpose">Document Purpose</h2>
+<h2 id="1-1-purpose-of-the-document">1.1 Purpose of the Document</h2>
+<p>This document provides a comprehensive comparison between OpenAI&#39;s established Chat Completion API (<code>/v1/chat/completions</code>) and its newer Responses API (<code>/v1/responses</code>). Its goal is to clarify the differences in design philosophy, features, and intended use cases, enabling developers, particularly those with experience in JavaScript and Node.js, to choose the most appropriate API for their specific application needs. It covers core technical distinctions, practical applications, migration considerations, interaction examples, and best practices for managing conversation state.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This document serves as a crucial guide for developers navigating OpenAI&#39;s evolving API landscape. Understanding the nuances between the established Chat Completion API and the newer, more agent-focused Responses API is essential for making informed architectural decisions. The choice impacts not only immediate implementation details like request/response structure but also long-term considerations such as scalability, maintainability, and the ability to leverage future OpenAI platform enhancements. As OpenAI pushes towards more sophisticated agentic systems, the Responses API represents a strategic direction, offering built-in capabilities that previously required significant custom implementation.</p>
+</blockquote>
+<hr>
+<h2 id="chat-completion-api-overview">Chat Completion API Overview</h2>
+<h2 id="1-2-overview-of-openai-s-chat-completion-api">1.2 Overview of OpenAI&#39;s Chat Completion API</h2>
+<p>The Chat Completion API is OpenAI&#39;s established, industry-standard API for generating model responses based on conversational input. </p>
+<ul>
+<li><strong>Endpoint:</strong> <code>POST https://api.openai.com/v1/chat/completions</code></li>
+<li><strong>Core Concept:</strong> Takes a list of messages (<code>messages</code> array) representing the conversation history and returns a model-generated message.</li>
+<li><strong>Input Structure:</strong> Primarily uses the <code>messages</code> array, where each message has a <code>role</code> (<code>system</code>, <code>user</code>, <code>assistant</code>, <code>tool</code>) and <code>content</code>. Supports text, image (<a href="https://platform.openai.com/docs/api-reference/chat">Vision</a>), and potentially audio inputs depending on the model.</li>
+<li><strong>Output Structure:</strong> Returns a <code>choices</code> array, typically containing one <code>message</code> object with the assistant&#39;s response.</li>
+<li><strong>Key Parameters:</strong> <code>model</code>, <code>messages</code>, <code>temperature</code>, <code>max_completion_tokens</code>, <code>tools</code>, <code>tool_choice</code>, <code>response_format</code> (for JSON Mode/Structured Output), <code>stream</code>.</li>
+<li><strong>Capabilities:</strong> Text generation, vision, audio (model-dependent), function/tool calling, structured output (JSON Mode and JSON Schema).</li>
+<li><strong>State Management:</strong> Stateless; requires the developer to manage and resend the conversation history in the <code>messages</code> array for each turn.</li>
+</ul>
+<p><img src="https://cloud.overment.com/2024-08-12/aidevs3_default_params-ea902572-1.png" alt="Default API parameters for LLM interaction"></p>
+<p>It&#39;s widely used for chatbots, content generation, and tasks requiring interaction based on conversation history. See the <a href="https://platform.openai.com/docs/api-reference/chat">Quickstart guide</a> for more details.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>The Chat Completion API has become the de facto standard for interacting with conversational AI models, not just from OpenAI but also from many other providers who offer compatible APIs. Its simplicity and focus on the <code>messages</code> array made it easy to adopt for a wide range of text generation tasks. Its widespread use means extensive community support, examples, and third-party tooling are readily available. However, its stateless nature and lack of built-in support for complex workflows like tool use orchestration necessitated the development of higher-level frameworks or more sophisticated APIs like the Responses API.</p>
+</blockquote>
+<hr>
+<h2 id="responses-api-overview">Responses API Overview</h2>
+<h2 id="1-3-overview-of-openai-s-responses-api">1.3 Overview of OpenAI&#39;s Responses API</h2>
+<p>The Responses API is OpenAI&#39;s newest core API, designed as a flexible, &#39;agentic API primitive&#39; to build action-oriented applications. It combines the simplicity of Chat Completions with enhanced capabilities.</p>
+<ul>
+<li><strong>Endpoint:</strong> <code>POST https://api.openai.com/v1/responses</code></li>
+<li><strong>Core Concept:</strong> Takes an <code>input</code> (string or array of items like text, images, files) and potentially a <code>previous_response_id</code> to generate a response, managing state internally.</li>
+<li><strong>Input Structure:</strong> Uses an <code>input</code> parameter which can be a simple string or an array of typed items (<code>input_text</code>, <code>input_image</code>, <code>input_file</code>).</li>
+<li><strong>Output Structure:</strong> Returns a typed response object, often accessed via helpers like <code>response.output_text</code> in the SDK.</li>
+<li><strong>Key Parameters:</strong> <code>model</code>, <code>input</code>, <code>previous_response_id</code>, <code>tools</code> (including built-ins), <code>text.format</code> (for structured output via JSON Schema), <code>stream</code>.</li>
+<li><strong>Capabilities:</strong> Text generation, vision, structured outputs (JSON Schema preferred), function calling, <strong>built-in tools</strong> (Web search, File search, Computer use), <strong>built-in state management</strong>.</li>
+<li><strong>State Management:</strong> Built-in via the <code>previous_response_id</code> parameter.</li>
+<li><strong>Streaming:</strong> Uses a predictable, event-driven architecture with distinct &#39;semantic events&#39;.</li>
+</ul>
+<p>OpenAI recommends new users start with the Responses API, especially for workflows involving tool use, code execution (coming soon), and state management. It aims to simplify these complex interactions compared to the Chat Completion API.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>The Responses API signals OpenAI&#39;s move towards providing more integrated and &#39;agentic&#39; primitives directly within their platform. By building in features like state management, specific tool integrations (Web Search, File Search, Computer Use), and a more structured streaming mechanism, OpenAI aims to simplify the development of complex, action-oriented applications. This potentially reduces the need for external orchestration frameworks for common agentic patterns. Its design, focusing on &#39;semantic events&#39; for streaming and typed responses, suggests an emphasis on developer experience and robustness, particularly for applications that programmatically react to different stages of the response generation process. It&#39;s positioned as the foundation for future agent capabilities.</p>
+</blockquote>
+<hr>
+<h2 id="core-purpose-and-design">Core Purpose and Design</h2>
+<h2 id="2-1-api-purpose-and-design-philosophy">2.1 API Purpose and Design Philosophy</h2>
+<ul>
+<li><strong>Chat Completion API:</strong> Designed as a general-purpose conversational AI endpoint. Its philosophy centers on generating the next message in a sequence based on the provided history (<code>messages</code>). It&#39;s highly flexible but requires developers to build more complex logic (like state management, multi-step tool use orchestration) on top.</li>
+<li><strong>Responses API:</strong> Designed as an &#39;agentic API primitive&#39;. Its philosophy is to provide a more integrated foundation for building applications where the AI takes actions, uses tools, and maintains context over multiple turns more seamlessly. It aims to simplify common agentic workflows by building in features like state management and specific tools (Web search, File search, Computer use). OpenAI positions it as the future direction for building agents on their platform.</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>The fundamental difference lies in the intended scope. Chat Completions is primarily a <em>text generation</em> API centered around conversation turns. Responses is designed as an <em>agent interaction</em> API. It anticipates workflows where the model doesn&#39;t just talk but <em>acts</em> – using tools, accessing files, potentially controlling applications (&#39;Computer use&#39;). This shift from conversation to action necessitates changes in state management, tool integration, and even the streaming protocol to better support observing and reacting to the steps an agent takes.</p>
+</blockquote>
+<hr>
+<h2 id="input-structure-differences">Input Structure Differences</h2>
+<h2 id="2-2-input-structure-messages-vs-input-">2.2 Input Structure (<code>messages</code> vs <code>input</code>)</h2>
+<ul>
+<li><strong>Chat Completion API:</strong> Requires the <code>messages</code> parameter, an array of message objects, each with a <code>role</code> (<code>system</code>, <code>user</code>, <code>assistant</code>, <code>tool</code>) and <code>content</code>. This structure explicitly represents the conversation history.<pre><code class="lang-json">{
+  <span class="hljs-attr">"model"</span>: <span class="hljs-string">"gpt-4o"</span>,
+  <span class="hljs-attr">"messages"</span>: [
+    {<span class="hljs-attr">"role"</span>: <span class="hljs-string">"system"</span>, <span class="hljs-attr">"content"</span>: <span class="hljs-string">"You are helpful."</span>},
+    {<span class="hljs-attr">"role"</span>: <span class="hljs-string">"user"</span>, <span class="hljs-attr">"content"</span>: <span class="hljs-string">"Hello!"</span>}
+  ]
+}
+</code></pre>
+</li>
+<li><strong>Responses API:</strong> Uses the <code>input</code> parameter, which can be a simple string or an array of input items. These items are typed (e.g., <code>input_text</code>, <code>input_image</code>, <code>input_file</code>) and represent the data provided for the current turn, not necessarily the entire history (which is managed via <code>previous_response_id</code>).<pre><code class="lang-json">{
+  <span class="hljs-attr">"model"</span>: <span class="hljs-string">"gpt-4o"</span>,
+  <span class="hljs-attr">"input"</span>: [
+    {<span class="hljs-attr">"role"</span>: <span class="hljs-string">"user"</span>, <span class="hljs-attr">"content"</span>: <span class="hljs-string">"Write a story."</span>}
+  ]
+  // Optionally: <span class="hljs-string">"previous_response_id"</span>: <span class="hljs-string">"resp_abc123"</span>
+}
+</code></pre>
+See guides for <a href="https://platform.openai.com/docs/api-reference/responses#input-text">Text inputs</a>, <a href="https://platform.openai.com/docs/api-reference/responses#input-image">Image inputs</a>, and <a href="https://platform.openai.com/docs/api-reference/responses#input-file">File inputs</a> in the Responses API.</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This structural difference is fundamental. <code>messages</code> in Chat Completions directly mirrors a conversation log, making it intuitive for simple chat applications. The <code>input</code> array in Responses is more abstract, representing various forms of input data (text, images, files, tool outputs) that feed into the agent&#39;s processing cycle. This structure is better suited for multi-modal inputs and complex interactions involving files or tool results, moving beyond a purely conversational paradigm.</p>
+</blockquote>
+<hr>
+<h2 id="output-structure-differences">Output Structure Differences</h2>
+<h2 id="2-3-output-structure-choices-vs-output-">2.3 Output Structure (<code>choices</code> vs <code>output</code>)</h2>
+<ul>
+<li><strong>Chat Completion API:</strong> Returns a response object containing a <code>choices</code> array. Each choice includes the generated <code>message</code> (with <code>role</code>, <code>content</code>, <code>tool_calls</code>), <code>finish_reason</code>, and optionally <code>logprobs</code>.<pre><code class="lang-json">{
+  <span class="hljs-string">"id"</span>: <span class="hljs-string">"chatcmpl-abc..."</span>,
+  <span class="hljs-string">"object"</span>: <span class="hljs-string">"chat.completion"</span>,
+  <span class="hljs-string">"created"</span>: <span class="hljs-number">1677652288</span>,
+  <span class="hljs-string">"model"</span>: <span class="hljs-string">"gpt-4o"</span>,
+  <span class="hljs-string">"choices"</span>: [
+    {
+      <span class="hljs-string">"index"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-string">"message"</span>: {
+        <span class="hljs-string">"role"</span>: <span class="hljs-string">"assistant"</span>,
+        <span class="hljs-string">"content"</span>: <span class="hljs-string">"Hello there! How can I help?"</span>
+      },
+      <span class="hljs-string">"finish_reason"</span>: <span class="hljs-string">"stop"</span>
+    }
+  ],
+  <span class="hljs-string">"usage"</span>: <span class="hljs-meta">{...}</span>
+}
+</code></pre>
+</li>
+<li><strong>Responses API:</strong> Returns a typed response object (e.g., <code>Response</code> type in SDKs) which has its own <code>id</code> (e.g., <code>resp_123...</code>). The generated content is typically within an <code>output</code> array containing typed items like <code>output_text</code> or tool calls. SDKs often provide helpers like <code>response.output_text</code> for easy access.<pre><code class="lang-json">{
+  <span class="hljs-string">"id"</span>: <span class="hljs-string">"resp_67b73f69..."</span>,
+  <span class="hljs-string">"object"</span>: <span class="hljs-string">"response"</span>,
+  <span class="hljs-string">"created"</span>: <span class="hljs-number">1722987012</span>,
+  <span class="hljs-string">"model"</span>: <span class="hljs-string">"gpt-4o"</span>,
+  <span class="hljs-string">"output"</span>: [
+    {
+      <span class="hljs-string">"id"</span>: <span class="hljs-string">"msg_67b73f69..."</span>,
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"message"</span>,
+      <span class="hljs-string">"role"</span>: <span class="hljs-string">"assistant"</span>,
+      <span class="hljs-string">"content"</span>: [
+        {
+          <span class="hljs-string">"type"</span>: <span class="hljs-string">"output_text"</span>,
+          <span class="hljs-string">"text"</span>: <span class="hljs-string">"Hello there! How can I help?"</span>,
+          <span class="hljs-string">"annotations"</span>: []
+        }
+      ]
+    }
+  ],
+  <span class="hljs-string">"usage"</span>: <span class="hljs-meta">{...}</span>
+}
+</code></pre>
+</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>The shift from a <code>choices</code> array containing a <code>message</code> to a more structured <code>output</code> array with typed content parts (<code>output_text</code>, tool calls, etc.) in the Responses API reflects its agentic nature. The output isn&#39;t just a single text response but potentially a collection of actions or results generated by the agent. The inclusion of a unique <code>id</code> for the response object itself (<code>resp_...</code>) is crucial for the built-in state management mechanism.</p>
+</blockquote>
+<hr>
+<h2 id="streaming-differences">Streaming Differences</h2>
+<h2 id="2-4-streaming-mechanism-token-stream-vs-semantic-events-">2.4 Streaming Mechanism (Token Stream vs Semantic Events)</h2>
+<ul>
+<li><strong>Chat Completion API:</strong> When <code>stream: true</code>, it returns a stream of Server-Sent Events (SSEs). Each event contains a <code>chat.completion.chunk</code> object with a <code>delta</code> field. The <code>delta</code> contains <em>incremental</em> changes, typically appending tokens to the <code>content</code> or providing parts of <code>tool_calls</code>. Reconstructing the full message or tracking state requires manual client-side logic.<ul>
+<li>See guides: <a href="https://platform.openai.com/docs/guides/text-generation/streaming">Streaming responses</a>, <a href="https://platform.openai.com/docs/guides/function-calling/streaming">Streaming function calls</a>, <a href="https://platform.openai.com/docs/guides/structured-outputs/streaming">Streaming structured output</a>.</li>
+</ul>
+</li>
+<li><p><strong>Responses API:</strong> Also uses SSEs when <code>stream: true</code>, but emits distinct <strong>semantic events</strong>. These events signal specific stages or changes in the response generation process (e.g., <code>response.created</code>, <code>response.output_text.delta</code>, <code>response.tool_call.started</code>, <code>response.completed</code>). This event-driven architecture is designed to be more predictable, easier to integrate, and type-safe.</p>
+<pre><code>event: response.created
+data: <span class="hljs-meta">{...}</span>
+
+event: response.output_item.added
+data: <span class="hljs-meta">{...}</span> // e.g., a message item
+
+event: response.content_part.added
+data: <span class="hljs-meta">{...}</span> // e.g., an output_text part
+
+event: response.output_text.delta
+data: {<span class="hljs-string">"delta"</span>: <span class="hljs-string">"Hello"</span>}
+
+event: response.output_text.delta
+data: {<span class="hljs-string">"delta"</span>: <span class="hljs-string">" world"</span>}
+
+event: response.output_text.done
+data: <span class="hljs-meta">{...}</span>
+
+event: response.content_part.done
+data: <span class="hljs-meta">{...}</span>
+
+event: response.output_item.done
+data: <span class="hljs-meta">{...}</span>
+
+event: response.completed
+data: <span class="hljs-meta">{...}</span> // includes final status <span class="hljs-keyword">and</span> usage
+</code></pre><p>OpenAI explicitly recommends using the Responses API for streaming due to its improved design.</p>
+</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>The streaming mechanism is a significant differentiator, especially for user experience in real-time applications and for developers building reactive systems. Chat Completion&#39;s token-by-token stream is simple but requires parsing and state management on the client-side to reconstruct messages or identify tool calls. Responses API&#39;s semantic events provide a much clearer, structured view of the generation process (e.g., &#39;tool call started&#39;, &#39;text delta arrived&#39;, &#39;response complete&#39;). This event-driven approach simplifies client-side logic, improves type safety, and makes it easier to react to specific stages of the agent&#39;s execution, like displaying a &#39;searching web...&#39; indicator when a <code>web_search</code> tool event occurs.</p>
+</blockquote>
+<hr>
+<h2 id="built-in-tool-differences">Built-in Tool Differences</h2>
+<h2 id="2-5-built-in-tool-support">2.5 Built-in Tool Support</h2>
+<ul>
+<li><strong>Chat Completion API:</strong> Supports defining custom <code>tools</code> (currently only <code>function</code> type). The developer provides the schema for the functions the model can call, and the model generates the arguments. The developer&#39;s application code is responsible for executing the function and returning the result to the model.</li>
+<li><strong>Responses API:</strong> Supports custom <code>tools</code> (functions) similar to Chat Completions. <strong>Crucially, it also offers built-in tools</strong> managed by OpenAI:<ul>
+<li>Web search (<code>web_search_preview</code>)</li>
+<li>File search (for Retrieval-Augmented Generation - RAG)</li>
+<li>Computer use (<code>computer_use_preview</code>)
+These built-in tools simplify workflows that require external information retrieval or interaction, as OpenAI handles the execution. Code Interpreter is also planned.</li>
+</ul>
+</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Built-in tools are a major advantage of the Responses API for specific use cases. While Chat Completions allows defining <em>custom</em> functions/tools, implementing the underlying logic (like performing a web search or interacting with files) remains the developer&#39;s responsibility. The Responses API provides ready-to-use implementations for common tasks like web search and file search (RAG), significantly reducing development effort for applications needing these capabilities. The &#39;Computer use&#39; tool hints at future possibilities for more direct interaction with user environments or applications.</p>
+</blockquote>
+<hr>
+<h2 id="state-management-differences">State Management Differences</h2>
+<h2 id="2-6-state-management-messages-vs-previous_response_id-">2.6 State Management (<code>messages</code> vs <code>previous_response_id</code>)</h2>
+<ul>
+<li><strong>Chat Completion API:</strong> Is <strong>stateless</strong>. To maintain conversation context, the developer must manually manage the history and send the entire relevant sequence of <code>messages</code> (user, assistant, system, tool) in <strong>every</strong> API request. This requires careful handling of token limits, often necessitating strategies like summarization or truncation for long conversations.<ul>
+<li><img src="https://cloud.overment.com/2024-08-15/aidevs3_convo-db9be435-2.png" alt="Sending full conversation history"></li>
+<li>A common strategy is <strong>conversation summarization</strong>: generate a summary of past turns and include it in the system prompt instead of all messages.
+<img src="https://cloud.overment.com/2024-08-15/aidevs3_compression-b513b064-0.png" alt="Comparison of sending full history vs. summarized history"></li>
+</ul>
+</li>
+<li><strong>Responses API:</strong> Has <strong>built-in state management</strong>. To continue a conversation, the developer simply passes the <code>id</code> of the previous response object in the <code>previous_response_id</code> parameter of the new request. OpenAI uses this ID to retrieve the necessary context and maintain the conversation state internally. This significantly simplifies managing multi-turn interactions.</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>State management is often a pain point in building conversational AI. Chat Completion&#39;s manual approach offers maximum flexibility but requires careful implementation to handle context window limits, potentially involving summarization or other truncation strategies. Responses API&#39;s <code>previous_response_id</code> offers significant convenience by offloading history management to OpenAI. This simplifies application logic but might offer less fine-grained control over exactly what context is preserved or how it&#39;s compressed compared to manual methods. The choice depends on whether the developer prioritizes convenience or control.</p>
+</blockquote>
+<hr>
+<h2 id="structured-output-differences">Structured Output Differences</h2>
+<h2 id="2-7-structured-output-support-json-mode-vs-json-schema-">2.7 Structured Output Support (JSON Mode vs JSON Schema)</h2>
+<p>Both APIs support mechanisms for requesting structured JSON output, moving beyond plain text responses. However, the preferred method and parameter names differ slightly.</p>
+<ul>
+<li><strong>Chat Completion API:</strong><ul>
+<li><strong>JSON Mode (Legacy):</strong> Activated by setting <code>response_format: { &quot;type&quot;: &quot;json_object&quot; }</code>. Requires prompting the model to output JSON. Does <em>not</em> guarantee valid JSON or adherence to a specific structure.
+<img src="https://cloud.overment.com/2024-08-19/aidevs3_format-a9a19c81-4.png" alt="JSON mode activation parameter">
+<img src="https://cloud.overment.com/2024-08-19/aidevs3_json_mode_failed-60a5c3e3-4.png" alt="JSON mode can fail"></li>
+<li><strong>Structured Output (JSON Schema - Preferred):</strong> Activated by <code>response_format: { &quot;type&quot;: &quot;json_schema&quot;, &quot;json_schema&quot;: { &quot;schema&quot;: {...}, &quot;strict&quot;: true/false } }</code>. Requires providing a JSON Schema. Guarantees schema-adherent JSON output in <code>strict</code> mode (model-dependent).
+<img src="https://cloud.overment.com/2024-08-19/aidevs3_structured-1a4721ed-7.png" alt="Structured Output activation parameters">
+<img src="https://cloud.overment.com/2024-08-19/aidevs3_schema-38a842f9-a.png" alt="Example of Structured Output correctly extracting data"></li>
+</ul>
+</li>
+<li><strong>Responses API:</strong><ul>
+<li>Uses the <code>text.format</code> parameter. The preferred method is using JSON Schema: <code>text.format: { &quot;type&quot;: &quot;json_schema&quot;, &quot;json_schema&quot;: { &quot;schema&quot;: {...} } }</code>. This aligns with the API&#39;s focus on structured interaction.</li>
+</ul>
+</li>
+</ul>
+<p>Using JSON Schema (<code>json_schema</code>) is strongly recommended over the older JSON Mode (<code>json_object</code>) in both APIs for reliable structured data extraction or generation.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Both APIs now offer robust ways to get structured JSON output, which is critical for reliable integration with application logic. The older &#39;JSON Mode&#39; (<code>json_object</code>) was less reliable as it relied heavily on prompting and didn&#39;t guarantee schema adherence. The introduction of JSON Schema support (<code>json_schema</code>) in both APIs, especially with <code>strict</code> mode, provides a much stronger guarantee of valid, schema-compliant JSON output. The Responses API seems to favor the <code>json_schema</code> approach via its <code>text.format</code> parameter, aligning with its focus on reliable, structured interactions needed for agentic workflows.</p>
+</blockquote>
+<hr>
+<h2 id="model-availability-differences">Model Availability Differences</h2>
+<h2 id="2-8-model-availability-and-compatibility">2.8 Model Availability and Compatibility</h2>
+<p>OpenAI aims to add new models to both APIs whenever possible. However, there might be differences:</p>
+<ul>
+<li><strong>General Models:</strong> Models like <code>gpt-4o</code> are available on both APIs.</li>
+<li><strong>Specialized Models:</strong> Some models, particularly those relying heavily on built-in tools (like future &#39;Computer use&#39; models) or involving complex internal multi-turn generation (like <code>o1-pro</code>), might <em>only</em> be available via the Responses API.</li>
+<li><strong>Parameter Support:</strong> Newer models (e.g., <code>o-series</code>) might have slightly different parameter support across the APIs (e.g., <code>reasoning_effort</code> vs <code>reasoning.effort</code>). The <code>max_tokens</code> parameter is deprecated in Chat Completions (use <code>max_completion_tokens</code>) and not compatible with <code>o1</code> models.</li>
+</ul>
+<p>Developers should consult the specific <a href="https://platform.openai.com/docs/models">model documentation</a> to confirm API support and compatible parameters for the desired model.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Model availability is a practical constraint. While OpenAI aims for parity, the reality is that cutting-edge models or those tightly integrated with specific platform features (like built-in tools) might debut or only be available on the Responses API. This could be a deciding factor if a specific model capability (e.g., advanced reasoning in <code>o1-pro</code>, or a future model using &#39;Computer use&#39;) is required. Developers should always check the specific model documentation for API compatibility.</p>
+</blockquote>
+<hr>
+<h2 id="use-case-chatbots">Use Case: Chatbots</h2>
+<h2 id="3-1-chatbots-and-conversational-interfaces">3.1 Chatbots and Conversational Interfaces</h2>
+<p>Both APIs are suitable for building chatbots and conversational UIs.</p>
+<ul>
+<li><strong>Chat Completion API:</strong> The traditional choice. Its <code>messages</code> structure directly maps to conversation turns. Requires manual state management (sending history with each request) or implementing summarization strategies for long conversations.</li>
+<li><strong>Responses API:</strong> Offers built-in state management via <code>previous_response_id</code>, simplifying the development of multi-turn conversations. Its semantic streaming events can also enhance the UI by providing clearer feedback on the generation process.</li>
+</ul>
+<p>The choice may depend on the complexity of the conversation and whether the developer prefers manual control over state (Chat Completions) or built-in convenience (Responses).</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Chatbots remain a primary use case for LLM APIs. While both APIs can power chatbots, the Responses API&#39;s built-in state management (<code>previous_response_id</code>) can significantly simplify development by removing the need for manual history tracking in the application code. For simple bots, Chat Completions is sufficient, but for more complex conversational agents maintaining long contexts, Responses offers convenience.</p>
+</blockquote>
+<hr>
+<h2 id="use-case-data-extraction">Use Case: Data Extraction</h2>
+<h2 id="3-2-data-extraction-and-structured-output">3.2 Data Extraction and Structured Output</h2>
+<p>LLMs can be used to extract structured data from text. Both APIs support this effectively using their structured output features.</p>
+<ul>
+<li><strong>Method:</strong> Use the <code>response_format</code> (Chat Completions) or <code>text.format</code> (Responses) parameter with <code>type: &quot;json_schema&quot;</code> and provide a JSON Schema defining the desired output structure.</li>
+<li><strong>Reliability:</strong> Using <code>json_schema</code> (especially with <code>strict: true</code> where supported) provides high confidence that the output will be valid JSON conforming to the specified schema, although the <em>correctness</em> of the extracted values still depends on the model&#39;s understanding.</li>
+<li><strong>Example Use Case:</strong> Extracting product details, contact information, or key entities from unstructured text documents.
+<img src="https://cloud.overment.com/2024-08-19/aidevs3_schema-38a842f9-a.png" alt="Example of Structured Output correctly extracting data">
+<img src="https://cloud.overment.com/2024-08-19/aidevs3_system-665877ea-b.png" alt="Example showing Structured Output using system prompt context"></li>
+</ul>
+<p>This is preferable to the older, less reliable <code>json_object</code> mode or trying to parse unstructured text output.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Structured data extraction is a powerful application of LLMs, transforming unstructured text into usable data. Both APIs now excel here thanks to JSON Schema support. This is far more reliable than prompt-based JSON formatting or regex. The guaranteed schema adherence (in strict mode) makes it feasible to directly integrate LLM output into databases, APIs, or other automated workflows. This capability is crucial for tasks like parsing invoices, extracting information from emails, or categorizing user feedback.</p>
+</blockquote>
+<hr>
+<h2 id="use-case-agentic-workflows">Use Case: Agentic Workflows</h2>
+<h2 id="3-3-agentic-workflows-and-tool-use">3.3 Agentic Workflows and Tool Use</h2>
+<p>Agentic workflows involve LLMs performing sequences of actions, potentially using tools, to achieve a goal. This often involves loops of planning, action, and reflection.</p>
+<ul>
+<li><strong>Chat Completion API:</strong> Can be used to build agents, but requires the developer to implement the orchestration logic: deciding when to call tools, parsing <code>tool_calls</code> from the response, executing the tools, and sending results back to the model. Frameworks like <a href="tools/LangChain.md">LangChain</a> often help manage this complexity.<ul>
+<li>Example: The <code>websearch</code> example combines multiple steps (decide search, pick domains, rate results, scrape, answer) orchestrated around Chat Completion calls.
+<img src="https://cloud.overment.com/2024-08-21/aidevs3_agent-c3590711-8.png" alt="Agent workflow diagram">
+<img src="https://cloud.overment.com/2024-09-04/aidevs3_graph-f6782902-9.png" alt="Websearch workflow visualization"></li>
+</ul>
+</li>
+<li><strong>Responses API:</strong> Designed to simplify agentic workflows. It offers:<ul>
+<li><strong>Built-in Tools:</strong> Web search, File search, Computer use reduce the need for custom tool implementation.</li>
+<li><strong>Integrated Tool Handling:</strong> The API manages aspects of the tool use lifecycle.</li>
+<li><strong>State Management:</strong> Simplifies tracking progress across multiple steps.</li>
+</ul>
+</li>
+</ul>
+<p>For complex agents involving multiple tools or steps, the Responses API offers a more integrated and potentially simpler development path.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Agentic workflows represent the cutting edge of LLM applications, moving beyond simple Q&amp;A to tasks involving planning, tool use, and interaction with external systems. The Responses API is explicitly designed for this, offering built-in tools and state management that streamline agent development. While agents <em>can</em> be built using Chat Completions, it requires significantly more orchestration logic within the application (often using frameworks like LangChain or LlamaIndex). The &#39;Chain&#39; and &#39;Agent&#39; concepts described in the notes illustrate these patterns, involving multiple LLM calls, decision-making steps, and interactions with tools like web search.</p>
+</blockquote>
+<hr>
+<h2 id="use-case-rag">Use Case: RAG</h2>
+<h2 id="3-4-document-search-and-retrieval-rag-">3.4 Document Search and Retrieval (RAG)</h2>
+<p>Retrieval-Augmented Generation (RAG) involves retrieving relevant information from external documents (e.g., a knowledge base, PDFs) and providing it to the LLM as context to answer a query.</p>
+<ul>
+<li><strong>Chat Completion API:</strong> RAG is implemented manually. The application searches an external vector database or index, retrieves relevant document chunks, and inserts them into the <code>messages</code> array (often in the system prompt or as user messages) before calling the API.</li>
+<li><strong>Responses API:</strong> Offers a <strong>built-in File search tool</strong>. This allows developers to upload files to OpenAI and have the API handle the retrieval and injection of relevant context automatically when the tool is invoked. This simplifies the RAG implementation by abstracting away the indexing and retrieval steps.</li>
+</ul>
+<p>While manual RAG with Chat Completions offers more control over the retrieval process, the Responses API&#39;s built-in tool provides a potentially faster path to implementing RAG.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Retrieval-Augmented Generation (RAG) is a key technique for grounding LLM responses in specific external knowledge, reducing hallucinations and providing up-to-date information. While Chat Completions can be used for RAG (by retrieving documents externally and inserting their content into the <code>messages</code> prompt), the Responses API&#39;s built-in &#39;File search&#39; tool aims to streamline this process significantly. By managing the file indexing and retrieval, it potentially simplifies the implementation of RAG systems, especially for developers new to the concept.</p>
+</blockquote>
+<hr>
+<h2 id="use-case-streaming">Use Case: Streaming</h2>
+<h2 id="3-5-streaming-applications">3.5 Streaming Applications</h2>
+<p>Streaming responses is essential for applications requiring real-time feedback, like chatbots or code generation assistants.</p>
+<ul>
+<li><p><strong>Chat Completion API:</strong> Supports streaming (<code>stream: true</code>) via token-based SSEs (<code>chat.completion.chunk</code> with <code>delta</code>). Requires client-side logic to assemble the final response and interpret the stream.</p>
+<ul>
+<li><p>Python Example (Concatenating Content):</p>
+<pre><code class="lang-python">from openai import OpenAI
+client = OpenAI()
+
+stream = client.chat.completions.create(
+    model=<span class="hljs-string">"gpt-4o"</span>,
+    messages=[{<span class="hljs-string">"role"</span>: <span class="hljs-string">"user"</span>, <span class="hljs-string">"content"</span>: <span class="hljs-string">"Say 'hi' ten times."</span>}],
+    stream=True,
+)
+
+full_response = <span class="hljs-string">""</span>
+<span class="hljs-keyword">for</span> chunk <span class="hljs-keyword">in</span> stream:
+    <span class="hljs-keyword">if</span> chunk.choices <span class="hljs-keyword">and</span> chunk.choices[<span class="hljs-number">0</span>].<span class="hljs-built_in">delta</span>.<span class="hljs-built_in">content</span> <span class="hljs-built_in">is</span> <span class="hljs-keyword">not</span> None:
+        <span class="hljs-built_in">content</span> = chunk.choices[<span class="hljs-number">0</span>].<span class="hljs-built_in">delta</span>.<span class="hljs-built_in">content</span>
+        <span class="hljs-built_in">print</span>(<span class="hljs-built_in">content</span>, end=<span class="hljs-string">""</span>)
+        full_response += <span class="hljs-built_in">content</span>
+</code></pre>
+</li>
+</ul>
+</li>
+<li><strong>Responses API:</strong> Also supports streaming (<code>stream: true</code>) but uses <strong>semantic events</strong> via SSEs. This provides a more structured stream that is easier to parse and react to different phases of generation (e.g., text deltas, tool calls, completion).</li>
+</ul>
+<p>OpenAI explicitly <strong>recommends the Responses API for streaming</strong> due to its improved, event-driven architecture, which simplifies integration and enhances type safety.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Streaming is crucial for user-perceived performance in interactive applications. Both APIs support streaming, but the Responses API&#39;s semantic event model offers advantages for building sophisticated UIs. Developers can listen for specific events (e.g., <code>tool_call.start</code>, <code>output_text.delta</code>, <code>response.completed</code>) to provide more granular feedback to the user about what the AI is doing, rather than just displaying incrementally appearing text. This richer feedback can significantly improve the user experience for complex or long-running requests.</p>
+</blockquote>
+<hr>
+<h2 id="when-to-use-chat-completions">When to Use Chat Completions</h2>
+<h2 id="4-1-scenarios-favoring-chat-completion-api">4.1 Scenarios Favoring Chat Completion API</h2>
+<p>Consider using the Chat Completion API (<code>/v1/chat/completions</code>) if:</p>
+<ol>
+<li><strong>Existing Project:</strong> You have an existing application successfully using this API, and migration offers limited benefits.</li>
+<li><strong>No Need for Built-in Tools:</strong> Your application does not require web search, file search (RAG), or computer use capabilities provided natively by the Responses API.</li>
+<li><strong>Prefer Manual State Control:</strong> You prefer or require fine-grained control over conversation history management, including custom summarization or truncation logic.</li>
+<li><strong>Simpler Use Cases:</strong> Your primary need is text generation, simple conversation, or basic function calling where the orchestration logic is manageable.</li>
+<li><strong>Industry Standard:</strong> You prioritize using the most widely adopted and understood API structure, potentially for compatibility with other tools or services mimicking OpenAI&#39;s API.</li>
+<li><strong>Maximum Flexibility:</strong> You need the flexibility to implement complex, custom agentic loops or state management strategies not directly supported by the Responses API&#39;s built-in features.</li>
+</ol>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Stick with Chat Completions if your project is mature, doesn&#39;t require the specific built-in tools of the Responses API, and you have already invested in building robust state management and tool orchestration logic. Its stability and vast ecosystem are valuable. It&#39;s also the safe choice if you need maximum control over the context sent to the model or if you rely heavily on third-party tools and frameworks tightly coupled with the Chat Completions API structure.</p>
+</blockquote>
+<hr>
+<h2 id="when-to-use-responses-api">When to Use Responses API</h2>
+<h2 id="4-2-scenarios-favoring-responses-api">4.2 Scenarios Favoring Responses API</h2>
+<p>Consider using the Responses API (<code>/v1/responses</code>) if:</p>
+<ol>
+<li><strong>New Project:</strong> You are starting a new project, especially one involving agentic capabilities. OpenAI recommends new users start here.</li>
+<li><strong>Need Built-in Tools:</strong> Your application requires web search, file search (RAG), or computer use, and you want to leverage OpenAI&#39;s integrated solutions.</li>
+<li><strong>Simplified State Management:</strong> You want to simplify multi-turn conversation handling using the <code>previous_response_id</code> mechanism.</li>
+<li><strong>Agentic Workflows:</strong> You are building complex agents involving tool use, planning, and potentially code execution (when available), and want an API designed for these tasks.</li>
+<li><strong>Improved Streaming:</strong> You need robust streaming with clearer state signaling (semantic events) for better UI feedback or backend processing.</li>
+<li><strong>Future Capabilities:</strong> You want to easily adopt future OpenAI platform enhancements, as the Responses API is positioned as the foundation for these.</li>
+<li><strong>Specific Model Requirements:</strong> You need to use a model or feature (like <code>o1-pro</code> or certain reasoning parameters) that is only available or better supported via the Responses API.</li>
+</ol>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>The Responses API is compelling for new projects, especially those aiming for more complex, agent-like behavior. The built-in tools and state management can significantly accelerate development. If your application heavily relies on RAG, web search, or anticipates using future capabilities like Code Interpreter or Computer Use, starting with the Responses API aligns you with OpenAI&#39;s strategic direction and potentially simplifies future integrations. The improved streaming mechanism is also a strong reason if user experience with real-time feedback is critical.</p>
+</blockquote>
+<hr>
+<h2 id="migration-considerations">Migration Considerations</h2>
+<h2 id="4-3-migration-considerations-for-existing-projects">4.3 Migration Considerations for Existing Projects</h2>
+<p>If considering migrating an existing project from the Chat Completion API to the Responses API, be aware of the following:</p>
+<ol>
+<li><strong>API Structure:</strong> Request parameters (<code>messages</code> vs <code>input</code>) and response structures (<code>choices</code> vs <code>output</code>) are different, requiring code changes in how you call the API and process results.</li>
+<li><strong>State Management:</strong> You&#39;ll need to replace manual history management (building the <code>messages</code> array) with logic to store and use the <code>previous_response_id</code> from the Responses API output.</li>
+<li><strong>Streaming:</strong> If using streaming, the client-side logic must be updated to handle semantic events instead of raw token deltas.</li>
+<li><strong>Tool/Function Calling:</strong> The API shape for defining tools and handling tool calls differs. Check the respective documentation for implementation changes.</li>
+<li><strong>Structured Output:</strong> Parameter names differ (<code>response_format</code> vs <code>text.format</code>), although the underlying JSON Schema mechanism is similar.</li>
+<li><strong>Testing:</strong> Thorough testing is required to ensure functional equivalence and handle potential behavioral differences between the APIs or underlying model interpretations.</li>
+</ol>
+<p>Migration involves non-trivial effort and should be justified by the benefits offered by the Responses API for the specific application (e.g., need for built-in tools, simplified state, improved streaming).</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Migrating from Chat Completions to Responses is not a simple drop-in replacement due to the fundamental differences in request/response structure, state management, and streaming. Key considerations include refactoring API call logic, adapting state management (from manual <code>messages</code> construction to using <code>previous_response_id</code>), handling the different output structures, and potentially updating streaming logic to work with semantic events instead of token deltas. Tool/function calling implementation will also likely require changes. Thorough testing is crucial. Given OpenAI&#39;s plan to eventually deprecate the Assistants API in favor of Responses, understanding these migration paths might become relevant for Assistants API users as well.</p>
+</blockquote>
+<hr>
+<h2 id="js-example-chat-completion">JS Example: Chat Completion</h2>
+<h2 id="5-1-chat-completion-api-example-node-js-with-openai-sdk-">5.1 Chat Completion API Example (Node.js with OpenAI SDK)</h2>
+<p>The notes provide a conceptual example using <code>curl</code> to interact with a Node.js backend that presumably uses the OpenAI SDK. While direct SDK code isn&#39;t shown for this specific API in the notes, the interaction pattern is illustrated.</p>
+<p><strong>Conceptual Interaction (Client -&gt; Node.js Backend):</strong></p>
+<p>A client (e.g., a web frontend or another service) sends a POST request to a Node.js API endpoint.</p>
+<pre><code class="lang-bash">curl -X POST http:<span class="hljs-comment">//localhost:3000/api/chat \</span>
+-H <span class="hljs-string">"Content-Type: application/json"</span> \
+-d <span class="hljs-string">'{"</span>messages<span class="hljs-string">":[{"</span>role<span class="hljs-string">":"</span>user<span class="hljs-string">","</span>content<span class="hljs-string">":"</span>Hello from client!<span class="hljs-string">"}]}'</span>
+</code></pre>
+<p><strong>Conceptual Node.js Backend Logic (using <code>openai</code> package):</strong></p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// Assuming setup with Express, Hono, or similar</span>
+<span class="hljs-comment">// import { OpenAI } from 'openai';</span>
+<span class="hljs-comment">// const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });</span>
+
+app.post(<span class="hljs-string">'/api/chat'</span>, <span class="hljs-keyword">async</span> (req, res) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> userMessages = req.body.messages; <span class="hljs-comment">// Get messages from client</span>
+
+    <span class="hljs-comment">// --- Add system prompt and potentially history --- </span>
+    <span class="hljs-keyword">const</span> messagesForApi = [
+      { role: <span class="hljs-string">'system'</span>, content: <span class="hljs-string">'You are a helpful assistant.'</span> },
+      ...userMessages <span class="hljs-comment">// Append client messages</span>
+      <span class="hljs-comment">// Potentially load more history from DB here</span>
+    ];
+
+    <span class="hljs-keyword">const</span> completion = <span class="hljs-keyword">await</span> openai.chat.completions.create({
+      model: <span class="hljs-string">'gpt-4o'</span>, <span class="hljs-comment">// Or other desired model</span>
+      messages: messagesForApi,
+      <span class="hljs-comment">// Add other parameters like temperature, max_tokens, stream, etc.</span>
+    });
+
+    <span class="hljs-comment">// Send response back to client</span>
+    res.json(completion.choices[<span class="hljs-number">0</span>].message);
+
+  } <span class="hljs-keyword">catch</span> (error) {
+    console.error(<span class="hljs-string">'Error calling OpenAI:'</span>, error);
+    res.status(<span class="hljs-number">500</span>).json({ error: <span class="hljs-string">'Failed to get completion'</span> });
+  }
+});
+</code></pre>
+<ul>
+<li><strong>Key SDK Method:</strong> <code>openai.chat.completions.create(requestBody)</code></li>
+<li><strong>Request Body:</strong> Contains <code>model</code>, <code>messages</code>, and other optional parameters from the API reference.</li>
+<li><strong>Source Code Reference:</strong> The notes mention example code in a GitHub repository: <a href="https://github.com/i-am-alice/3rd-devs/tree/main/streaming">https://github.com/i-am-alice/3rd-devs/tree/main/streaming</a> (within the <code>sdk</code> folder, though the link points to <code>streaming</code>).</li>
+<li><strong>Recommended SDK:</strong> Use the official <a href="https://github.com/openai/openai-node">OpenAI Node.js SDK</a>.</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>While the notes lack direct JavaScript SDK examples for the <em>latest</em> OpenAI SDK usage, the principles remain the same. You&#39;d use the <code>openai</code> package, instantiate a client, and call the appropriate method (<code>client.chat.completions.create</code>). The key is correctly constructing the request object, including the <code>model</code> and <code>messages</code> array. For a Node.js backend, this logic would typically reside in an API route handler (like in Express, Hono, or Nest.js) that receives user input, constructs the <code>messages</code> array (potentially retrieving history from a database), calls the OpenAI API, and sends the response back to the client.</p>
+</blockquote>
+<hr>
+<h2 id="js-example-responses-api">JS Example: Responses API</h2>
+<h2 id="5-2-responses-api-example-node-js-with-openai-sdk-">5.2 Responses API Example (Node.js with OpenAI SDK)</h2>
+<p>The notes provide a Python example comparing the basic call structure. Translating this concept to Node.js using the official <code>openai</code> SDK would look similar, but using the <code>responses.create</code> method.</p>
+<p><strong>Conceptual Node.js Backend Logic (using <code>openai</code> package):</strong></p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// Assuming setup with Express, Hono, or similar</span>
+<span class="hljs-comment">// import { OpenAI } from 'openai';</span>
+<span class="hljs-comment">// const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });</span>
+
+app.post(<span class="hljs-string">'/api/respond'</span>, <span class="hljs-keyword">async</span> (req, res) =&gt; {
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">const</span> userInput = req.body.input; <span class="hljs-comment">// e.g., [{ role: 'user', content: '...' }]</span>
+    <span class="hljs-keyword">const</span> prevResponseId = req.body.previous_response_id; <span class="hljs-comment">// Get previous ID if continuing conversation</span>
+
+    <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> openai.responses.create({
+      model: <span class="hljs-string">'gpt-4o'</span>, <span class="hljs-comment">// Or other desired model</span>
+      input: userInput,
+      previous_response_id: prevResponseId, <span class="hljs-comment">// Pass for state management</span>
+      <span class="hljs-comment">// Add other parameters like tools, text.format, stream, etc.</span>
+    });
+
+    <span class="hljs-comment">// Send response back to client</span>
+    <span class="hljs-comment">// Accessing output might depend on SDK version/helpers</span>
+    <span class="hljs-comment">// Example: Assuming an output_text helper or accessing the first text part</span>
+    <span class="hljs-keyword">const</span> outputText = response.output_text || response.output?.[<span class="hljs-number">0</span>]?.content?.[<span class="hljs-number">0</span>]?.text;
+    <span class="hljs-keyword">const</span> responseId = response.id; <span class="hljs-comment">// Get the ID for the next turn</span>
+
+    res.json({ output: outputText, response_id: responseId });
+
+  } <span class="hljs-keyword">catch</span> (error) {
+    console.error(<span class="hljs-string">'Error calling OpenAI Responses API:'</span>, error);
+    res.status(<span class="hljs-number">500</span>).json({ error: <span class="hljs-string">'Failed to get response'</span> });
+  }
+});
+</code></pre>
+<ul>
+<li><strong>Key SDK Method:</strong> <code>openai.responses.create(requestBody)</code></li>
+<li><strong>Request Body:</strong> Contains <code>model</code>, <code>input</code>, optionally <code>previous_response_id</code>, <code>tools</code>, <code>text.format</code>, etc.</li>
+<li><strong>State:</strong> The <code>response.id</code> from the output needs to be stored and sent back as <code>previous_response_id</code> in the next request to maintain context.</li>
+<li><strong>Note:</strong> The notes themselves do not contain JavaScript examples for the Responses API; this is a conceptual translation based on the Python example and API structure.</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Similar to Chat Completions, interacting with the Responses API via the Node.js SDK involves using the corresponding method (<code>client.responses.create</code>). The main difference lies in the request object structure: using <code>input</code> instead of <code>messages</code>, and optionally providing <code>previous_response_id</code> for state management. The response object structure also differs, so accessing the output text might use a helper like <code>response.output_text</code> if available in the SDK, or navigating the <code>output</code> array directly. Remember to handle potential errors and the different response format.</p>
+</blockquote>
+<hr>
+<h2 id="js-example-structured-output">JS Example: Structured Output</h2>
+<h2 id="5-3-enabling-structured-output-in-javascript">5.3 Enabling Structured Output in JavaScript</h2>
+<p>To get structured JSON output conforming to a specific schema using the OpenAI Node.js SDK, you need to set the appropriate parameter in the API call.</p>
+<p><strong>1. Define your JSON Schema:</strong>
+Create a standard JSON Schema object describing the desired output structure.</p>
+<pre><code class="lang-javascript">const mySchema = {
+  <span class="hljs-class"><span class="hljs-keyword">type</span></span>: <span class="hljs-symbol">'objec</span>t',
+  properties: {
+    name: { <span class="hljs-class"><span class="hljs-keyword">type</span></span>: <span class="hljs-symbol">'strin</span>g', description: <span class="hljs-symbol">'Person</span>\<span class="hljs-symbol">'s</span> full name' },
+    age: { <span class="hljs-class"><span class="hljs-keyword">type</span></span>: <span class="hljs-symbol">'intege</span>r', description: <span class="hljs-symbol">'Person</span>\<span class="hljs-symbol">'s</span> age' },
+    isStudent: { <span class="hljs-class"><span class="hljs-keyword">type</span></span>: <span class="hljs-symbol">'boolea</span>n', description: <span class="hljs-symbol">'Whether</span> the person is a student' }
+  },
+  required: [<span class="hljs-symbol">'nam</span>e', <span class="hljs-symbol">'ag</span>e']
+};
+</code></pre>
+<p><strong>2. Include it in the API Call:</strong></p>
+<ul>
+<li><p><strong>For Chat Completion API:</strong> Use the <code>response_format</code> parameter.</p>
+<pre><code class="lang-javascript">const completion = await openai.chat.completions.create({
+<span class="hljs-symbol">  model:</span> <span class="hljs-string">'gpt-4o'</span>,
+<span class="hljs-symbol">  messages:</span> [
+    { <span class="hljs-string">role:</span> <span class="hljs-string">'system'</span>, <span class="hljs-string">content:</span> <span class="hljs-string">'Extract information as JSON based on the provided schema.'</span> },
+    { <span class="hljs-string">role:</span> <span class="hljs-string">'user'</span>, <span class="hljs-string">content:</span> <span class="hljs-string">'John Doe is 30 years old.'</span> }
+  ],
+<span class="hljs-symbol">  response_format:</span> {
+<span class="hljs-symbol">    type:</span> <span class="hljs-string">'json_schema'</span>,
+<span class="hljs-symbol">    json_schema:</span> {
+<span class="hljs-symbol">      schema:</span> mySchema,
+<span class="hljs-symbol">      strict:</span> <span class="hljs-literal">true</span> <span class="hljs-comment">// Recommended for guaranteed schema adherence (model permitting)</span>
+    }
+  }
+});
+<span class="hljs-comment">// The result in completion.choices[0].message.content will be a JSON string</span>
+const structuredData = JSON.parse(completion.choices[<span class="hljs-number">0</span>].message.content);
+</code></pre>
+</li>
+<li><p><strong>For Responses API:</strong> Use the <code>text.format</code> parameter.</p>
+<pre><code class="lang-javascript">const response = await openai.responses.create({
+  model: <span class="hljs-string">'gpt-4o'</span>,
+  input: [{ role: <span class="hljs-string">'user'</span>, content: <span class="hljs-string">'Extract info for Jane Smith, age 25, student.'</span> }],
+  // previous_response_id: ... (<span class="hljs-keyword">if</span> applicable)
+  text: {
+    <span class="hljs-keyword">format</span>: {
+      <span class="hljs-keyword">type</span>: <span class="hljs-string">'json_schema'</span>,
+      json_schema: {
+        schema: mySchema
+        // Strict mode might be <span class="hljs-keyword">implicit</span> or configured differently, check SDK/API docs
+      }
+    }
+  }
+});
+// <span class="hljs-keyword">Access</span> the structured output, potentially via response.output_text or similar
+const structuredData = JSON.parse(response.output_text); // Assuming output_text <span class="hljs-keyword">contains</span> the JSON string
+</code></pre>
+</li>
+</ul>
+<p>Remember to handle potential parsing errors and the <code>refusal</code> field which might indicate the model couldn&#39;t generate the requested JSON.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Enabling structured output is crucial for integrating LLM responses into application logic reliably. Using JSON Schema is the recommended approach for both APIs. In JavaScript/Node.js, this involves constructing the <code>json_schema</code> object according to the JSON Schema specification and including it within the appropriate request parameter (<code>response_format</code> for Chat Completions, <code>text.format</code> for Responses). Libraries like <code>zod</code> can be helpful for defining schemas in TypeScript and generating the corresponding JSON Schema object, ensuring type safety within the application code as well.</p>
+</blockquote>
+<hr>
+<h2 id="js-example-streaming">JS Example: Streaming</h2>
+<h2 id="5-4-streaming-responses-in-javascript">5.4 Streaming Responses in JavaScript</h2>
+<p>To handle streaming responses using the OpenAI Node.js SDK, set <code>stream: true</code> in the request. The SDK method will typically return an async iterator.</p>
+<p><strong>1. Chat Completion API Streaming:</strong>
+Iterate through chunks and accumulate the <code>delta.content</code>.</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">streamChatCompletion</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> stream = <span class="hljs-keyword">await</span> openai.chat.completions.create({
+    <span class="hljs-attr">model</span>: <span class="hljs-string">'gpt-4o'</span>,
+    <span class="hljs-attr">messages</span>: [{ <span class="hljs-attr">role</span>: <span class="hljs-string">'user'</span>, <span class="hljs-attr">content</span>: <span class="hljs-string">'Tell me a very short story.'</span> }],
+    <span class="hljs-attr">stream</span>: <span class="hljs-literal">true</span>,
+  });
+
+  <span class="hljs-keyword">let</span> fullResponse = <span class="hljs-string">""</span>;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Streaming response:'</span>);
+  <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> chunk <span class="hljs-keyword">of</span> stream) {
+    <span class="hljs-keyword">const</span> content = chunk.choices[<span class="hljs-number">0</span>]?.delta?.content || <span class="hljs-string">''</span>;
+    process.stdout.write(content); <span class="hljs-comment">// Write chunk to console in real-time</span>
+    fullResponse += content;
+  }
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'\n--- End of Stream ---'</span>);
+  <span class="hljs-keyword">return</span> fullResponse;
+}
+</code></pre>
+<ul>
+<li>The Python examples in the notes demonstrate this logic clearly.</li>
+<li>You might also receive <code>tool_calls</code> deltas within the stream.</li>
+<li>Include <code>stream_options: { include_usage: true }</code> to get usage stats in the final chunk.</li>
+</ul>
+<p><strong>2. Responses API Streaming:</strong>
+Iterate through the stream. The structure of each chunk/event will differ based on the semantic event type. You&#39;ll need to inspect the chunk to understand what type of event it represents (e.g., <code>response.output_text.delta</code>, <code>response.tool_call.start</code>, <code>response.completed</code>).</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">streamResponse</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> stream = <span class="hljs-keyword">await</span> openai.responses.create({
+    <span class="hljs-attr">model</span>: <span class="hljs-string">'gpt-4o'</span>,
+    <span class="hljs-attr">input</span>: [{ <span class="hljs-attr">role</span>: <span class="hljs-string">'user'</span>, <span class="hljs-attr">content</span>: <span class="hljs-string">'Write a haiku about streams.'</span> }],
+    <span class="hljs-attr">stream</span>: <span class="hljs-literal">true</span>,
+  });
+
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Streaming response events:'</span>);
+  <span class="hljs-keyword">let</span> fullText = <span class="hljs-string">""</span>;
+  <span class="hljs-keyword">for</span> <span class="hljs-keyword">await</span> (<span class="hljs-keyword">const</span> event <span class="hljs-keyword">of</span> stream) {
+    <span class="hljs-comment">// <span class="hljs-doctag">NOTE:</span> SDK structure for events may vary. Check SDK documentation.</span>
+    <span class="hljs-comment">// Conceptual example: Check event type and data</span>
+    <span class="hljs-keyword">if</span> (event.type === <span class="hljs-string">'response.output_text.delta'</span> &amp;&amp; event.data?.delta) {
+      <span class="hljs-keyword">const</span> textDelta = event.data.delta;
+      process.stdout.write(textDelta);
+      fullText += textDelta;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (event.type === <span class="hljs-string">'response.tool_call.start'</span>) {
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`\n[Tool Call Started: <span class="hljs-subst">${event.data?.tool_call?.name}</span>]`</span>);
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (event.type === <span class="hljs-string">'response.completed'</span>) {
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`\n[Response Completed. Status: <span class="hljs-subst">${event.data?.status}</span>]`</span>);
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Usage: <span class="hljs-subst">${<span class="hljs-built_in">JSON</span>.stringify(event.data?.usage)}</span>`</span>);
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-comment">// Handle other event types (created, in_progress, done events, etc.)</span>
+      <span class="hljs-comment">// console.log(`\n[Event: ${event.type}]`);</span>
+    }
+  }
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'\n--- End of Stream ---'</span>);
+  <span class="hljs-keyword">return</span> fullText;
+}
+</code></pre>
+<ul>
+<li>The exact structure of the streamed objects/events depends on the specific version of the OpenAI Node.js SDK. Refer to its documentation for precise handling of Responses API semantic events.</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Streaming in Node.js involves handling the asynchronous nature of Server-Sent Events (SSEs). The OpenAI Node.js SDK typically returns an async iterator when <code>stream: true</code>. You loop through this iterator (<code>for await...of</code>) to process each chunk or event as it arrives. For Chat Completions, you&#39;ll concatenate <code>delta.content</code>. For Responses, you&#39;ll inspect the <code>event</code> type on each chunk (if provided by the SDK, otherwise parse the raw SSE stream) and react accordingly (e.g., update UI based on <code>response.output_text.delta</code>, show tool activity on <code>response.tool_call.start</code>). Libraries like <code>eventsource-parser</code> can be useful if handling raw SSE streams.</p>
+</blockquote>
+<hr>
+<h2 id="history-chat-completion-manual-">History: Chat Completion (Manual)</h2>
+<h2 id="6-1-chat-completion-api-manual-history-management">6.1 Chat Completion API: Manual History Management</h2>
+<p>The Chat Completion API is stateless. To maintain conversation context, you must manually manage the history and send it with each request in the <code>messages</code> array.</p>
+<ul>
+<li><p><strong>Mechanism:</strong> Construct the <code>messages</code> array including <code>system</code> instructions, previous <code>user</code> messages, previous <code>assistant</code> responses, and any <code>tool</code> interactions.</p>
+<pre><code class="lang-javascript"><span class="hljs-comment">// Example messages array for turn 3</span>
+const messages = [
+  { <span class="hljs-string">role:</span> <span class="hljs-string">'system'</span>, <span class="hljs-string">content:</span> <span class="hljs-string">'You are a helpful chatbot.'</span> },
+  { <span class="hljs-string">role:</span> <span class="hljs-string">'user'</span>, <span class="hljs-string">content:</span> <span class="hljs-string">'What is the capital of France?'</span> }, <span class="hljs-comment">// Turn 1</span>
+  { <span class="hljs-string">role:</span> <span class="hljs-string">'assistant'</span>, <span class="hljs-string">content:</span> <span class="hljs-string">'The capital of France is Paris.'</span> }, <span class="hljs-comment">// Turn 1</span>
+  { <span class="hljs-string">role:</span> <span class="hljs-string">'user'</span>, <span class="hljs-string">content:</span> <span class="hljs-string">'What is its population?'</span> } <span class="hljs-comment">// Turn 2 (Current request)</span>
+];
+
+<span class="hljs-comment">// Call API with these messages</span>
+<span class="hljs-comment">// const completion = await openai.chat.completions.create({ model: 'gpt-4o', messages });</span>
+</code></pre>
+</li>
+<li><strong>Persistence:</strong> Store the conversation history (each message with its role and content) in a database (e.g., <a href="tools/PostgreSQL.md">PostgreSQL</a>, <a href="tools/MongoDB.md">MongoDB</a>) associated with a user or session ID.</li>
+<li><strong>Context Limit:</strong> Be mindful of the model&#39;s context window limit. Sending too much history will result in errors. Implement strategies like truncation or summarization.
+<img src="https://cloud.overment.com/2024-08-15/aidevs3_convo-db9be435-2.png" alt="Sending full conversation history"></li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Manual history management, as required by the Chat Completion API, gives developers complete control but also burdens them with implementation details. They must decide how much history to keep, how to format it, and how to handle context window limits. This often involves strategies like keeping a fixed number of turns, summarizing older parts of the conversation, or using more sophisticated techniques like vector similarity search over the history to find relevant past messages. Storing the history in a database is essential for persistence across sessions.</p>
+</blockquote>
+<hr>
+<h2 id="history-responses-api-built-in-">History: Responses API (Built-in)</h2>
+<h2 id="6-2-responses-api-using-previous_response_id-">6.2 Responses API: Using <code>previous_response_id</code></h2>
+<p>The Responses API offers built-in state management, simplifying conversation history handling.</p>
+<ul>
+<li><p><strong>Mechanism:</strong></p>
+<ol>
+<li>Make the first call to the Responses API without <code>previous_response_id</code>.</li>
+<li>The API returns a response object containing a unique <code>id</code> (e.g., <code>resp_abc123</code>).</li>
+<li>Store this <code>id</code>.</li>
+<li>For the next turn in the conversation, include this stored ID in the <code>previous_response_id</code> parameter of the request.
+```javascript
+// First call
+const response1 = await openai.responses.create({
+model: &#39;gpt-4o&#39;,
+input: [{ role: &#39;user&#39;, content: &#39;What is the capital of France?&#39; }]
+});
+const responseId1 = response1.id;
+// Store responseId1 (e.g., in user session or DB)</li>
+</ol>
+<p>// Second call (continuing conversation)
+const response2 = await openai.responses.create({
+  model: &#39;gpt-4o&#39;,
+  input: [{ role: &#39;user&#39;, content: &#39;What is its population?&#39; }],
+  previous_response_id: responseId1 // Link to the previous turn
+});
+const responseId2 = response2.id;
+// Store responseId2 for the next turn...
+```</p>
+</li>
+<li><strong>Benefit:</strong> The developer does not need to manually construct and send the entire message history. OpenAI uses the <code>previous_response_id</code> to manage the context internally.</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>The <code>previous_response_id</code> mechanism in the Responses API is a significant simplification for developers. It abstracts away the complexity of manually assembling and potentially compressing the conversation history. OpenAI handles the context retrieval based on the provided ID. This is particularly beneficial for rapid development and for applications where complex manual history management isn&#39;t necessary. However, it offers less transparency and control compared to the manual approach; developers rely on OpenAI&#39;s internal logic for context management.</p>
+</blockquote>
+<hr>
+<h2 id="history-summarization-strategies">History: Summarization Strategies</h2>
+<h2 id="6-3-summarization-strategies-for-long-conversations">6.3 Summarization Strategies for Long Conversations</h2>
+<p>When conversations become too long to fit within the model&#39;s context window (especially relevant for manual history management with Chat Completions), summarization is a key strategy.</p>
+<ul>
+<li><strong>Problem:</strong> Sending the full history consumes tokens (increasing cost) and can exceed model limits.</li>
+<li><strong>Solution:</strong> Instead of sending all past messages, generate a summary of the conversation up to a certain point.</li>
+<li><strong>Implementation (<code>thread</code> example):</strong><ol>
+<li>After a few turns, use an LLM (potentially a cheaper one like <code>gpt-4o-mini</code>) to summarize the existing <code>messages</code> array.</li>
+<li>In subsequent requests, replace the older messages with this summary, typically placed within the <code>system</code> prompt or as a condensed <code>assistant</code> message, followed by the most recent user message.</li>
+<li>Diagram:
+<img src="https://cloud.overment.com/2024-09-02/aidevs3_turns-faccf75e-d.png" alt=""></li>
+<li>Code Reference: <a href="https://github.com/i-am-alice/3rd-devs/tree/main/thread"><code>thread</code> example</a></li>
+</ol>
+</li>
+<li><strong>Benefits:</strong><ul>
+<li>Manages context window limits.</li>
+<li>Reduces token count per request (<a href="glossary/cost%20reduction.md">cost reduction</a>).</li>
+<li>May improve model focus (<a href="glossary/performance%20optimization.md">performance optimization</a>).</li>
+</ul>
+</li>
+<li><strong>Drawback:</strong> Summarization inherently involves information loss. The effectiveness depends on the quality of the summary.</li>
+</ul>
+<p><img src="https://cloud.overment.com/2024-08-15/aidevs3_compression-b513b064-0.png" alt="Comparison of sending full history vs. summarized history"></p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Summarization is a practical technique to manage context window limitations and potentially reduce costs, especially with the Chat Completion API or when implementing custom state management. The key challenge is balancing information retention with brevity. Simple truncation (dropping old messages) is easy but loses context. Summarization aims to preserve the gist of the conversation. This can be done programmatically or, meta-cognitively, by using another LLM call (often with a cheaper, faster model) specifically tasked with summarizing the history. The quality of the summary directly impacts the main model&#39;s ability to maintain context effectively.</p>
+</blockquote>
+<hr>
+<h2 id="history-database-storage">History: Database Storage</h2>
+<h2 id="6-4-database-schema-for-storing-conversations">6.4 Database Schema for Storing Conversations</h2>
+<p>Storing conversation history persistently is essential for most applications.</p>
+<ul>
+<li><strong>Purpose:</strong> Allows users to continue conversations later, provides context for state management (especially manual), and enables logging/auditing.</li>
+<li><strong>Recommended Storage:</strong> Relational databases like <a href="tools/PostgreSQL.md">PostgreSQL</a> or NoSQL databases like <a href="tools/MongoDB.md">MongoDB</a> are suitable.</li>
+<li><p><strong>Example Schema Structure:</strong> A table (e.g., <code>conversation_messages</code>) could include fields like:</p>
+<ul>
+<li><code>message_id</code> (Primary Key, e.g., UUID)</li>
+<li><code>thread_id</code> or <code>conversation_id</code> (Foreign Key linking messages in the same conversation, Indexed)</li>
+<li><code>user_id</code> or <code>session_id</code> (Identifier for the user/session)</li>
+<li><code>role</code> (String: <code>user</code>, <code>assistant</code>, <code>system</code>, <code>tool</code>)</li>
+<li><code>content</code> (Text: The actual message content)</li>
+<li><code>timestamp</code> (Timestamp, Indexed)</li>
+<li><code>openai_response_id</code> (String, Nullable: Store the <code>id</code> from Responses API if used)</li>
+<li><code>metadata</code> (JSONB/TEXT: Optional, for storing model name, token counts, latency, etc.)</li>
+</ul>
+<p><img src="https://cloud.overment.com/2024-08-15/aidevs3_db-10cc2714-d.png" alt="Example database schema for storing messages"></p>
+</li>
+</ul>
+<p>This structure allows retrieving the history for a specific conversation (<code>thread_id</code>) ordered by <code>timestamp</code> to reconstruct the <code>messages</code> array for the Chat Completion API or to find the latest <code>openai_response_id</code> for the Responses API.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>A well-designed database schema is crucial for persisting conversations, enabling users to resume interactions later and providing data for analysis or fine-tuning. The suggested schema provides a good starting point. Key considerations include indexing (especially on <code>thread_id</code> and timestamps for efficient retrieval), handling potentially large message content (using appropriate data types like TEXT), storing metadata (like model used, latency, token counts, finish reason), and ensuring compliance with data privacy regulations (e.g., GDPR, CCPA) if storing user conversations.</p>
+</blockquote>
+<hr>
+<h2 id="summary-key-differences">Summary: Key Differences</h2>
+<h2 id="7-1-summary-of-key-differences">7.1 Summary of Key Differences</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Chat Completion API (<code>/v1/chat/completions</code>)</th>
+<th>Responses API (<code>/v1/responses</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary Use</strong></td>
+<td>Conversational AI, Text Generation</td>
+<td>Agentic Workflows, Action-Oriented Apps</td>
+</tr>
+<tr>
+<td><strong>Input Parameter</strong></td>
+<td><code>messages</code> (array of message objects)</td>
+<td><code>input</code> (string or array of typed items)</td>
+</tr>
+<tr>
+<td><strong>Output Access</strong></td>
+<td><code>choices[0].message.content</code></td>
+<td><code>output</code> array, SDK helpers (e.g., <code>output_text</code>)</td>
+</tr>
+<tr>
+<td><strong>State Management</strong></td>
+<td>Manual (send full history in <code>messages</code>)</td>
+<td>Built-in (via <code>previous_response_id</code>)</td>
+</tr>
+<tr>
+<td><strong>Streaming</strong></td>
+<td>Token-based deltas (<code>delta.content</code>)</td>
+<td>Semantic events (e.g., <code>output_text.delta</code>, <code>tool_call.start</code>)</td>
+</tr>
+<tr>
+<td><strong>Built-in Tools</strong></td>
+<td>No (only custom functions)</td>
+<td>Yes (Web search, File search, Computer use)</td>
+</tr>
+<tr>
+<td><strong>Structured Output</strong></td>
+<td><code>response_format</code> (<code>json_object</code>/<code>json_schema</code>)</td>
+<td><code>text.format</code> (<code>json_schema</code> preferred)</td>
+</tr>
+<tr>
+<td><strong>Recommendation</strong></td>
+<td>Established projects, Max control</td>
+<td>New projects, Agentic tasks, Simpler state/tools</td>
+</tr>
+</tbody>
+</table>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>The emergence of the Responses API marks a significant evolution in OpenAI&#39;s platform, moving from a focus on pure text generation towards enabling more complex, interactive agents. While Chat Completions remains a robust and vital API, Responses offers a glimpse into the future of integrated AI capabilities, simplifying tasks that previously required considerable developer effort.</p>
+</blockquote>
+<hr>
+<h2 id="decision-matrix">Decision Matrix</h2>
+<h2 id="7-2-decision-matrix-which-api-to-use-when">7.2 Decision Matrix: Which API to Use When</h2>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Use Chat Completion API</th>
+<th>Use Responses API</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Simple Chatbot / Text Generation</strong></td>
+<td>✅ Likely</td>
+<td>✅ Possible</td>
+<td>Chat Completions often simpler for basic cases.</td>
+</tr>
+<tr>
+<td><strong>New Project (General Purpose)</strong></td>
+<td>Possible</td>
+<td>✅ Recommended</td>
+<td>OpenAI recommends Responses for new users/projects.</td>
+</tr>
+<tr>
+<td><strong>Requires Web Search / RAG</strong></td>
+<td>Manual Implementation</td>
+<td>✅ Recommended</td>
+<td>Responses API has built-in tools.</td>
+</tr>
+<tr>
+<td><strong>Complex Agentic Workflow</strong></td>
+<td>Possible (More Effort)</td>
+<td>✅ Recommended</td>
+<td>Responses API designed for this; simplifies state/tools.</td>
+</tr>
+<tr>
+<td><strong>Need Fine-Grained History Control</strong></td>
+<td>✅ Yes</td>
+<td>Less Control</td>
+<td>Manual management allows custom logic (summarization, filtering).</td>
+</tr>
+<tr>
+<td><strong>Requires Sophisticated Streaming UI</strong></td>
+<td>Possible</td>
+<td>✅ Recommended</td>
+<td>Semantic events provide richer feedback.</td>
+</tr>
+<tr>
+<td><strong>Existing Project on Chat Completions</strong></td>
+<td>✅ Stay (Likely)</td>
+<td>Consider Migration</td>
+<td>Migrate only if Responses API benefits outweigh effort.</td>
+</tr>
+<tr>
+<td><strong>Need Specific Model Only on Responses API</strong></td>
+<td>No</td>
+<td>✅ Yes</td>
+<td>Check model documentation for API compatibility.</td>
+</tr>
+<tr>
+<td><strong>Prioritize Industry Standard / Max Tools</strong></td>
+<td>✅ Yes</td>
+<td>Less Standard</td>
+<td>Chat Completions has wider adoption/tooling currently.</td>
+</tr>
+</tbody>
+</table>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This matrix provides a quick reference, but the optimal choice often involves nuances. Consider the team&#39;s familiarity with each API, the project&#39;s long-term roadmap (will it need more agentic features later?), and the acceptable level of coupling with OpenAI&#39;s platform (built-in tools increase coupling). Prototyping simple versions with both APIs might be worthwhile for complex projects to evaluate the developer experience and performance characteristics directly.</p>
+</blockquote>
+<hr>
+<h2 id="best-practices">Best Practices</h2>
+<h2 id="7-3-best-practices-for-api-integration">7.3 Best Practices for API Integration</h2>
+<p>Regardless of which API you choose, follow these best practices:</p>
+<ol>
+<li><strong>Use Official SDKs:</strong> Utilize official libraries (<a href="https://github.com/openai/openai-node">OpenAI Node.js SDK</a>) for easier integration, type safety, and handling API details.</li>
+<li><strong>Manage API Keys Securely:</strong> Store API keys in environment variables or secure secret management systems. Do not hardcode them in your source code.</li>
+<li><strong>Implement Robust Error Handling:</strong> Handle potential network errors, API errors (e.g., rate limits, invalid requests), and timeouts gracefully.</li>
+<li><strong>Manage State Appropriately:</strong> Choose a state management strategy (manual history + DB for Chat Completions, <code>previous_response_id</code> + DB for Responses) and implement it reliably.</li>
+<li><strong>Optimize for Cost and Latency:</strong> Monitor token usage. Consider summarization, using cheaper models for simpler tasks, or caching responses where applicable.</li>
+<li><strong>Structure Prompts Effectively:</strong> Use clear instructions, system prompts, and potentially few-shot examples. For complex prompts, consider organizing them outside main code logic.</li>
+<li><strong>Leverage Structured Output:</strong> Use JSON Schema (<code>json_schema</code>) for reliable data extraction or function argument generation instead of parsing text.</li>
+<li><strong>Monitor and Log:</strong> Use tools like <a href="tools/LangFuse.md">LangFuse</a> or LangSmith to monitor LLM calls, track prompts/responses, debug issues, and manage prompt versions.
+<img src="https://cloud.overment.com/2024-08-22/aidevs3_langfuse-07427b01-4.png" alt="Screenshot of LangFuse interface"></li>
+<li><strong>Consider Alternatives:</strong> Don&#39;t use LLMs for tasks easily solvable programmatically (e.g., simple data manipulation, regex). Evaluate if traditional search or databases suffice before implementing complex LLM solutions.
+<img src="https://cloud.overment.com/2024-08-22/aidevs3_emails-0ec2d633-6.png" alt="Example showing email deduplication better handled programmatically"></li>
+</ol>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Beyond the API choice, successful integration involves robust error handling (network issues, API errors, rate limits), cost management (monitoring token usage, potentially using cheaper models for certain tasks like summarization), security (protecting API keys, handling user data responsibly), and observability (using tools like LangFuse or LangSmith to track prompts, responses, latency, and costs). Prompt engineering remains crucial for getting desired behavior, and managing prompts effectively (versioning, testing) is key for maintainability.</p>
+</blockquote>
+<hr>
+<h2 id="references-openai-docs">References: OpenAI Docs</h2>
+<h2 id="8-1-openai-documentation-links">8.1 OpenAI Documentation Links</h2>
+<ul>
+<li><strong>Chat Completions API Reference:</strong> <a href="https://platform.openai.com/docs/api-reference/chat">https://platform.openai.com/docs/api-reference/chat</a></li>
+<li><strong>Responses API Reference:</strong> <a href="https://platform.openai.com/docs/api-reference/responses">https://platform.openai.com/docs/api-reference/responses</a></li>
+<li><strong>Comparison Guide (Official):</strong> <a href="https://platform.openai.com/docs/guides/responses/chat-completions-vs-responses">Compare Chat Completions with Responses</a> (Link derived from context, actual comparison page)</li>
+<li><strong>Models:</strong> <a href="https://platform.openai.com/docs/models">https://platform.openai.com/docs/models</a></li>
+<li><strong>Guides:</strong><ul>
+<li><a href="https://platform.openai.com/docs/guides/structured-outputs">Structured Outputs</a></li>
+<li><a href="https://platform.openai.com/docs/guides/function-calling">Function Calling</a></li>
+<li><a href="https://platform.openai.com/docs/guides/text-generation/streaming">Streaming</a></li>
+<li><a href="https://platform.openai.com/docs/assistants/overview">Assistants API (Legacy/Transitioning):</a> (Note: Planned deprecation in favor of Responses API features)</li>
+</ul>
+</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Staying updated with OpenAI&#39;s documentation is crucial, as the APIs and models evolve rapidly. Exploring community projects and alternative SDKs/frameworks can provide valuable insights and practical implementation patterns. Understanding the broader ecosystem helps in making informed decisions about tooling and architecture.</p>
+</blockquote>
+<hr>
+<h2 id="references-example-projects">References: Example Projects</h2>
+<h2 id="8-2-example-projects-and-repositories">8.2 Example Projects and Repositories</h2>
+<ul>
+<li><strong><code>3rd-devs</code> Repository Examples (Illustrative Concepts):</strong><ul>
+<li><code>streaming/sdk</code>: Conceptual Node.js backend interaction. <a href="https://github.com/i-am-alice/3rd-devs/tree/main/streaming">Link</a></li>
+<li><code>thread</code>: Conversation summarization technique. <a href="https://github.com/i-am-alice/3rd-devs/tree/main/thread">Link</a></li>
+<li><code>websearch</code>, <code>use_search</code>, <code>pick_domains</code>, <code>rate</code>: Examples of chained LLM calls for agentic tasks (likely using Chat Completion structure). <a href="https://github.com/i-am-alice/3rd-devs/tree/main/websearch">Link</a></li>
+</ul>
+</li>
+<li><strong>&#39;Cracker&#39; Agent:</strong> Example of an agent built using schema involving planning, tools, etc. <a href="https://github.com/iceener/aidevs-agent-cracker">Link</a>
+<img src="https://cloud.overment.com/2024-08-21/aidevs3_cracker-de17a1ca-b.png" alt="Screenshot of the &#39;Cracker&#39; Agent project"></li>
+<li><strong>Quivr:</strong> Project using LangChain (Python) showing prompt organization. <a href="https://github.com/QuivrHQ/quivr">Link</a> (Illustrative)
+<img src="https://cloud.overment.com/2024-08-22/aidevs3_quivr-0cf13ec3-d.png" alt="Image showing prompt organization in Quivr project"></li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Examining open-source projects that utilize these APIs can provide practical examples and inspiration. The <code>aidevs-agent-cracker</code> demonstrates a complex agent built using agentic principles, while the <code>3rd-devs</code> repository contains smaller, focused examples illustrating specific techniques like summarization and chained calls relevant to both APIs.</p>
+</blockquote>
+<hr>
+<h2 id="references-related-tools">References: Related Tools</h2>
+<h2 id="8-3-related-tools-and-sdks">8.3 Related Tools and SDKs</h2>
+<ul>
+<li><strong>Official SDKs:</strong><ul>
+<li><a href="https://github.com/openai/openai-node">OpenAI Node.js SDK</a></li>
+<li><a href="https://github.com/openai/openai-python">OpenAI Python SDK</a></li>
+<li><a href="https://docs.anthropic.com/en/api/client-sdks">Anthropic Client SDKs</a></li>
+</ul>
+</li>
+<li><strong>Abstraction Layers / UI Helpers:</strong><ul>
+<li><a href="tools/Vercel%20AI%20SDK.md">Vercel AI SDK</a>: TypeScript library for building AI interfaces and backend integrations, supports multiple providers.</li>
+<li><a href="https://github.com/BerriAI/litellm">LiteLLM</a>: Python library to call various LLM APIs using a consistent format.</li>
+</ul>
+</li>
+<li><strong>Observability &amp; Prompt Management:</strong><ul>
+<li><a href="tools/LangFuse.md">LangFuse</a>: Open-source LLM engineering platform for tracing, debugging, evaluation, and prompt management.
+<img src="https://cloud.overment.com/2024-08-22/aidevs3_prompts-2bd63a30-a.png" alt="Screenshot showing prompt management within LangFuse"></li>
+<li>LangSmith (by LangChain): Platform for LLM application development, monitoring, and testing.</li>
+</ul>
+</li>
+<li><strong>Prompt Templating (Alternatives):</strong><ul>
+<li>JavaScript Native: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals">Template Strings</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates">Tagged Templates</a>.</li>
+<li>Frameworks: <a href="tools/LangChain.md">LangChain</a> (offers templating, but use with caution regarding stability/documentation noted pre-v1.0).</li>
+</ul>
+</li>
+<li><strong>Web Scraping for RAG/Agents:</strong><ul>
+<li><a href="tools/FireCrawl.md">FireCrawl</a>: Tool mentioned for scraping content in the <code>websearch</code> example.</li>
+</ul>
+</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>The LLM ecosystem is rich with tools and SDKs. Official SDKs are usually the safest bet, but abstraction layers like the Vercel AI SDK can simplify building frontends and backends that interact with multiple LLM providers. Observability tools like LangFuse are becoming indispensable for managing the complexity and cost of LLM applications in production. Prompt management tools integrated into these platforms further aid development workflows.</p>
+</blockquote>
+<hr>
+

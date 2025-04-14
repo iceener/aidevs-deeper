@@ -1,0 +1,725 @@
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>
+	@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.actions-btn {
+  @apply text-zinc-400 hover:text-white;
+  width: 26px;  /* 14px + 8px (4px padding on each side) */
+  height: 26px; /* 14px + 8px (4px padding on each side) */
+  @apply p-1;   /* 4px padding */
+  @apply border;
+  @apply flex items-center justify-center;
+  @apply transition-all duration-200;
+}
+
+.actions-btn svg {
+  width: 14px;
+  height: 14px;
+}
+ 
+@layer base {
+  :root {
+    font-family: 'SF Pro Text', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* --background: 0 0% 100%; */
+    /* --foreground: 222.2 84% 4.9%; */
+ 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+ 
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+ 
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+ 
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+ 
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+ 
+    --destructive: 0 72.2% 50.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --ring: 267 84% 47%;
+ 
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+ 
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+ 
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --ring: 267 84% 47%;
+  }
+ 
+  /* Add specific selection styles for the message content */
+  .message-content ::selection {
+    @apply bg-violet-500/100;
+  }
+
+  /* Keep the prompt's existing selection style for other elements */
+  ::selection {
+    @apply bg-primary-600/90 text-white;
+  }
+
+  /* Caret styling */
+  @supports (-webkit-caret-color: auto) or (caret-color: auto) {
+    input, textarea, [contenteditable="true"] {
+      caret-color: theme('colors.primary.600');
+    }
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ... existing styles ... */
+
+/* Remove default select styling */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+/* Remove default focus outline in Firefox */
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #fff;
+}
+
+/* Remove default select arrow in IE */
+select::-ms-expand {
+  display: none;
+}
+
+/* Add focus styles for form elements */
+[type='text']:focus,
+[type='email']:focus,
+[type='url']:focus,
+[type='password']:focus,
+[type='number']:focus,
+[type='date']:focus,
+[type='datetime-local']:focus,
+[type='month']:focus,
+[type='search']:focus,
+[type='tel']:focus,
+[type='time']:focus,
+[type='week']:focus,
+[multiple]:focus,
+textarea:focus,
+select:focus,
+button:focus {
+  /*outline: 1px solid #6D28D9 !important;  violet-700 */
+  outline-offset: 1px;
+  --tw-ring-shadow: none;
+  --tw-ring-offset-shadow: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+dialog {
+  color: initial;
+}
+
+.renderer {
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: -0.011em;
+  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  min-height: 34px;
+  color: #27272a;  /* Default light theme color */
+  max-width: calc(83vw);
+}
+
+[data-theme="dark"] .renderer {
+  color: #fafafa;  /* Dark theme color */
+}
+
+.renderer {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.renderer h1, .renderer h2, .renderer h3, 
+.renderer h4, .renderer h5, .renderer h6 {
+  margin: 1.2em 0 0.6em;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--heading-color, inherit);
+}
+
+.renderer h1 {
+  font-size: 1.5em;
+  font-weight: 700;
+}
+.renderer h2 { font-size: 1.25em; font-weight: 700; }
+.renderer h3 { font-size: 1.125em; font-weight: 600; }
+.renderer h4 { font-size: 1em; font-weight: 600; }
+.renderer h5 { font-size: 0.875em; font-weight: 600; }
+.renderer h6 { font-size: 0.75em; font-weight: 600; }
+
+.renderer p {
+  margin: 0.75em 0;
+  line-height: 1.6;
+  max-width: 70ch;
+}
+
+.renderer strong {
+  font-weight: bold;
+}
+
+.renderer em {
+  font-style: italic;
+}
+
+.renderer a {
+  color: var(--link-color, theme('colors.primary.500', #3B82F6));
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.15em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.renderer a:hover {
+  text-decoration-thickness: 0.125em;
+}
+
+.renderer a:focus {
+  outline: 2px solid var(--link-color, #0070f3);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.renderer code {
+  font-family: 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.92em;
+  /* padding: 0.2em 0.4em; */
+  border-radius: 3px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+[data-theme="light"] .renderer code {
+  background-color: transparent;
+  color: #24292e;
+}
+
+[data-theme="dark"] .renderer code {
+  background-color: transparent;
+  color: #e1e4e8;
+}
+
+.renderer pre {
+  padding: 0 1.5rem 0 0;
+  margin: 1em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* font-size: 0.875rem; */
+  /* line-height: 1.7142857; */
+  border-radius: 0.375rem;
+  max-width: 100%;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+[data-theme="light"] .renderer pre {
+  /* @apply bg-zinc-100/80 border border-zinc-200; */
+}
+
+[data-theme="dark"] .renderer pre {
+  /* @apply bg-zinc-950/90 border border-zinc-800; */
+}
+
+.renderer blockquote {
+  @apply pl-4 border-l-4 border-primary-600 
+         bg-zinc-900/50 
+         py-3 px-4 my-4 
+         text-zinc-200
+         rounded-r
+         backdrop-blur-sm
+         shadow-sm
+         transition-colors
+         duration-200;
+}
+
+.renderer blockquote > ul {
+  @apply my-0;
+}
+
+.renderer blockquote > p {
+  @apply my-0 first:mt-0 last:mb-0;
+}
+
+.renderer blockquote > p + p {
+  @apply mt-4;
+}
+
+.renderer blockquote strong {
+  @apply text-primary-600;
+}
+
+.renderer blockquote a {
+  @apply text-primary-600 hover:text-primary-500 
+         transition-colors duration-200;
+}
+
+.renderer ul,
+.renderer ol {
+  padding-left: 1.5em;
+  margin: 1em 0;
+}
+
+.renderer li {
+  margin: 0.5em 0;
+}
+
+.renderer hr {
+  border: none;
+  border-top: 1px solid #242424;
+  margin: 2em 0;
+}
+
+.renderer table {
+  font-size: 1rem;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+.renderer th,
+.renderer td {
+  border: 1px solid #27272a;
+  padding: 0.5em;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.renderer th {
+  font-weight: 600;
+  background: #27272a;
+}
+
+.renderer img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  @apply bg-primary-600/5;
+  object-fit: contain;
+}
+
+p + p {
+ margin-top: 1rem;
+}
+
+div > code {
+ color: #9333ea;
+}
+
+/* Add this new override for tab buttons */
+[role="tab"]:focus {
+  outline-offset: -1px !important;
+}
+
+.custom-scrollbar {
+  /* Force scrollbar visibility */
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* Target both the container and any nested scrollable elements */
+.custom-scrollbar,
+.custom-scrollbar * {
+  &::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-zinc-600/50 hover:bg-zinc-400/70 dark:bg-zinc-800/50 dark:hover:bg-zinc-800/70 !important;
+    border-radius: 5px !important;
+    min-height: 50px !important;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent !important;
+    border-radius: 5px !important;
+  }
+
+  &::-webkit-scrollbar-corner {
+    @apply bg-transparent !important;
+  }
+}
+
+/* Ensure Firefox fallback */
+@supports (scrollbar-color: auto) {
+  .custom-scrollbar {
+    scrollbar-width: thin !important;
+    @apply scrollbar-color-light dark:scrollbar-color-dark !important;
+  }
+}
+
+@layer utilities {
+  .scrollbar-color-light {
+    scrollbar-color: theme('colors.zinc.400/50') transparent !important;
+  }
+  .scrollbar-color-dark {
+    scrollbar-color: theme('colors.zinc.600/50') transparent !important;
+  }
+}
+
+/* Renderer styles */
+.renderer .line-number {
+  pointer-events: none;
+  user-select: none;
+  margin-right: 25px;
+  opacity: 0.5;
+  font-size: 16px;
+}
+
+.renderer strong {
+  /* @apply text-primary-600; */
+}
+
+.onboarding-message .renderer strong {
+  @apply text-primary-600 selection:text-white selection:bg-primary-600/50;
+}
+
+.renderer > div > :first-child > .block-container, 
+.renderer > div > :first-child > p, 
+.renderer > div > :first-child > ul, 
+.renderer > div > :first-child > ul li:first-of-type,
+.renderer > div > :first-child > ol, 
+.renderer > div > :first-child > img,
+.renderer > div > :first-child > ol li:first-of-type,
+.renderer > div > .message-container > :first-child,
+.renderer > div > :first-child {
+  margin-top: -1px !important
+}
+
+.renderer > :first-child p {
+  /* margin-bottom: 0; */
+}
+
+.renderer > p:first-child {
+  /* margin-bottom: 0; */
+}
+
+.renderer .line {
+  padding: 0 10px;
+  @apply transition-colors duration-200;
+}
+
+[data-theme="light"] .renderer .line:hover {
+  @apply bg-zinc-200/70;
+}
+
+[data-theme="dark"] .renderer .line:hover {
+  @apply bg-zinc-700/70;
+}
+
+.renderer pre {
+  border-radius: 6px;
+}
+
+.renderer ul {
+   list-style-type: disc;
+   margin-top: 1.5em;
+   margin-bottom: 1.5em;
+   padding-left: 1.5em;
+}
+.renderer ol {
+   list-style-type: decimal;
+   margin-top: 1.5em;
+   margin-bottom: 1.5em;
+   padding-left: 1.5em;
+}
+.renderer li {
+    margin-bottom: 0.5em;
+}
+
+pre:empty {
+  display: none;
+  opacity: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.avatar {
+  height: 38px;
+}
+
+.math-inline {
+  display: block !important;
+  margin: 15px 0;
+}
+
+:global(.renderer .line:hover) {
+  background: rgba(24, 24, 27, 0.95);
+}
+</style>
+<div class="renderer" data-theme="light">
+<h1 id="connect-llm-to-web-search">Connect LLM to Web Search</h1>
+<p>Provide examples and explanations on how to integrate a language model with internet access and web search capabilities. This includes methods for retrieving real-time data from the web and incorporating it into the model&#39;s responses. The task may involve using APIs, web scraping, or third-party services to enable this functionality.</p>
+<hr>
+<h2 id="introduction-to-real-time-llm-integration">Introduction to Real-Time LLM Integration</h2>
+<p>In modern applications, integrating language models (LLMs) with real-time data sources like the internet and web search engines is increasingly essential. This capability allows LLMs to provide up-to-date, contextually relevant responses that go beyond their static training data.</p>
+<p><strong>Benefits of Web-Connected LLMs:</strong></p>
+<ul>
+<li><strong>Access to current information:</strong> Enables responses based on the latest news, prices, or documentation.</li>
+<li><strong>Enhanced reasoning:</strong> LLMs can enrich their outputs with external facts.</li>
+<li><strong>Dynamic user experiences:</strong> Applications can adapt to real-world changes in real time.</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Real-time integration is particularly valuable in domains like finance, e-commerce, and customer support, where information changes frequently. For developers, this opens up opportunities to build smarter, more responsive applications.</p>
+</blockquote>
+<hr>
+<h2 id="chain-based-architecture">Chain-Based Architecture</h2>
+<p>A <strong>Chain Architecture</strong> structures the LLM interaction as a sequence of steps, each performing a specific function. This is ideal for tasks requiring external context, such as web search.</p>
+<p><strong>Example Workflow:</strong></p>
+<ol>
+<li><strong>Input Compression:</strong> Replace links and images with placeholders.</li>
+<li><strong>Keyword Enrichment:</strong> Use a web search to expand on key terms.</li>
+<li><strong>Summarization:</strong> Summarize the enriched content.</li>
+<li><strong>Output Generation:</strong> Use the summary to generate a final response.</li>
+</ol>
+<p><img src="https://cloud.overment.com/2024-08-21/aidevs3_chain-fb7f345a-7.png" alt="Chain architecture example"></p>
+<p><img src="https://cloud.overment.com/2024-08-22/aidevs3_chain-4befe717-c.png" alt="Chain with web search step"></p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Chain architectures are modular and easy to debug. They are well-suited for deterministic workflows and can be implemented using tools like LangChain or custom orchestrators in Node.js or Rust.</p>
+</blockquote>
+<hr>
+<h2 id="agent-based-architecture">Agent-Based Architecture</h2>
+<p><strong>Agentic Architectures</strong> empower LLMs to act autonomously by deciding when and how to use tools like web search.</p>
+<p><strong>Agent Workflow:</strong></p>
+<ul>
+<li><strong>Reflection:</strong> Analyze the task.</li>
+<li><strong>Planning:</strong> Decide on a sequence of actions.</li>
+<li><strong>Action:</strong> Execute steps, including web searches.</li>
+<li><strong>Memory Access:</strong> Retrieve or store relevant data.</li>
+</ul>
+<p><img src="https://cloud.overment.com/2024-08-21/aidevs3_agent-c3590711-8.png" alt="Agentic workflow diagram"></p>
+<p><strong>Example:</strong> The <a href="https://github.com/iceener/aidevs-agent-cracker">Cracker Agent</a> solves puzzles on <a href="https://game.aidevs.pl">game.aidevs.pl</a> by dynamically using web search and other tools.</p>
+<p><img src="https://cloud.overment.com/2024-08-21/aidevs3_cracker-de17a1ca-b.png" alt="Cracker agent solving a puzzle"></p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Agent-based systems are more flexible than chains and can handle complex, non-linear tasks. They are ideal for applications requiring decision-making, such as virtual assistants or autonomous research agents.</p>
+</blockquote>
+<hr>
+<h2 id="multi-prompt-parallel-architecture">Multi-Prompt Parallel Architecture</h2>
+<p>This architecture routes a user&#39;s message to multiple prompts in parallel, combining internal knowledge with real-time web data.</p>
+<p><strong>Workflow:</strong></p>
+<ol>
+<li><strong>Routing:</strong> User input is sent to two prompts:<ul>
+<li>One uses internal memory.</li>
+<li>One performs a web search.</li>
+</ul>
+</li>
+<li><strong>Parallel Execution:</strong> Both prompts run simultaneously.</li>
+<li><strong>Aggregation:</strong> A third prompt synthesizes the final response.</li>
+</ol>
+<p><img src="https://cloud.overment.com/2024-08-15/aidevs3_logic-d55f9c57-0.png" alt="Multi-step interaction logic"></p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This approach balances speed and accuracy by leveraging both static and dynamic data. It&#39;s particularly useful in chatbots or assistants where latency is critical.</p>
+</blockquote>
+<hr>
+<h2 id="firecrawl-api-overview">Firecrawl API Overview</h2>
+<p><a href="https://firecrawl.dev/docs">Firecrawl</a> is a powerful API for integrating web search and scraping into LLM workflows.</p>
+<p><strong>Key Endpoints:</strong></p>
+<ul>
+<li><code>/v0/search</code>: Perform web searches and retrieve structured results.</li>
+<li><code>/v1/scrape</code>: Scrape and format web content for LLM consumption.</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Firecrawl simplifies the process of connecting LLMs to the web by abstracting search and scraping logic. It&#39;s especially useful for developers looking to avoid building custom scrapers or search integrations.</p>
+</blockquote>
+<hr>
+<h2 id="using-firecrawl-search">Using Firecrawl Search</h2>
+<p>To perform a web search using Firecrawl:</p>
+<p><strong>Endpoint:</strong> <code>POST https://api.firecrawl.dev/v0/search</code></p>
+<p><strong>Request Parameters:</strong></p>
+<ul>
+<li><code>query</code>: Search string.</li>
+<li><code>pageOptions</code>: (optional) Fetch page content.</li>
+<li><code>searchOptions</code>: (optional) Control result limits.</li>
+</ul>
+<p><strong>Example (TypeScript):</strong></p>
+<pre><code class="lang-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> search = <span class="hljs-keyword">async</span> (
+  params: FirecrawlSearchParams,
+  <span class="hljs-attr">apiKey</span>: string,
+): <span class="hljs-built_in">Promise</span>&lt;FirecrawlSearchSuccessData&gt; =&gt; {
+  <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> fetch(<span class="hljs-string">`<span class="hljs-subst">${FIRECRAWL_BASE_URL}</span>/v0/search`</span>, {
+    <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>,
+    <span class="hljs-attr">headers</span>: { <span class="hljs-string">'Authorization'</span>: <span class="hljs-string">`Bearer <span class="hljs-subst">${apiKey}</span>`</span> },
+    <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify({ <span class="hljs-attr">query</span>: params.query })
+  });
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> response.json();
+};
+</code></pre>
+<p><strong>Response Example:</strong></p>
+<pre><code class="lang-json">[
+  {
+    <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://example.com"</span>,
+    <span class="hljs-attr">"title"</span>: <span class="hljs-string">"Example Title"</span>,
+    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"Snippet..."</span>,
+    <span class="hljs-attr">"markdown"</span>: <span class="hljs-string">"..."</span>
+  }
+]
+</code></pre>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This API is ideal for enriching LLM prompts with real-time data. Developers can use the results directly or pass them through summarization steps before feeding them to the LLM.</p>
+</blockquote>
+<hr>
+<h2 id="scraping-and-dynamic-content-with-firecrawl">Scraping and Dynamic Content with Firecrawl</h2>
+<p>Firecrawl&#39;s <code>/v1/scrape</code> endpoint allows scraping both static and dynamic content.</p>
+<p><strong>Request Parameters:</strong></p>
+<ul>
+<li><code>url</code>: Target page.</li>
+<li><code>formats</code>: Output formats (<code>markdown</code>, <code>html</code>, etc.).</li>
+<li><code>extract</code>: Structured data extraction via schema or prompt.</li>
+<li><code>actions</code>: Automate browser interactions.</li>
+</ul>
+<p><strong>Example (cURL):</strong></p>
+<pre><code class="lang-bash">curl -X POST https:<span class="hljs-comment">//api.firecrawl.dev/v1/scrape \</span>
+  -H <span class="hljs-string">'Authorization: Bearer YOUR_API_KEY'</span> \
+  -d <span class="hljs-string">'{
+    "</span>url<span class="hljs-string">": "</span>https:<span class="hljs-comment">//docs.firecrawl.dev",</span>
+    <span class="hljs-string">"formats"</span>: [<span class="hljs-string">"markdown"</span>, <span class="hljs-string">"html"</span>]
+  }<span class="hljs-string">'</span>
+</code></pre>
+<p><strong>Structured Extraction Example:</strong></p>
+<pre><code class="lang-json"><span class="hljs-string">"extract"</span>: {
+  <span class="hljs-string">"schema"</span>: {
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"object"</span>,
+    <span class="hljs-string">"properties"</span>: {
+      <span class="hljs-string">"company_mission"</span>: { <span class="hljs-string">"type"</span>: <span class="hljs-string">"string"</span> },
+      <span class="hljs-string">"supports_sso"</span>: { <span class="hljs-string">"type"</span>: <span class="hljs-string">"boolean"</span> }
+    },
+    <span class="hljs-string">"required"</span>: [<span class="hljs-string">"company_mission"</span>, <span class="hljs-string">"supports_sso"</span>]
+  }
+}
+</code></pre>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This feature is powerful for extracting structured data from unstructured web pages. It enables LLMs to reason over real-time content in a structured way, improving accuracy and relevance.</p>
+</blockquote>
+<hr>
+<h2 id="automating-browser-interactions">Automating Browser Interactions</h2>
+<p>Firecrawl supports browser automation via the <code>actions</code> parameter in the <code>/v1/scrape</code> endpoint.</p>
+<p><strong>Supported Actions:</strong></p>
+<ul>
+<li><code>wait</code>: Pause.</li>
+<li><code>click</code>: Click element.</li>
+<li><code>write</code>: Type into input.</li>
+<li><code>press</code>: Simulate key press.</li>
+<li><code>scroll</code>: Scroll page.</li>
+<li><code>screenshot</code>: Capture screen.</li>
+<li><code>scrape</code>: Trigger scrape.</li>
+<li><code>executeJavascript</code>: Run JS.</li>
+</ul>
+<p><strong>Example: Google Search Automation</strong></p>
+<pre><code class="lang-bash">curl -X POST https:<span class="hljs-comment">//api.firecrawl.dev/v1/scrape \</span>
+  -H <span class="hljs-string">'Authorization: Bearer YOUR_API_KEY'</span> \
+  -d <span class="hljs-string">'{
+    "</span>url<span class="hljs-string">": "</span>google.com<span class="hljs-string">",
+    "</span>formats<span class="hljs-string">": ["</span>markdown<span class="hljs-string">", "</span>screenshot<span class="hljs-string">"],
+    "</span>actions<span class="hljs-string">": [
+      {"</span><span class="hljs-built_in">type</span><span class="hljs-string">": "</span>wait<span class="hljs-string">", "</span>milliseconds<span class="hljs-string">": 1000},
+      {"</span><span class="hljs-built_in">type</span><span class="hljs-string">": "</span>write<span class="hljs-string">", "</span>selector<span class="hljs-string">": "</span>textarea[title=\<span class="hljs-string">"Search\"]"</span>, <span class="hljs-string">"text"</span>: <span class="hljs-string">"firecrawl"</span>},
+      {<span class="hljs-string">"type"</span>: <span class="hljs-string">"press"</span>, <span class="hljs-string">"key"</span>: <span class="hljs-string">"Enter"</span>},
+      {<span class="hljs-string">"type"</span>: <span class="hljs-string">"wait"</span>, <span class="hljs-string">"milliseconds"</span>: <span class="hljs-number">3000</span>},
+      {<span class="hljs-string">"type"</span>: <span class="hljs-string">"click"</span>, <span class="hljs-string">"selector"</span>: <span class="hljs-string">"h3"</span>},
+      {<span class="hljs-string">"type"</span>: <span class="hljs-string">"screenshot"</span>, <span class="hljs-string">"fullPage"</span>: true}
+    ]
+  }<span class="hljs-string">'</span>
+</code></pre>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Automating browser interactions is crucial for scraping JavaScript-heavy or interactive pages. This makes Firecrawl suitable for modern web apps that rely on client-side rendering.</p>
+</blockquote>
+<hr>
+<h2 id="best-practices-and-considerations">Best Practices and Considerations</h2>
+<p>When integrating LLMs with web search, consider the following:</p>
+<ul>
+<li><strong>Latency:</strong> Use parallel execution and caching to reduce delays.</li>
+<li><strong>Dynamic Content:</strong> Use browser automation for JS-heavy pages.</li>
+<li><strong>Ethics &amp; Legality:</strong> Respect <code>robots.txt</code>, terms of service, and data privacy laws.</li>
+<li><strong>Rate Limits:</strong> Monitor API usage and implement retries or backoff strategies.</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Following best practices ensures your application is robust, compliant, and performant. It&#39;s also important to monitor for changes in third-party APIs or website structures.</p>
+</blockquote>
+<hr>
+<h2 id="conclusion-and-future-directions">Conclusion and Future Directions</h2>
+<p>Integrating LLMs with web search enhances their capabilities significantly. Depending on your use case, you can choose:</p>
+<ul>
+<li><strong>Chain Architecture</strong> for deterministic workflows.</li>
+<li><strong>Agent-Based Architecture</strong> for autonomous reasoning.</li>
+<li><strong>Multi-Prompt Architecture</strong> for latency-sensitive applications.</li>
+</ul>
+<p><strong>Future Improvements:</strong></p>
+<ul>
+<li>Smarter agents with better planning.</li>
+<li>Improved scraping tools.</li>
+<li>More efficient prompt aggregation.</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>As LLMs evolve, their ability to interact with external tools will become more seamless. Developers should stay updated on new APIs and frameworks that simplify these integrations.</p>
+</blockquote>
+<hr>
+
+

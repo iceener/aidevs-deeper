@@ -1,0 +1,11 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+We're building Deep Search feature that uses AI in a loop with Web Search, File System and SQLite dabatabase to gather information and generate detailed documents about the given topic.
+
+Requirements: 
+- code must be modern javascript/typescript, readable, minimalistic, declarative, easy to read and non-overengineered.
+- we need to be able to easily swap ai providers between openai anthropic and potential others
+- we need to keep api clean as possible

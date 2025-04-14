@@ -1,0 +1,84 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# We're using:
+
+- node.js, typescript, hono.dev framework with modern es6+ syntax
+- drizzle orm with sqlite databse
+
+# What we're building: 
+
+## 🧠 Deep Search System Overview
+
+### Purpose  
+Enable **contextual, LLM-powered search** over a curated set of **trusted knowledge sources**—including uploaded files and scraped websites—organized in a way that supports deep reasoning, dynamic query refinement, and structured output generation.
+
+---
+
+### 🔁 Workflow
+
+1. **User submits a query** in a thread.
+2. System creates a **task** for this query and may generate **self-queries**.
+3. It matches relevant **documents**:
+   - already loaded (in-memory),
+   - or listed in **trusted sources** but not yet loaded.
+4. Loads and parses **trusted documents** (markdown), extracting relevant content.
+5. Stores insights in **notes** linked to the task.
+6. Generates a final **document** (markdown output) based on all gathered data.
+
+---
+
+### 🧱 Schema Overview
+
+#### `threads`
+- Grouping container for messages and deep search tasks.
+
+#### `messages`
+- User or assistant messages within a thread.
+- A user message can trigger a **deep search task**.
+
+#### `tasks`
+- Represents a deep search process.
+- Links to the originating message (`query_message_id`).
+- Tracks status and links to a final output document.
+
+#### `sources`
+- Registered list of **trusted source origins**:
+  - `type`: `'website' | 'file' | 'manual'`
+  - `origin`: URL or file identifier
+  - Metadata like `scraped_at`, `description`
+
+#### `documents`
+- Individual content units (e.g. files or webpages) related to a source.
+- Document types:
+  - `external`: from trusted sources
+  - `generated`: response documents
+  - `manual`: user-curated
+- Linked to a `source` (if external) and optionally to a `task`.
+
+#### `notes`
+- Snippets or extracted insights tied to a particular **task** and **document**.
+- Used as a scratchpad for reasoning and response generation.
+
+---
+
+### 🌐 Deep Search Logic
+
+- Uses **semantic retrieval** (LLM, embeddings) to match queries with trusted documents.
+- Supports **partial loading**: not all sources need to be in memory upfront.
+- Tracks **document provenance** via `sources` and `documents`.
+- Stores **intermediate insights** in `notes` and **final answer** in a `generated` document.
+
+---
+
+### 📂 Future Extensions
+
+- Add `sitemap` or `structure` field to `sources` for richer content mapping.
+- Embed content from `documents` to enable fast vector search.
+- Track document chunking or sections for better retrieval granularity.
+
+---
+
+Want this as Markdown file or internal doc?

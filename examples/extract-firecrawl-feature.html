@@ -1,0 +1,1216 @@
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>
+	@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.actions-btn {
+  @apply text-zinc-400 hover:text-white;
+  width: 26px;  /* 14px + 8px (4px padding on each side) */
+  height: 26px; /* 14px + 8px (4px padding on each side) */
+  @apply p-1;   /* 4px padding */
+  @apply border;
+  @apply flex items-center justify-center;
+  @apply transition-all duration-200;
+}
+
+.actions-btn svg {
+  width: 14px;
+  height: 14px;
+}
+ 
+@layer base {
+  :root {
+    font-family: 'SF Pro Text', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* --background: 0 0% 100%; */
+    /* --foreground: 222.2 84% 4.9%; */
+ 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+ 
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+ 
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+ 
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+ 
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+ 
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+ 
+    --destructive: 0 72.2% 50.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --ring: 267 84% 47%;
+ 
+    --radius: 0.5rem;
+  }
+ 
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+ 
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+ 
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --ring: 267 84% 47%;
+  }
+ 
+  /* Add specific selection styles for the message content */
+  .message-content ::selection {
+    @apply bg-violet-500/100;
+  }
+
+  /* Keep the prompt's existing selection style for other elements */
+  ::selection {
+    @apply bg-primary-600/90 text-white;
+  }
+
+  /* Caret styling */
+  @supports (-webkit-caret-color: auto) or (caret-color: auto) {
+    input, textarea, [contenteditable="true"] {
+      caret-color: theme('colors.primary.600');
+    }
+  }
+}
+ 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ... existing styles ... */
+
+/* Remove default select styling */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+/* Remove default focus outline in Firefox */
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #fff;
+}
+
+/* Remove default select arrow in IE */
+select::-ms-expand {
+  display: none;
+}
+
+/* Add focus styles for form elements */
+[type='text']:focus,
+[type='email']:focus,
+[type='url']:focus,
+[type='password']:focus,
+[type='number']:focus,
+[type='date']:focus,
+[type='datetime-local']:focus,
+[type='month']:focus,
+[type='search']:focus,
+[type='tel']:focus,
+[type='time']:focus,
+[type='week']:focus,
+[multiple]:focus,
+textarea:focus,
+select:focus,
+button:focus {
+  /*outline: 1px solid #6D28D9 !important;  violet-700 */
+  outline-offset: 1px;
+  --tw-ring-shadow: none;
+  --tw-ring-offset-shadow: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+dialog {
+  color: initial;
+}
+
+.renderer {
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: -0.011em;
+  font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  min-height: 34px;
+  color: #27272a;  /* Default light theme color */
+  max-width: calc(83vw);
+}
+
+[data-theme="dark"] .renderer {
+  color: #fafafa;  /* Dark theme color */
+}
+
+.renderer {
+	max-width: 800px;
+	margin: 0 auto;
+}
+
+.renderer h1, .renderer h2, .renderer h3, 
+.renderer h4, .renderer h5, .renderer h6 {
+  margin: 1.2em 0 0.6em;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: var(--heading-color, inherit);
+}
+
+.renderer h1 {
+  font-size: 1.5em;
+  font-weight: 700;
+}
+.renderer h2 { font-size: 1.25em; font-weight: 700; }
+.renderer h3 { font-size: 1.125em; font-weight: 600; }
+.renderer h4 { font-size: 1em; font-weight: 600; }
+.renderer h5 { font-size: 0.875em; font-weight: 600; }
+.renderer h6 { font-size: 0.75em; font-weight: 600; }
+
+.renderer p {
+  margin: 0.75em 0;
+  line-height: 1.6;
+  max-width: 70ch;
+}
+
+.renderer strong {
+  font-weight: bold;
+}
+
+.renderer em {
+  font-style: italic;
+}
+
+.renderer a {
+  color: var(--link-color, theme('colors.primary.500', #3B82F6));
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.15em;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.renderer a:hover {
+  text-decoration-thickness: 0.125em;
+}
+
+.renderer a:focus {
+  outline: 2px solid var(--link-color, #0070f3);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.renderer code {
+  font-family: 'SF Mono', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.92em;
+  /* padding: 0.2em 0.4em; */
+  border-radius: 3px;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+[data-theme="light"] .renderer code {
+  background-color: transparent;
+  color: #24292e;
+}
+
+[data-theme="dark"] .renderer code {
+  background-color: transparent;
+  color: #e1e4e8;
+}
+
+.renderer pre {
+  padding: 0 1.5rem 0 0;
+  margin: 1em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* font-size: 0.875rem; */
+  /* line-height: 1.7142857; */
+  border-radius: 0.375rem;
+  max-width: 100%;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+[data-theme="light"] .renderer pre {
+  /* @apply bg-zinc-100/80 border border-zinc-200; */
+}
+
+[data-theme="dark"] .renderer pre {
+  /* @apply bg-zinc-950/90 border border-zinc-800; */
+}
+
+.renderer blockquote {
+  @apply pl-4 border-l-4 border-primary-600 
+         bg-zinc-900/50 
+         py-3 px-4 my-4 
+         text-zinc-200
+         rounded-r
+         backdrop-blur-sm
+         shadow-sm
+         transition-colors
+         duration-200;
+}
+
+.renderer blockquote > ul {
+  @apply my-0;
+}
+
+.renderer blockquote > p {
+  @apply my-0 first:mt-0 last:mb-0;
+}
+
+.renderer blockquote > p + p {
+  @apply mt-4;
+}
+
+.renderer blockquote strong {
+  @apply text-primary-600;
+}
+
+.renderer blockquote a {
+  @apply text-primary-600 hover:text-primary-500 
+         transition-colors duration-200;
+}
+
+.renderer ul,
+.renderer ol {
+  padding-left: 1.5em;
+  margin: 1em 0;
+}
+
+.renderer li {
+  margin: 0.5em 0;
+}
+
+.renderer hr {
+  border: none;
+  border-top: 1px solid #242424;
+  margin: 2em 0;
+}
+
+.renderer table {
+  font-size: 1rem;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+.renderer th,
+.renderer td {
+  border: 1px solid #27272a;
+  padding: 0.5em;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.renderer th {
+  font-weight: 600;
+  background: #27272a;
+}
+
+.renderer img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  @apply bg-primary-600/5;
+  object-fit: contain;
+}
+
+p + p {
+ margin-top: 1rem;
+}
+
+div > code {
+ color: #9333ea;
+}
+
+/* Add this new override for tab buttons */
+[role="tab"]:focus {
+  outline-offset: -1px !important;
+}
+
+.custom-scrollbar {
+  /* Force scrollbar visibility */
+  -webkit-overflow-scrolling: touch !important;
+}
+
+/* Target both the container and any nested scrollable elements */
+.custom-scrollbar,
+.custom-scrollbar * {
+  &::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-zinc-600/50 hover:bg-zinc-400/70 dark:bg-zinc-800/50 dark:hover:bg-zinc-800/70 !important;
+    border-radius: 5px !important;
+    min-height: 50px !important;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent !important;
+    border-radius: 5px !important;
+  }
+
+  &::-webkit-scrollbar-corner {
+    @apply bg-transparent !important;
+  }
+}
+
+/* Ensure Firefox fallback */
+@supports (scrollbar-color: auto) {
+  .custom-scrollbar {
+    scrollbar-width: thin !important;
+    @apply scrollbar-color-light dark:scrollbar-color-dark !important;
+  }
+}
+
+@layer utilities {
+  .scrollbar-color-light {
+    scrollbar-color: theme('colors.zinc.400/50') transparent !important;
+  }
+  .scrollbar-color-dark {
+    scrollbar-color: theme('colors.zinc.600/50') transparent !important;
+  }
+}
+
+/* Renderer styles */
+.renderer .line-number {
+  pointer-events: none;
+  user-select: none;
+  margin-right: 25px;
+  opacity: 0.5;
+  font-size: 16px;
+}
+
+.renderer strong {
+  /* @apply text-primary-600; */
+}
+
+.onboarding-message .renderer strong {
+  @apply text-primary-600 selection:text-white selection:bg-primary-600/50;
+}
+
+.renderer > div > :first-child > .block-container, 
+.renderer > div > :first-child > p, 
+.renderer > div > :first-child > ul, 
+.renderer > div > :first-child > ul li:first-of-type,
+.renderer > div > :first-child > ol, 
+.renderer > div > :first-child > img,
+.renderer > div > :first-child > ol li:first-of-type,
+.renderer > div > .message-container > :first-child,
+.renderer > div > :first-child {
+  margin-top: -1px !important
+}
+
+.renderer > :first-child p {
+  /* margin-bottom: 0; */
+}
+
+.renderer > p:first-child {
+  /* margin-bottom: 0; */
+}
+
+.renderer .line {
+  padding: 0 10px;
+  @apply transition-colors duration-200;
+}
+
+[data-theme="light"] .renderer .line:hover {
+  @apply bg-zinc-200/70;
+}
+
+[data-theme="dark"] .renderer .line:hover {
+  @apply bg-zinc-700/70;
+}
+
+.renderer pre {
+  border-radius: 6px;
+}
+
+.renderer ul {
+   list-style-type: disc;
+   margin-top: 1.5em;
+   margin-bottom: 1.5em;
+   padding-left: 1.5em;
+}
+.renderer ol {
+   list-style-type: decimal;
+   margin-top: 1.5em;
+   margin-bottom: 1.5em;
+   padding-left: 1.5em;
+}
+.renderer li {
+    margin-bottom: 0.5em;
+}
+
+pre:empty {
+  display: none;
+  opacity: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.avatar {
+  height: 38px;
+}
+
+.math-inline {
+  display: block !important;
+  margin: 15px 0;
+}
+
+:global(.renderer .line:hover) {
+  background: rgba(24, 24, 27, 0.95);
+}
+</style>
+<div class="renderer" data-theme="light">
+<h1 id="firecrawl-extract-feature-overview">Firecrawl Extract Feature Overview</h1>
+<p>The &#39;Extract&#39; feature of Firecrawl is designed to automatically retrieve and structure data from web pages. It enables users to extract specific content such as text, images, metadata, and structured data using customizable parameters. This feature is particularly useful for web scraping, data analysis, and content aggregation tasks.</p>
+<hr>
+<h2 id="firecrawl-fundamentals">Firecrawl Fundamentals</h2>
+<h2 id="1-1-understanding-firecrawl-s-core-functionality">1.1 Understanding Firecrawl&#39;s Core Functionality</h2>
+<p>Firecrawl provides an API designed to convert web pages into clean, structured data formats, specifically optimized for use with Large Language Models (LLMs). The primary tool for this is the Scrape API endpoint (<code>POST https://api.firecrawl.dev/v1/scrape</code>). This service handles many underlying complexities inherent in web scraping, such as:</p>
+<ul>
+<li>Proxy management</li>
+<li>Data caching</li>
+<li>Rate limit handling</li>
+<li>JavaScript rendering</li>
+<li>Loading dynamic content</li>
+</ul>
+<p>This allows developers to focus on utilizing the data rather than managing the intricacies of web page retrieval. You can learn more about the base Scrape API in the <a href="https://docs.firecrawl.dev/api-reference/endpoint/scrape">API Reference</a>.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Firecrawl positions itself as a developer-centric tool simplifying the often complex process of web data acquisition. Unlike traditional scraping libraries (e.g., <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">Beautiful Soup</a>, <a href="https://scrapy.org/">Scrapy</a>) that require significant setup for handling JavaScript rendering, proxies, and rate limits, Firecrawl aims to abstract these complexities behind a clean API. For a full-stack developer, this means potentially faster integration and less infrastructure management for data-gathering tasks. The focus on &#39;LLM-ready&#39; data highlights its relevance in the current AI landscape, where clean, structured input is crucial for effective model performance. Consider Firecrawl as a managed service layer on top of common scraping challenges.</p>
+</blockquote>
+<hr>
+<h2 id="extract-feature-overview">Extract Feature Overview</h2>
+<h2 id="1-2-introducing-the-extract-feature">1.2 Introducing the Extract Feature</h2>
+<p>The &#39;Extract&#39; feature is a specialized capability within Firecrawl designed for targeted, structured data retrieval from web pages. It allows users to specify precisely what information they need (e.g., company mission, product prices, contact details) and receive it in a predictable JSON format. This feature is accessible via both the general <code>/v1/scrape</code> endpoint and a dedicated <code>/extract</code> endpoint, offering flexibility depending on the use case. Its core purpose is to simplify the collection of structured data from single pages, multiple URLs, or even entire domains. Find more details on the <a href="https://www.firecrawl.dev/extract">Extract feature page</a>.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>The Extract feature represents a significant step beyond simple content fetching (like retrieving raw HTML or Markdown). It leverages AI (specifically, LLMs) to interpret the content and pull out specific pieces of information according to user-defined instructions (either a schema or a natural language prompt). This capability is particularly valuable for tasks requiring semantic understanding of the page content, not just its structure. For developers building RAG (Retrieval-Augmented Generation) systems or other AI-powered applications, Extract offers a way to directly obtain structured knowledge from web sources, reducing the need for intermediate parsing and structuring steps. Think of it as intelligent, targeted scraping.</p>
+</blockquote>
+<hr>
+<h2 id="structured-data-extraction-explained">Structured Data Extraction Explained</h2>
+<h2 id="2-1-the-power-of-structured-data-extraction">2.1 The Power of Structured Data Extraction</h2>
+<p>The primary goal of the Extract feature is to retrieve <em>structured data</em>. Instead of just getting the raw text or Markdown of a page, you can define the specific pieces of information you need and their expected format. Firecrawl then uses its capabilities to parse the page content and populate this structure.</p>
+<p>You can define the desired structure in two main ways:</p>
+<ol>
+<li><strong>JSON Schema:</strong> Provide a formal <a href="https://json-schema.org/">JSON Schema</a> definition outlining the fields, data types (string, boolean, number, etc.), and requirements (e.g., which fields are mandatory).</li>
+<li><strong>Natural Language Prompt:</strong> Describe the information you want in plain English. The underlying LLM interprets your request and determines an appropriate JSON structure for the output.</li>
+</ol>
+<p>This structured approach ensures the output data is consistent and easy to integrate into applications or data pipelines.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Structured data extraction is fundamental for integrating web information into databases, applications, or analytical workflows. Unstructured text (like raw HTML or plain text) requires significant post-processing to be useful programmatically. By providing data in a predefined JSON format (either via a user-supplied schema or an LLM-inferred structure), Firecrawl&#39;s Extract feature makes the data immediately actionable. This aligns well with modern development practices favoring well-defined data contracts and API-driven architectures. For a developer working with TypeScript or Rust, the ability to map the extracted JSON directly to typed objects or structs is a significant advantage.</p>
+</blockquote>
+<hr>
+<h2 id="purpose-and-capabilities">Purpose and Capabilities</h2>
+<h2 id="2-2-key-applications-and-use-cases">2.2 Key Applications and Use Cases</h2>
+<p>The Extract feature is versatile and supports various data-driven tasks:</p>
+<ul>
+<li><strong>Web Scraping:</strong> Automate the collection of specific data points from websites, such as product information, user reviews, or real estate listings.</li>
+<li><strong>Data Analysis:</strong> Gather targeted datasets from the web for market research, sentiment analysis, or tracking specific metrics across different sources.</li>
+<li><strong>Content Aggregation:</strong> Build applications that consolidate information from multiple websites, like news feeds, job boards, or event listings, by extracting relevant details in a consistent format.</li>
+</ul>
+<p>The ability to get structured data directly simplifies these workflows significantly compared to traditional scraping methods that often require manual parser development. Explore more potential applications on the <a href="https://firecrawl.dev/blog">Firecrawl Blog</a>.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>These use cases are common drivers for web data extraction tools. </p>
+<ul>
+<li><strong>Web Scraping:</strong> Beyond simple data gathering, structured extraction allows for targeted scraping, like extracting product details (name, price, SKU) from e-commerce sites or contact information from directories. This is more efficient than scraping entire pages and parsing later.</li>
+<li><strong>Data Analysis:</strong> Researchers and analysts can use Extract to gather specific data points from news articles, reports, or social media for trend analysis, market research, or competitive intelligence without manual copy-pasting.</li>
+<li><strong>Content Aggregation:</strong> Platforms that aggregate content (e.g., job boards, news aggregators, price comparison sites) can use Extract to pull standardized information from various sources, ensuring consistency in their own databases and user interfaces. For a full-stack developer, this could power features like automated content updates or competitive monitoring within an application.</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="using-extract-with-v1-scrape-">Using Extract with <code>/v1/scrape</code></h2>
+<h2 id="3-1-activation-via-the-v1-scrape-endpoint">3.1 Activation via the <code>/v1/scrape</code> Endpoint</h2>
+<p>One way to use the Extract feature is through Firecrawl&#39;s primary scraping endpoint: <code>POST https://api.firecrawl.dev/v1/scrape</code>. This endpoint is designed to convert individual web pages into various clean formats.</p>
+<p>To enable structured data extraction using this endpoint, you need to modify the request payload.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Using the <code>/v1/scrape</code> endpoint for extraction integrates this capability into Firecrawl&#39;s general-purpose scraping workflow. This might be suitable if you&#39;re already using <code>/v1/scrape</code> for other formats (like Markdown) and want to add structured data extraction for the same URL in a single API call. It keeps the interaction pattern consistent if you primarily use this endpoint. However, for tasks focused <em>solely</em> on structured extraction, especially across multiple URLs or domains, the dedicated <code>/extract</code> endpoint might offer a more streamlined interface.</p>
+</blockquote>
+<hr>
+<h2 id="enabling-extraction-in-v1-scrape-">Enabling Extraction in <code>/v1/scrape</code></h2>
+<h3 id="3-1-1-the-formats-array-and-extract-parameter">3.1.1 The <code>formats</code> Array and <code>extract</code> Parameter</h3>
+<p>Activation requires two key elements in the JSON request body sent to <code>/v1/scrape</code>:</p>
+<ol>
+<li><strong><code>formats</code> Array:</strong> You must include the string <code>&quot;extract&quot;</code> within this array. This tells Firecrawl that you intend to perform structured data extraction.<pre><code class="lang-json">{
+  <span class="hljs-attr">"url"</span>: <span class="hljs-string">"https://example.com"</span>,
+  <span class="hljs-attr">"formats"</span>: [<span class="hljs-string">"extract"</span>, <span class="hljs-string">"markdown"</span>] 
+}
+</code></pre>
+</li>
+<li><strong><code>extract</code> Object:</strong> When <code>&quot;extract&quot;</code> is present in the <code>formats</code> array, you <em>must</em> also include an <code>extract</code> object in the request body. This object contains the configuration for the extraction process.</li>
+</ol>
+<p>As noted in the <a href="https://docs.firecrawl.dev/api-reference/endpoint/scrape">API Reference</a>, the <code>extract</code> parameter is required if <code>&quot;extract&quot;</code> is in <code>formats</code>.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This mechanism clearly separates the request for standard scraping formats (like Markdown or raw HTML, which might be specified alongside <code>&quot;extract&quot;</code> in the <code>formats</code> array) from the specific configuration for the structured extraction itself. It allows for a modular approach where extraction parameters are only needed when that specific format is requested. This design promotes clarity in the API request structure.</p>
+</blockquote>
+<hr>
+<h2 id="extraction-configuration-extract-object-">Extraction Configuration (<code>extract</code> Object)</h2>
+<h3 id="3-1-2-configuring-the-extract-object">3.1.2 Configuring the <code>extract</code> Object</h3>
+<p>The <code>extract</code> object is where you define <em>how</em> the structured data should be extracted. It accepts the following fields:</p>
+<ul>
+<li><code>schema</code>: A <a href="https://json-schema.org/">JSON Schema</a> object defining the exact structure (fields, types, requirements) of the desired output JSON. Use this for precise control over the output format.</li>
+<li><code>prompt</code>: A natural language string describing the data you want to extract. This is used if the <code>schema</code> field is omitted. The LLM interprets the prompt and determines the output structure itself.</li>
+<li><code>systemPrompt</code> (Optional): An additional prompt providing higher-level instructions or context to the LLM to guide its extraction process.</li>
+</ul>
+<pre><code class="lang-json">{
+  <span class="hljs-string">"url"</span>: <span class="hljs-string">"https://example.com"</span>,
+  <span class="hljs-string">"formats"</span>: [<span class="hljs-string">"extract"</span>],
+  <span class="hljs-string">"extract"</span>: {
+    <span class="hljs-string">"schema"</span>: { /* Your JSON Schema */ }, 
+    // OR
+    <span class="hljs-string">"prompt"</span>: <span class="hljs-string">"Extract the main contact email and phone number."</span>,
+    <span class="hljs-string">"systemPrompt"</span>: <span class="hljs-string">"Focus only on information present in the footer."</span>
+  }
+}
+</code></pre>
+<p>Consult the <a href="https://docs.firecrawl.dev/api-reference/endpoint/scrape">API Reference</a> for detailed specifications.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>The choice between <code>schema</code> and <code>prompt</code> offers a trade-off: <code>schema</code> provides predictability and strict structure, ideal for production systems where data consistency is paramount. <code>prompt</code> offers flexibility and is useful for exploratory analysis or when the exact structure isn&#39;t known beforehand, but its output might be less consistent. The <code>systemPrompt</code> acts as a meta-instruction, guiding the LLM&#39;s behavior during extraction (e.g., specifying tone, focus, or constraints). This is a common technique in <a href="https://www.promptingguide.ai/">prompt engineering</a> to fine-tune LLM outputs.</p>
+</blockquote>
+<hr>
+<h2 id="using-the-dedicated-extract-endpoint">Using the Dedicated <code>/extract</code> Endpoint</h2>
+<h2 id="3-2-activation-via-the-extract-endpoint">3.2 Activation via the <code>/extract</code> Endpoint</h2>
+<p>Firecrawl offers a dedicated endpoint specifically for structured data extraction: <code>POST https://api.firecrawl.dev/v1/extract</code>. This endpoint is designed to streamline the process of collecting structured data from one or more URLs, or even entire domains.</p>
+<p>It handles the underlying crawling, parsing, and data collation based on your specifications, making it suitable for both small and large-scale extraction tasks. The primary goal is simplification compared to managing multiple <code>/v1/scrape</code> calls. More details are in the <a href="https://docs.firecrawl.dev/api-reference/endpoint/extract">/extract API Reference</a>.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>The dedicated <code>/extract</code> endpoint (<code>POST https://api.firecrawl.dev/v1/extract</code>) is purpose-built for structured data extraction, especially at scale. It simplifies the API call when extraction is the sole objective. Its ability to handle multiple URLs and domain crawling directly within a single request makes it more convenient than making multiple calls to <code>/v1/scrape</code>. This endpoint likely orchestrates multiple scrape and extraction operations internally, providing a higher-level abstraction for the user.</p>
+</blockquote>
+<hr>
+<h2 id="url-handling-in-extract-">URL Handling in <code>/extract</code></h2>
+<h3 id="3-2-1-handling-single-pages-multiple-pages-and-domains">3.2.1 Handling Single Pages, Multiple Pages, and Domains</h3>
+<p>The <code>/extract</code> endpoint is flexible in handling target URLs specified in the <code>urls</code> array parameter:</p>
+<ul>
+<li><strong>Single Page:</strong> Provide a specific URL like <code>https://firecrawl.dev/some-page</code>.</li>
+<li><strong>Multiple Pages:</strong> Provide an array of specific URLs.</li>
+<li><strong>Full Domain / Multiple Pages with Wildcard:</strong> Use a wildcard pattern like <code>https://firecrawl.dev/*</code>. When <code>/*</code> is used, Firecrawl attempts to automatically discover and process all crawlable URLs within that domain.</li>
+</ul>
+<p><strong>Important:</strong> The wildcard (<code>/*</code>) feature for domain crawling is currently experimental.</p>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"urls"</span>: [
+    <span class="hljs-string">"https://firecrawl.dev/pricing"</span>, 
+    <span class="hljs-string">"https://docs.firecrawl.dev/*"</span> 
+  ],
+  <span class="hljs-attr">"extract"</span>: { 
+    <span class="hljs-attr">"prompt"</span>: <span class="hljs-string">"Extract pricing details and main features."</span>
+  }
+}
+</code></pre>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>The wildcard support (<code>/*</code>) is a powerful feature, essentially turning the extractor into a focused crawler. This is useful for gathering consistent information across a known site structure (e.g., all blog posts, all product pages). However, developers should be mindful of the scope; crawling an entire large domain can be time-consuming and potentially expensive depending on the pricing model. The experimental nature suggests users should monitor performance and results closely. It&#39;s crucial to understand the site&#39;s structure (<code>robots.txt</code>, sitemaps) when using wildcards to estimate the scope and avoid unintended extensive crawling.</p>
+</blockquote>
+<hr>
+<h2 id="wildcard-crawling-experimental-">Wildcard Crawling (Experimental)</h2>
+<h3 id="3-2-2-wildcard-support-and-crawling">3.2.2 Wildcard Support and Crawling</h3>
+<p>The use of <code>/*</code> at the end of a base URL in the <code>urls</code> array triggers Firecrawl&#39;s domain crawling capability for the <code>/extract</code> endpoint. Firecrawl will attempt to find and process pages linked within that domain.</p>
+<p>As stated in the notes, this feature is <strong>experimental</strong>. This means its behavior, performance, and coverage might change, and it may have limitations, especially on very large or complex websites. Users should exercise caution and test thoroughly when relying on wildcard crawling. Refer to the <a href="https://docs.firecrawl.dev/api-reference/endpoint/extract">/extract API Reference</a> for any updates on this feature.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>The experimental status of wildcard crawling implies potential limitations in terms of crawl depth, breadth, speed, and adherence to politeness protocols (<code>robots.txt</code>, crawl delays). Developers using this should implement robust error handling and potentially status monitoring (if using async mode) to manage jobs that might take a long time or encounter issues on complex sites. It&#39;s also worth considering the ethical and legal implications of large-scale crawling.</p>
+</blockquote>
+<hr>
+<h2 id="configuration-using-json-schema">Configuration: Using JSON Schema</h2>
+<h2 id="4-1-defining-structure-with-json-schema">4.1 Defining Structure with JSON Schema</h2>
+<p>When you need the extracted data to conform to a precise structure, you can provide a <a href="https://json-schema.org/">JSON Schema</a> object within the <code>extract</code> configuration (for <code>/v1/scrape</code>) or the <code>params</code> object (for <code>/extract</code>).</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Using a JSON Schema provides the highest level of control and predictability over the extracted data structure. This is crucial for applications where the consuming code expects specific fields and data types. It acts as a contract between the extraction request and the expected output. For developers using statically-typed languages like TypeScript or Rust, defining a schema allows for easy generation of corresponding types/structs, enabling type safety and better developer experience (e.g., autocompletion, compile-time checks). Tools like <a href="https://docs.pydantic.dev/latest/">Pydantic</a> in Python can also leverage schemas for validation.</p>
+</blockquote>
+<hr>
+<h2 id="defining-schema-fields-and-types">Defining Schema Fields and Types</h2>
+<h3 id="4-1-1-specifying-fields-and-data-types">4.1.1 Specifying Fields and Data Types</h3>
+<p>Within the <code>schema</code> object, you define the desired output structure using standard JSON Schema syntax:</p>
+<ul>
+<li><code>type: &quot;object&quot;</code>: Indicates the root is a JSON object.</li>
+<li><code>properties</code>: An object where each key is a desired field name.<ul>
+<li>Each field definition specifies its <code>type</code> (e.g., <code>&quot;string&quot;</code>, <code>&quot;boolean&quot;</code>, <code>&quot;number&quot;</code>, <code>&quot;array&quot;</code>, <code>&quot;object&quot;</code>).</li>
+<li>You can add descriptions or other schema keywords as needed.</li>
+</ul>
+</li>
+<li><code>required</code>: An array of strings listing the field names that <em>must</em> be present in the output.</li>
+</ul>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"schema"</span>: {
+    <span class="hljs-attr">"type"</span>: <span class="hljs-string">"object"</span>,
+    <span class="hljs-attr">"properties"</span>: {
+      <span class="hljs-attr">"company_mission"</span>: { 
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span>,
+        <span class="hljs-attr">"description"</span>: <span class="hljs-string">"The main mission statement of the company."</span>
+      },
+      <span class="hljs-attr">"supports_sso"</span>: { 
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"boolean"</span> 
+      },
+      <span class="hljs-attr">"feature_list"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"array"</span>,
+        <span class="hljs-attr">"items"</span>: { <span class="hljs-attr">"type"</span>: <span class="hljs-string">"string"</span> }
+      }
+    },
+    <span class="hljs-attr">"required"</span>: [<span class="hljs-string">"company_mission"</span>, <span class="hljs-string">"supports_sso"</span>]
+  }
+}
+</code></pre>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Defining fields and types using JSON Schema standard syntax ensures interoperability and leverages a well-established standard. The <code>required</code> array is particularly important for ensuring essential data points are present in the result, although the LLM&#39;s ability to find the data on the page is still a factor. Complex schemas with nested objects and arrays are also possible, allowing for rich data structures.</p>
+</blockquote>
+<hr>
+<h2 id="example-request-with-schema">Example Request with Schema</h2>
+<h3 id="4-1-2-example-schema-based-extraction-request">4.1.2 Example: Schema-Based Extraction Request</h3>
+<p>Here&#39;s an example using <code>cURL</code> to request structured data from <code>https://docs.firecrawl.dev/</code> using a JSON schema via the <code>/v1/scrape</code> endpoint:</p>
+<pre><code class="lang-bash">curl -X POST https:<span class="hljs-comment">//api.firecrawl.dev/v1/scrape \</span>
+    -H <span class="hljs-string">'Content-Type: application/json'</span> \
+    -H <span class="hljs-string">'Authorization: Bearer YOUR_API_KEY'</span> \
+    -d <span class="hljs-string">'{
+      "</span>url<span class="hljs-string">": "</span>https:<span class="hljs-comment">//docs.firecrawl.dev/",</span>
+      <span class="hljs-string">"formats"</span>: [<span class="hljs-string">"extract"</span>],
+      <span class="hljs-string">"extract"</span>: {
+        <span class="hljs-string">"schema"</span>: {
+          <span class="hljs-string">"type"</span>: <span class="hljs-string">"object"</span>,
+          <span class="hljs-string">"properties"</span>: {
+            <span class="hljs-string">"company_mission"</span>: { <span class="hljs-string">"type"</span>: <span class="hljs-string">"string"</span> },
+            <span class="hljs-string">"supports_sso"</span>: { <span class="hljs-string">"type"</span>: <span class="hljs-string">"boolean"</span> }
+          },
+          <span class="hljs-string">"required"</span>: [<span class="hljs-string">"company_mission"</span>, <span class="hljs-string">"supports_sso"</span>]
+        }
+      }
+    }<span class="hljs-string">'</span>
+</code></pre>
+<p>This request asks Firecrawl to find the company mission (as a string) and whether SSO is supported (as a boolean) on the target page, returning them in a JSON object matching the schema.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This cURL example demonstrates a typical API call using schema-based extraction via the <code>/v1/scrape</code> endpoint. Note the <code>Authorization</code> header for the API key and <code>Content-Type</code> set to <code>application/json</code>. The <code>formats</code> array includes <code>&quot;extract&quot;</code>, and the <code>extract</code> object contains the <code>schema</code>. This structure is clear and directly maps to the concepts discussed.</p>
+</blockquote>
+<hr>
+<h2 id="configuration-using-natural-language-prompt">Configuration: Using Natural Language Prompt</h2>
+<h2 id="4-2-defining-structure-with-natural-language">4.2 Defining Structure with Natural Language</h2>
+<p>Alternatively, if you prefer not to define a rigid schema, or if you&#39;re doing more exploratory extraction, you can use a natural language <code>prompt</code>.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Prompt-based extraction offers flexibility, especially during development or exploration phases. It lowers the barrier to entry as you don&#39;t need to construct a formal JSON schema. However, the LLM interprets the natural language prompt, which can introduce ambiguity. The structure of the output JSON is determined by the LLM based on its understanding of the prompt and the page content. This might lead to variations in field names or structure across different runs or different pages, making it potentially less suitable for production systems requiring strict data contracts. It excels in scenarios where the exact output format is less critical than capturing the requested information.</p>
+</blockquote>
+<hr>
+<h2 id="prompt-only-extraction">Prompt-Only Extraction</h2>
+<h3 id="4-2-1-prompt-only-extraction-mechanism">4.2.1 Prompt-Only Extraction Mechanism</h3>
+<p>When you provide a <code>prompt</code> string within the <code>extract</code> configuration (for <code>/v1/scrape</code>) or <code>params</code> (for <code>/extract</code>) <em>without</em> providing a <code>schema</code>, Firecrawl uses the LLM to:</p>
+<ol>
+<li>Understand the information requested in the prompt.</li>
+<li>Analyze the content of the target web page(s).</li>
+<li>Generate a JSON object containing the extracted information, deciding on the field names and structure itself.</li>
+</ol>
+<p>This is useful when you know <em>what</em> data you need but don&#39;t want to pre-define the exact JSON format.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This approach relies entirely on the LLM&#39;s ability to understand the request and generate a suitable JSON output. The quality of the prompt significantly influences the result. Clear, specific prompts generally yield better outcomes. This method is powerful for quick queries or when dealing with diverse content where a single schema might not fit all pages.</p>
+</blockquote>
+<hr>
+<h2 id="example-request-with-prompt">Example Request with Prompt</h2>
+<h3 id="4-2-2-example-prompt-based-extraction-request">4.2.2 Example: Prompt-Based Extraction Request</h3>
+<p>Here&#39;s a <code>cURL</code> example using a natural language prompt with the <code>/v1/scrape</code> endpoint:</p>
+<pre><code class="lang-bash">curl -X POST https:<span class="hljs-comment">//api.firecrawl.dev/v1/scrape \</span>
+    -H <span class="hljs-string">'Content-Type: application/json'</span> \
+    -H <span class="hljs-string">'Authorization: Bearer YOUR_API_KEY'</span> \
+    -d <span class="hljs-string">'{
+      "</span>url<span class="hljs-string">": "</span>https:<span class="hljs-comment">//docs.firecrawl.dev/",</span>
+      <span class="hljs-string">"formats"</span>: [<span class="hljs-string">"extract"</span>],
+      <span class="hljs-string">"extract"</span>: {
+        <span class="hljs-string">"prompt"</span>: <span class="hljs-string">"Extract the company mission and whether they support SSO."</span>
+      }
+    }<span class="hljs-string">'</span>
+</code></pre>
+<p>In this case, the LLM will determine the best JSON structure to represent the requested information based on the content of <code>https://docs.firecrawl.dev/</code>.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Similar to the schema example, this cURL request targets the <code>/v1/scrape</code> endpoint. The key difference is the <code>extract</code> object now contains only the <code>prompt</code> field. Firecrawl&#39;s LLM will process this prompt and return a JSON object, for instance, it might return <code>{&quot;company_mission&quot;: &quot;...&quot;, &quot;sso_support&quot;: false}</code> or a similar structure based on its interpretation.</p>
+</blockquote>
+<hr>
+<h2 id="optional-systemprompt-for-guidance">Optional <code>systemPrompt</code> for Guidance</h2>
+<h2 id="4-3-guiding-the-llm-with-systemprompt-">4.3 Guiding the LLM with <code>systemPrompt</code></h2>
+<p>The <code>extract</code> configuration object (for <code>/v1/scrape</code>) or <code>params</code> (for <code>/extract</code>) accepts an optional <code>systemPrompt</code> field. This field allows you to provide additional instructions or context to the underlying Large Language Model (LLM) that performs the data extraction.</p>
+<p>For example, you could use <code>systemPrompt</code> to:</p>
+<ul>
+<li>Specify the desired tone or style of extracted text.</li>
+<li>Instruct the LLM to focus on specific parts of a webpage.</li>
+<li>Provide background context that might help interpret the page content.</li>
+</ul>
+<p>It serves as a way to guide the LLM&#39;s reasoning process during extraction, potentially improving the relevance or accuracy of the results, especially for complex pages or nuanced requests. See the <a href="https://docs.firecrawl.dev/api-reference/endpoint/extract">API Reference</a> for usage.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>The <code>systemPrompt</code> provides a way to give meta-instructions or context to the LLM performing the extraction, separate from the main <code>prompt</code> or <code>schema</code>. This is useful for guiding the LLM&#39;s behavior, such as instructing it to adopt a specific persona, focus on certain sections of the page, ignore irrelevant information, or format the output in a particular style (though schema is better for strict formatting). Effective use of system prompts often involves experimentation to see how they influence the LLM&#39;s output for specific tasks and content types. It&#39;s a tool for fine-tuning when the default behavior isn&#39;t quite right.</p>
+</blockquote>
+<hr>
+<h2 id="enabling-web-search-for-broader-context">Enabling Web Search for Broader Context</h2>
+<h2 id="4-4-expanding-scope-with-web-search-enablewebsearch-">4.4 Expanding Scope with Web Search (<code>enableWebSearch</code>)</h2>
+<p>For the <code>/extract</code> endpoint, you can optionally include the <code>enableWebSearch</code> parameter (boolean) in the request&#39;s <code>params</code> object. When set to <code>true</code>, this feature allows the extraction process to potentially follow links found on the initial target pages and incorporate information from those external pages into the final result.</p>
+<p>This is useful when the information needed might be spread across multiple related pages or requires broader context than available on the starting URL(s). For instance, extracting product details might benefit from accessing linked review pages.</p>
+<p><strong>Python Example Snippet:</strong></p>
+<pre><code class="lang-python">data = app.extract([
+  <span class="hljs-string">'https://nextbase.com/dash-cams/622gw-dash-cam'</span>
+], {
+  <span class="hljs-string">'prompt'</span>: <span class="hljs-string">"Extract details about the best dash cams including prices, features, pros/cons and reviews."</span>,
+  <span class="hljs-string">'enableWebSearch'</span>: <span class="hljs-literal">True</span> <span class="hljs-meta"># Enable web search</span>
+})
+</code></pre>
+<p>Check the <a href="https://docs.firecrawl.dev/api-reference/endpoint/extract">/extract API Reference</a> for more details.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Enabling web search (<code>enableWebSearch: true</code>) significantly expands the scope of information gathering. Instead of being limited to the content of the initially provided URLs, the extractor can follow links and incorporate information from external pages. This is powerful for tasks requiring broader context, like competitive analysis, product review aggregation, or research synthesis. However, it introduces several considerations:</p>
+<ul>
+<li><strong>Cost:</strong> May increase processing time and potentially API usage costs.</li>
+<li><strong>Relevance:</strong> The system needs to effectively determine which external links are relevant to the original query.</li>
+<li><strong>Depth/Breadth:</strong> The extent of external crawling might be limited.</li>
+<li><strong>Latency:</strong> Extraction will likely take longer.
+It&#39;s best used when the initial pages are known to lack complete information and external context is necessary.</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="api-response-structure">API Response Structure</h2>
+<h2 id="5-1-understanding-the-api-response-structure">5.1 Understanding the API Response Structure</h2>
+<p>When you make a successful request to the <code>/v1/scrape</code> endpoint with <code>&quot;extract&quot;</code> in <code>formats</code>, or to the <code>/extract</code> endpoint, the API returns a JSON response.</p>
+<p>The typical structure for a successful synchronous operation (or a completed asynchronous one retrieved via status check or SDK polling) includes:</p>
+<ul>
+<li><code>success</code>: A boolean flag, typically <code>true</code> if the extraction process completed without critical errors.</li>
+<li><code>data</code>: An object containing the extracted structured data. The structure of this object depends on whether you used a <code>schema</code> or a <code>prompt</code>:<ul>
+<li>If a <code>schema</code> was provided, <code>data</code> will conform to that schema.</li>
+<li>If only a <code>prompt</code> was provided, <code>data</code> will have a structure determined by the LLM based on the prompt.</li>
+</ul>
+</li>
+</ul>
+<p>For asynchronous jobs, the initial response might contain a <code>job_id</code>, and status checks will return fields like <code>status</code> and potentially partial <code>results</code> or the final <code>data</code> upon completion.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>A consistent response structure is crucial for reliable API integration. The <code>success</code> flag provides a clear indication of whether the core operation completed without fatal errors. The actual extracted data resides within the <code>data</code> field. For asynchronous operations, additional fields like <code>status</code> and <code>job_id</code> will be present, indicating the job&#39;s progress. Developers should always check the <code>success</code> flag before attempting to process the <code>data</code> field.</p>
+</blockquote>
+<hr>
+<h2 id="example-api-responses">Example API Responses</h2>
+<h2 id="5-2-illustrative-api-response-examples">5.2 Illustrative API Response Examples</h2>
+<p>Here are examples of what the <code>data</code> field in the API response might look like for different extraction scenarios.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>These examples illustrate the practical output of the Extract feature under different configurations. Seeing the actual JSON helps developers understand what to expect and how to parse the results in their applications. The web search example clearly shows how external information (pros/cons likely sourced from review sites) can enrich the data extracted from the primary URL.</p>
+</blockquote>
+<hr>
+<h2 id="response-example-schema-based-">Response Example (Schema-Based)</h2>
+<h3 id="5-2-1-example-response-using-a-schema">5.2.1 Example Response Using a Schema</h3>
+<p>If a request was made using a schema (like the Python SDK example defining <code>company_mission</code>, <code>supports_sso</code>, <code>is_open_source</code>, <code>is_in_yc</code>), a successful response might look like this (from SDKs):</p>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"company_mission"</span>: <span class="hljs-string">"Firecrawl is the easiest way to extract data from the web. Developers use us to reliably convert URLs into LLM-ready markdown or structured data with a single API call."</span>,
+    <span class="hljs-attr">"supports_sso"</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">"is_open_source"</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">"is_in_yc"</span>: <span class="hljs-literal">true</span>
+  }
+}
+</code></pre>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This response directly mirrors the structure defined in the schema provided in the request example (Section 4.1.2). The fields (<code>company_mission</code>, <code>supports_sso</code>, <code>is_open_source</code>, <code>is_in_yc</code>) and their types match the schema definition, demonstrating the predictability of schema-based extraction.</p>
+</blockquote>
+<hr>
+<h2 id="response-example-prompt-based-">Response Example (Prompt-Based)</h2>
+<h3 id="5-2-2-example-response-using-a-prompt">5.2.2 Example Response Using a Prompt</h3>
+<p>If a request was made using only a prompt like &quot;Extract Firecrawl&#39;s mission from the page.&quot;, the response might be structured by the LLM as follows:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"data"</span>: {
+    <span class="hljs-attr">"company_mission"</span>: <span class="hljs-string">"Turn websites into LLM-ready data. Power your AI apps with clean data crawled from any website."</span>
+  }
+}
+</code></pre>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This response corresponds to a prompt like &quot;Extract Firecrawl&#39;s mission&quot;. The LLM interpreted the prompt and decided to return the mission statement under the key <code>company_mission</code>. The structure is simpler, reflecting the focused nature of the prompt.</p>
+</blockquote>
+<hr>
+<h2 id="response-example-web-search-enabled-">Response Example (Web Search Enabled)</h2>
+<h3 id="5-2-3-example-response-with-web-search-enabled">5.2.3 Example Response with Web Search Enabled</h3>
+<p>When <code>enableWebSearch</code> is set to <code>true</code> for a prompt asking for comprehensive details (e.g., about dash cams including reviews), the response can incorporate information gathered from external links:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-string">"data"</span>: {
+    <span class="hljs-string">"dash_cams"</span>: [
+      {
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Nextbase 622GW"</span>,
+        <span class="hljs-string">"price"</span>: <span class="hljs-string">"$399.99"</span>,
+        <span class="hljs-string">"features"</span>: [
+          <span class="hljs-string">"4K video recording"</span>,
+          <span class="hljs-string">"Image stabilization"</span>,
+          <span class="hljs-string">"Alexa built-in"</span>,
+          <span class="hljs-string">"What3Words integration"</span>
+        ],
+        /* Information below enriched with other websites like
+        https://www.techradar.com/best/best-dash-cam found
+        via enableWebSearch parameter */
+        <span class="hljs-string">"pros"</span>: [
+          <span class="hljs-string">"Excellent video quality"</span>,
+          <span class="hljs-string">"Great night vision"</span>,
+          <span class="hljs-string">"Built-in GPS"</span>
+        ],
+        <span class="hljs-string">"cons"</span>: [<span class="hljs-string">"Premium price point"</span>, <span class="hljs-string">"App can be finicky"</span>]
+      }
+      /* Potentially other dash cams found */
+    ]
+  }
+}
+</code></pre>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>This example demonstrates the power of <code>enableWebSearch</code>. The initial URL was for a specific dash cam. The prompt asked for details, prices, features, pros/cons, and reviews. The response includes basic details likely from the main page (<code>name</code>, <code>price</code>, <code>features</code>) but also <code>pros</code> and <code>cons</code> which, as noted in the source, were likely enriched by visiting external review sites found via web search. This highlights how the feature can synthesize information from multiple sources.</p>
+</blockquote>
+<hr>
+<h2 id="asynchronous-operations-job-submission">Asynchronous Operations: Job Submission</h2>
+<h2 id="6-1-submitting-jobs-asynchronously">6.1 Submitting Jobs Asynchronously</h2>
+<p>The <code>/extract</code> endpoint supports asynchronous operations, which is crucial when dealing with multiple URLs, domain crawling, or web search enabled, as these tasks can take time.</p>
+<ul>
+<li><strong>API Behavior:</strong> When initiating an asynchronous job (e.g., by using specific API parameters or SDK methods like <code>async_extract</code>), the API typically responds quickly with a <code>job_id</code>.</li>
+<li><strong>SDK Behavior:</strong><ul>
+<li>The standard <code>extract</code> methods in the Python and Node.js SDKs usually handle polling <em>automatically</em> by default, waiting until the job is complete and returning the final result.</li>
+<li>SDKs also provide explicit asynchronous methods (e.g., <code>async_extract</code> in Python, <code>asyncExtract</code> in Node.js) that return the <code>job_id</code> immediately, allowing for manual status checks.</li>
+</ul>
+</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Asynchronous processing is essential for long-running tasks like crawling entire domains or performing complex extractions, especially with web search enabled. Returning a Job ID immediately allows the client application to remain responsive without waiting potentially minutes for the operation to complete. The client can then poll for the status or use webhooks (if supported by the API, though not mentioned in notes) to get notified upon completion. This is a standard pattern for handling potentially slow API operations.</p>
+</blockquote>
+<hr>
+<h2 id="checking-asynchronous-job-status">Checking Asynchronous Job Status</h2>
+<h2 id="6-2-monitoring-asynchronous-job-progress">6.2 Monitoring Asynchronous Job Progress</h2>
+<p>Once you have a <code>job_id</code> from an asynchronous <code>/extract</code> request, you can check its status:</p>
+<ul>
+<li><strong>Manual Polling (API/SDK):</strong> Use the Job ID with a dedicated status check mechanism. The notes suggest using the <code>/extract/</code> endpoint (likely a GET request with the Job ID, e.g., <code>GET /v1/extract/{job_id}</code>) or specific SDK functions:<ul>
+<li>Python: <code>app.get_extract_status(job_id)</code></li>
+<li>Node.js: <code>app.getExtractStatus(job_id)</code></li>
+</ul>
+</li>
+<li><strong>Automatic Polling (SDK Default):</strong> As mentioned, the default SDK <code>extract</code> methods often hide the polling complexity.</li>
+</ul>
+<p>Status information for jobs (in progress or completed) is typically available for 24 hours.</p>
+<p><strong>Python Example (Manual Status Check):</strong></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> firecrawl <span class="hljs-keyword">import</span> FirecrawlApp
+
+app = FirecrawlApp(
+    api_key=<span class="hljs-string">"fc-YOUR_API_KEY"</span>
+)
+
+# Assume extract_job = app.async_extract(...) was called earlier
+job_id = extract_job.job_id 
+
+# Get the status
+job_status = app.get_extract_status(job_id)
+
+print(job_status)
+# Example output for a completed job:
+# {
+#     <span class="hljs-string">"status"</span>: <span class="hljs-string">"completed"</span>,
+#     <span class="hljs-string">"progress"</span>: <span class="hljs-number">100</span>,
+#     <span class="hljs-string">"results"</span>: [{ <span class="hljs-string">"url"</span>: <span class="hljs-string">"https://docs.firecrawl.dev"</span>, <span class="hljs-string">"data"</span>: { ... } }]
+# }
+</code></pre>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Polling is a common method for checking the status of asynchronous jobs. The client periodically queries a status endpoint using the Job ID. The frequency of polling should be managed carefully to avoid excessive API calls (consider exponential backoff). The SDK methods <code>get_extract_status</code> / <code>getExtractStatus</code> abstract this polling logic, simplifying development. The 24-hour limit for status checks implies that results are stored temporarily and developers should retrieve and store them permanently if needed beyond that window.</p>
+</blockquote>
+<hr>
+<h2 id="possible-asynchronous-job-statuses">Possible Asynchronous Job Statuses</h2>
+<h2 id="6-3-understanding-job-status-values">6.3 Understanding Job Status Values</h2>
+<p>When checking the status of an extraction job, the response will include a <code>status</code> field indicating the current state. Possible values include:</p>
+<ul>
+<li><code>processing</code>: The job is currently running.</li>
+<li><code>completed</code>: The extraction finished successfully. The results should be available.</li>
+<li><code>failed</code>: An error occurred during processing. Data extraction may be incomplete or unavailable.</li>
+<li><code>cancelled</code>: The job was cancelled by the user.</li>
+</ul>
+<p><strong>Example JSON for a Pending Job Status:</strong></p>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>, 
+  <span class="hljs-attr">"data"</span>: [], 
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"processing"</span>,
+  <span class="hljs-attr">"expiresAt"</span>: <span class="hljs-string">"2025-01-08T20:58:12.000Z"</span> 
+}
+</code></pre>
+<p><strong>Example JSON for a Completed Job Status:</strong></p>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"success"</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">"data"</span>: {
+      <span class="hljs-attr">"company_mission"</span>: <span class="hljs-string">"..."</span>,
+      <span class="hljs-attr">"supports_sso"</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">"is_open_source"</span>: <span class="hljs-literal">true</span>,
+      <span class="hljs-attr">"is_in_yc"</span>: <span class="hljs-literal">true</span>
+    },
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"completed"</span>,
+  <span class="hljs-attr">"expiresAt"</span>: <span class="hljs-string">"2025-01-08T20:58:12.000Z"</span>
+}
+</code></pre>
+<p>The <code>expiresAt</code> field indicates when the job status/results might no longer be available.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>These status values represent the typical lifecycle of an asynchronous task. <code>processing</code> indicates work is ongoing. <code>completed</code> signifies success. <code>failed</code> indicates an error occurred, requiring investigation (checking logs or error messages if provided in the status response). <code>cancelled</code> implies user intervention. Robust applications should handle each status appropriately, potentially retrying failed jobs or alerting users.</p>
+</blockquote>
+<hr>
+<h2 id="python-sdk-examples">Python SDK Examples</h2>
+<h2 id="7-1-integrating-with-python">7.1 Integrating with Python</h2>
+<p>Firecrawl provides a Python SDK (<code>firecrawl-py</code>) for easier integration. Here are examples demonstrating common <code>/extract</code> use cases:</p>
+<p><strong>Initialization:</strong></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> firecrawl <span class="hljs-keyword">import</span> FirecrawlApp
+app = FirecrawlApp(api_key=<span class="hljs-string">'your_api_key'</span>)
+</code></pre>
+<p><strong>Extraction with Schema (using Pydantic):</strong></p>
+<pre><code class="lang-python">from pydantic import BaseModel, Field
+
+class ExtractSchema(BaseModel):
+    company_mission: <span class="hljs-keyword">str</span>
+    supports_sso: <span class="hljs-keyword">bool</span>
+    is_open_source: <span class="hljs-keyword">bool</span>
+    is_in_yc: <span class="hljs-keyword">bool</span>
+
+data = app.extract(
+    urls=[
+        <span class="hljs-symbol">'https</span>:<span class="hljs-comment">//docs.firecrawl.dev/*',</span>
+        <span class="hljs-symbol">'https</span>:<span class="hljs-comment">//firecrawl.dev/',</span>
+        <span class="hljs-symbol">'https</span>:<span class="hljs-comment">//www.ycombinator.com/companies/'</span>
+    ],
+    params={
+        <span class="hljs-symbol">'prompt</span>': <span class="hljs-symbol">'Extract</span> the company mission, whether it supports SSO, whether it is open source, and whether it is <span class="hljs-keyword">in</span> Y Combinator from the page.',
+        <span class="hljs-symbol">'schema</span>': ExtractSchema.model_json_schema(),
+    }
+)
+print(data)
+</code></pre>
+<p><strong>Extraction without Schema (Prompt-Only):</strong></p>
+<pre><code class="lang-python">from firecrawl <span class="hljs-keyword">import</span> FirecrawlApp
+app = FirecrawlApp(api_key=<span class="hljs-string">'your_api_key'</span>)
+
+<span class="hljs-keyword">data</span> = app.extract(
+    urls=[
+        <span class="hljs-string">'https://docs.firecrawl.dev/'</span>,
+        <span class="hljs-string">'https://firecrawl.dev/'</span>
+    ],
+    params={
+        <span class="hljs-string">'prompt'</span>: <span class="hljs-string">"Extract Firecrawl's mission from the page."</span>
+    }
+)
+print(<span class="hljs-keyword">data</span>)
+</code></pre>
+<p><strong>Extraction with Web Search:</strong></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> firecrawl <span class="hljs-keyword">import</span> FirecrawlApp
+app = FirecrawlApp(api_key=<span class="hljs-string">'your_api_key'</span>)
+
+data = app.extract(
+    urls=[<span class="hljs-string">'https://nextbase.com/dash-cams/622gw-dash-cam'</span>],
+    params={
+        <span class="hljs-string">'prompt'</span>: <span class="hljs-string">"Extract details about the best dash cams including prices, features, pros/cons and reviews."</span>,
+        <span class="hljs-string">'enableWebSearch'</span>: <span class="hljs-keyword">True</span>
+    }
+)
+<span class="hljs-keyword">print</span>(data)
+</code></pre>
+<p><strong>Extraction without URLs (Alpha):</strong></p>
+<pre><code class="lang-python"><span class="hljs-keyword">from</span> pydantic <span class="hljs-keyword">import</span> BaseModel
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ExtractSchema</span><span class="hljs-params">(BaseModel)</span>:</span>
+    company_mission: str
+
+prompt = <span class="hljs-string">'Extract the company mission from Firecrawl\'s website.'</span>
+
+scrape_result = app.extract(params={
+    <span class="hljs-string">'prompt'</span>: prompt,
+    <span class="hljs-string">'schema'</span>: ExtractSchema.model_json_schema(),
+})
+
+<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> scrape_result[<span class="hljs-string">'success'</span>]:
+    <span class="hljs-keyword">raise</span> Exception(f<span class="hljs-string">"Failed to scrape: {scrape_result['error']}"</span>)
+
+print(scrape_result[<span class="hljs-string">'data'</span>])
+</code></pre>
+<p><strong>Asynchronous Extraction and Status Check:</strong></p>
+<pre><code class="lang-python"><span class="hljs-meta"># Start job</span>
+extract_job = app.async_extract(
+    urls=[
+        <span class="hljs-string">'https://docs.firecrawl.dev/*'</span>,
+        <span class="hljs-string">'https://firecrawl.dev/'</span>
+    ],
+    params={<span class="hljs-string">'prompt'</span>: <span class="hljs-string">"Extract the company mission and features from these pages."</span>}
+)
+
+<span class="hljs-meta"># Check status later</span>
+job_status = app.get_extract_status(extract_job.job_id)
+print(job_status)
+</code></pre>
+<p>Find the SDK on <a href="https://pypi.org/project/firecrawl-py/">PyPI</a> or <a href="https://github.com/mendableai/firecrawl-py">GitHub</a>.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Providing SDKs simplifies API integration significantly. The Python examples showcase key functionalities: initializing the client, using schemas (leveraging Pydantic for schema definition), using prompts, enabling web search, handling async operations, and even the alpha feature of URL-less extraction. Using an SDK is generally recommended over raw HTTP calls as it handles authentication, request formatting, response parsing, and potentially retries and error handling, allowing developers to focus on application logic. Pydantic integration is particularly useful for Python developers working with structured data.</p>
+</blockquote>
+<hr>
+<h2 id="node-js-and-curl-integration">Node.js and cURL Integration</h2>
+<h2 id="7-2-node-js-and-curl-examples">7.2 Node.js and cURL Examples</h2>
+<p>Firecrawl also provides official support and examples for Node.js developers and for direct API interaction using <code>cURL</code>.</p>
+<p><strong>Node.js:</strong>
+Similar functionalities as the Python SDK are available through the Node.js SDK (<code>firecrawl-js</code>). The notes indicate that examples exist in the documentation, likely covering initialization, schema/prompt extraction, async operations, etc., mirroring the Python examples.</p>
+<p><strong>cURL:</strong>
+<code>cURL</code> examples are useful for testing or integrating from environments where an SDK isn&#39;t available or practical. Examples using <code>cURL</code> for schema-based and prompt-based extraction via the <code>/v1/scrape</code> endpoint were provided earlier (Sections 4.1.2 and 4.2.2).</p>
+<p><strong>cURL Example (Schema - <code>/v1/scrape</code>):</strong></p>
+<pre><code class="lang-bash">curl -X POST https:<span class="hljs-comment">//api.firecrawl.dev/v1/scrape \</span>
+    -H <span class="hljs-symbol">'Content</span>-Type: application/json' \
+    -H <span class="hljs-symbol">'Authorization</span>: Bearer YOUR_API_KEY' \
+    -d '{
+      <span class="hljs-string">"url"</span>: <span class="hljs-string">"https://docs.firecrawl.dev/"</span>,
+      <span class="hljs-string">"formats"</span>: [<span class="hljs-string">"extract"</span>],
+      <span class="hljs-string">"extract"</span>: {
+        <span class="hljs-string">"schema"</span>: { <span class="hljs-comment">/* ... schema definition ... */</span> }
+      }
+    }'
+</code></pre>
+<p><strong>cURL Example (Prompt - <code>/v1/scrape</code>):</strong></p>
+<pre><code class="lang-bash">curl -X POST https:<span class="hljs-comment">//api.firecrawl.dev/v1/scrape \</span>
+    -H <span class="hljs-string">'Content-Type: application/json'</span> \
+    -H <span class="hljs-string">'Authorization: Bearer YOUR_API_KEY'</span> \
+    -d <span class="hljs-string">'{
+      "</span>url<span class="hljs-string">": "</span>https:<span class="hljs-comment">//docs.firecrawl.dev/",</span>
+      <span class="hljs-string">"formats"</span>: [<span class="hljs-string">"extract"</span>],
+      <span class="hljs-string">"extract"</span>: {
+        <span class="hljs-string">"prompt"</span>: <span class="hljs-string">"Extract the company mission..."</span>
+      }
+    }<span class="hljs-string">'</span>
+</code></pre>
+<p>Refer to the official <a href="https://docs.firecrawl.dev/">Firecrawl Documentation</a> for detailed Node.js examples and further <code>cURL</code> usage patterns, including the <code>/extract</code> endpoint.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Providing examples in multiple languages (Node.js) and a universal tool (cURL) caters to a broader developer audience. Node.js is highly relevant for full-stack developers, especially those using JavaScript/TypeScript across the stack. cURL examples are invaluable for quick testing, debugging, and understanding the raw HTTP interaction, regardless of the programming language used in the final application. While the full Node.js examples aren&#39;t shown in the notes, their existence suggests parity with the Python SDK&#39;s capabilities.</p>
+</blockquote>
+<hr>
+<h2 id="known-limitations-and-beta-status">Known Limitations and Beta Status</h2>
+<h2 id="8-1-current-limitations-beta-status-">8.1 Current Limitations (Beta Status)</h2>
+<p>The <code>/extract</code> feature is currently in <strong>Open Beta</strong>. As such, users should be aware of some known limitations:</p>
+<ol>
+<li><strong>Large-Scale Site Coverage:</strong> Attempting to extract data from extremely large websites (e.g., <em>all</em> products on Amazon) in a single request is not yet fully supported or reliable.</li>
+<li><strong>Complex Logical Queries:</strong> Highly complex or nuanced queries requiring deep logical inference (e.g., &quot;find every blog post published exactly in 2025 containing keyword X but not keyword Y&quot;) may not perform reliably yet.</li>
+<li><strong>Occasional Inconsistencies:</strong> Results, especially for large or highly dynamic websites, might exhibit slight variations between runs.</li>
+<li><strong>Beta State Implications:</strong> As a Beta feature, its functionality, performance characteristics, and API surface may evolve based on feedback and further development.</li>
+</ol>
+<p>Refer to the <a href="https://www.firecrawl.dev/extract">Extract feature page</a> for potential updates on status and limitations.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Acknowledging limitations is crucial for setting user expectations, especially for a feature in Beta. </p>
+<ol>
+<li><strong>Large-Scale Coverage:</strong> This suggests users should break down very large extraction tasks (e.g., scraping an entire e-commerce catalog) into smaller, more manageable batches.</li>
+<li><strong>Complex Logic:</strong> The reliance on LLMs means complex, highly specific logical constraints might be difficult to enforce reliably compared to traditional scraping code. Simpler, more direct extraction prompts/schemas are likely more effective currently.</li>
+<li><strong>Inconsistencies:</strong> This is common with LLM-based systems and dynamic websites. Developers should implement validation and potentially retry mechanisms or be prepared for some variability in results.</li>
+<li><strong>Beta Status:</strong> Users should anticipate potential API changes, performance fluctuations, and bugs. It&#39;s generally advisable to use beta features with caution in critical production systems.</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="experimental-and-alpha-capabilities">Experimental and Alpha Capabilities</h2>
+<h2 id="8-2-experimental-and-alpha-features">8.2 Experimental and Alpha Features</h2>
+<p>Beyond the general Beta status, certain specific capabilities within the Extract feature are flagged as experimental or alpha:</p>
+<ul>
+<li><strong>Wildcard Domain Crawling (<code>/*</code>):</strong> As mentioned previously, using the <code>/*</code> pattern with the <code>/extract</code> endpoint to crawl entire domains is considered <strong>experimental</strong>.</li>
+<li><strong>URL-less Extraction:</strong> The ability to use the <code>/extract</code> endpoint with only a <code>prompt</code> (and optionally <code>schema</code>) without providing any <code>urls</code> is currently in <strong>Alpha</strong>. This is useful for research-like queries where the target source isn&#39;t a specific URL but rather a concept the system should find information about (potentially using web search implicitly).</li>
+</ul>
+<p>Users should treat these features with extra caution, anticipate potential instability or changes, and consult the <a href="https://docs.firecrawl.dev/">Firecrawl Documentation</a> for the latest status.</p>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Features flagged as &#39;Experimental&#39; or &#39;Alpha&#39; carry higher risk and uncertainty than Beta features. Wildcard crawling (<code>/*</code>) and URL-less extraction are powerful capabilities but likely require further refinement and testing. Developers using these should have fallback strategies, monitor performance closely, and be prepared for breaking changes or removal of the feature. Providing feedback on these experimental features is often valuable to the service provider.</p>
+</blockquote>
+<hr>
+<h2 id="billing-and-usage-monitoring">Billing and Usage Monitoring</h2>
+<h2 id="9-1-pricing-details-and-usage-tracking">9.1 Pricing Details and Usage Tracking</h2>
+<p>Information regarding the cost associated with using the Firecrawl Extract feature can be found on the dedicated pricing section of the feature&#39;s landing page:</p>
+<ul>
+<li><strong>Pricing:</strong> <a href="https://www.firecrawl.dev/extract#pricing">Extract Landing Page Pricing Section</a></li>
+</ul>
+<p>To monitor your usage of the Extract API and associated costs, you can use the Firecrawl dashboard:</p>
+<ul>
+<li><strong>Usage Monitoring:</strong> <a href="https://www.firecrawl.dev/app/extract">Extract Page on Firecrawl Dashboard</a></li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Clear pricing and usage monitoring are essential for developers integrating any paid API service. Providing direct links allows users to easily understand the cost structure (likely based on the number of pages processed, complexity, or features like web search) and track their consumption to manage budgets. This transparency is key for production planning.</p>
+</blockquote>
+<hr>
+<h2 id="getting-help-and-providing-feedback">Getting Help and Providing Feedback</h2>
+<h2 id="9-2-accessing-support-and-providing-feedback">9.2 Accessing Support and Providing Feedback</h2>
+<p>If you require assistance with the Extract feature or wish to provide feedback, suggestions, or report issues:</p>
+<ul>
+<li><strong>Direct Support:</strong> Contact the Firecrawl team via email at <a href="mailto:help@firecrawl.dev">help@firecrawl.dev</a>.</li>
+<li><strong>Documentation Feedback:</strong><ul>
+<li>Suggest edits directly to the documentation pages on GitHub: <a href="https://github.com/hellofirecrawl/docs/edit/main/features/extract.mdx">Suggest edits</a></li>
+<li>Report issues or inaccuracies in the documentation: <a href="https://github.com/hellofirecrawl/docs/issues/new?title=Issue%20on%20docs&amp;body=Path:%20/features/extract">Raise issue</a></li>
+</ul>
+</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Providing clear support channels (email) and feedback mechanisms (GitHub issues/edits) is crucial for user adoption and product improvement, especially for a feature in Beta. Encouraging feedback helps the Firecrawl team prioritize fixes and enhancements based on real-world usage. For developers, direct access to issue tracking on GitHub offers transparency into ongoing development and known problems.</p>
+</blockquote>
+<hr>
+<h2 id="visual-assets-logos">Visual Assets: Logos</h2>
+<h2 id="10-1-firecrawl-branding-assets">10.1 Firecrawl Branding Assets</h2>
+<p>The documentation includes Firecrawl logos suitable for different background themes:</p>
+<ul>
+<li><p><strong>Light Theme Logo:</strong>
+<img src="https://mintlify.s3.us-west-1.amazonaws.com/firecrawl/logo/light.svg" alt="Firecrawl Logo Light"></p>
+</li>
+<li><p><strong>Dark Theme Logo:</strong>
+<img src="https://mintlify.s3.us-west-1.amazonaws.com/firecrawl/logo/dark.svg" alt="Firecrawl Logo Dark"></p>
+</li>
+</ul>
+<p><em>Commentary:</em></p>
+<blockquote>
+<p>Including logos helps with branding and visual identification, useful for presentations or internal documentation referencing Firecrawl. Providing both light and dark theme versions ensures they can be used appropriately in different contexts.</p>
+</blockquote>
+<hr>
+
+
