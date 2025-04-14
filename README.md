@@ -63,7 +63,7 @@ curl --request POST \
   }'
 ```
 
-Czas wykonania zapytania wynosi około 2-4 minut. Odpowiedź jest strumieniowana, ale końcowy rezultat zostaje zapisany w katalogu: ./documents/[data]/[unikatowy identyfikator]/task_result.md
+Czas wykonania zapytania wynosi około 2-4 minut. Jeśli wysyłasz zapytanie przez aplikację taką jak Insomnia czy Postman, upewnij się, że timeout jest odpowiednio ustawiony. Odpowiedź jest strumieniowana, a końcowy rezultat zostaje zapisany w katalogu: ./documents/[data]/[unikatowy identyfikator]/task_result.md
 
 ## Dołącz do AI_devs 3: Reloaded
 
