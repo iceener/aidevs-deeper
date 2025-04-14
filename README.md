@@ -12,7 +12,7 @@ W roli bazy danych również występuje SQLite, więc konfiguracja jest ogranicz
 
 ## Przegląd bez instalacji
 
-W głównym katalogu umieściłem kilka plików Markdown, które zostały wygenerowane na moim komputerze. Możesz przejrzeć ich zawartość, aby uniknąć konieczności instalowania i uruchamiania aplikacji.
+W głównym katalogu umieściłem folder `examples` a w nim kilka plików html, które zostały wygenerowane na moim komputerze. Możesz przejrzeć ich zawartość, aby uniknąć konieczności instalowania i uruchamiania aplikacji.
 
 ⚠️ UWAGA: Projekt wykorzystuje modele OpenAI oraz Gemini. W przypadku Gemini jest to bezpłatna wersja modelu 2.5 Pro Experimental, która w przyszłości może zostać wyłączona. Uruchomienie agenta może zatem generować istotne koszty. Upewnij się zatem, że na koncie OpenAI masz ustawione limity wydatków. W przypadku Gemini **w momencie pisania tych słów nie ma takiej opcji**, dlatego korzystamy z modelu bezpłatnego.
 
